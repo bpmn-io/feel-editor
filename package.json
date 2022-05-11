@@ -1,0 +1,36 @@
+{
+  "name": "@bpmn-io/feel-editor",
+  "version": "0.0.0",
+  "description": "Editor for FEEL expressions.",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpmn-io/properties-panel.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "bpmn-io",
+    "feel",
+    "editor"
+  ],
+  "author": {
+    "name": "Martin Stamm",
+    "url": "https://github.com/marstamm"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {}
+}
