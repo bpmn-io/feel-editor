@@ -6,8 +6,15 @@
     "dist"
   ],
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "all": "run-s lint test build",
+    "test": "karma start",
+    "build": "rollup -c",
+    "build:watch": "rollup -cw",
+    "lint": "eslint src",
+    "start": "SINGLE_START=true npm run dev",
+    "dev": "npm test -- --auto-watch --no-single-run"
   },
   "repository": {
     "type": "git",
@@ -32,5 +39,31 @@
     }
   ],
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.20.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "chai": "^4.3.6",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-bpmn-io": "^0.13.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "karma": "^6.3.19",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-coverage": "^2.2.0",
+    "karma-debug-launcher": "^0.0.4",
+    "karma-env-preprocessor": "^0.1.1",
+    "karma-firefox-launcher": "^2.1.2",
+    "karma-mocha": "^2.0.1",
+    "karma-sinon-chai": "^2.0.2",
+    "karma-webpack": "^5.0.0",
+    "mocha": "^10.0.0",
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^14.0.0",
+    "rollup": "^2.72.1",
+    "sinon": "^14.0.0",
+    "sinon-chai": "^3.7.0",
+    "webpack": "^5.72.1"
+  }
 }
