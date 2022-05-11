@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bpmn-io/properties-panel.git"
+    "url": "git+https://github.com/bpmn-io/feel-editor.git"
   },
   "publishConfig": {
     "access": "public"
