@@ -40,7 +40,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@codemirror/basic-setup": "^0.20.0"
+    "@codemirror/basic-setup": "^0.20.0",
+    "@codemirror/highlight": "^0.19.8",
+    "@codemirror/lint": "^0.20.2",
+    "lezer-feel": "^0.3.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
