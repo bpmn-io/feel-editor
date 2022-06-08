@@ -17,8 +17,14 @@ describe('CodeEditor', function() {
   (singleStart ? it.only : it)('should render', async function() {
 
     // when
+    const initalValue = `for
+  fruit in [ "apple", "bananas" ], vegetable in vegetables
+return
+  { ingredients: [ fruit, vegetable ] }`;
+
     const editor = new FeelEditor({
-      container
+      container,
+      value: initalValue
     });
 
     // then
