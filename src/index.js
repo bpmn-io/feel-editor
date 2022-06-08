@@ -1,81 +1,83 @@
-import { Annotation, EditorState } from '@codemirror/state';
+import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { language } from './language';
-import themes from './theme';
+import theme from './theme';
 
 /**
+ * Creates a FEEL editor in the supplied container
  *
  * @param {Object} config
  * @param {DOMNode} config.container
- * @param {Function} config.onChange
- * @param {String} config.value
- * @returns
+ * @param {Function} [config.onChange]
+ * @param {Function} [config.onKeyDown]
+ * @param {String} [config.value]
+ *
+ * @returns {Object} editor
  */
-export function FeelEditor({
+export default function FeelEditor({
   container,
   onChange = () => {},
   onKeyDown = () => {},
-  value = '',
-  focus = false
+  value = ''
 }) {
 
   const changeHandler = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
-      if (isUpdateExternal(update)) {
-        return;
-      }
-
       onChange(update.state.doc.toString());
     }
   });
 
   const keyHandler = EditorView.domEventHandlers(
     {
-      keydown: onKeyDown,
+      keydown: onKeyDown
     }
   );
 
-  this.editor = new EditorView({
+  this._cmEditor = new EditorView({
     state: EditorState.create({
       doc: value,
       extensions: [
         changeHandler,
         keyHandler,
         language(),
-        themes
+        theme
       ]
     }),
     parent: container
   });
 
-  if (focus) {
-    this.editor.focus();
-  }
-
-  // replace content with new value
-  this.setValue = (value) => {
-    const annotation = new Annotation('externalChange', true);
-
-    this.editor.dispatch({
-      changes: {
-        from: 0,
-        to: this.editor.state.doc.length,
-        insert: value,
-      },
-      annotations: [ annotation ]
-    });
-  };
-
-
-  this.getSelection = () => {
-    return this.editor.state.selection;
-  };
-
   return this;
 }
 
-const isUpdateExternal = (update) => {
-  return update.transactions.some(t => {
-    return t.annotations.some(a => a.type === 'externalChange' && a.value === true);
+/**
+ * Replaces the content of the Editor
+ *
+ * @param {String} value
+ */
+FeelEditor.prototype.setValue = function(value) {
+  this._cmEditor.dispatch({
+    changes: {
+      from: 0,
+      to: this._cmEditor.state.doc.length,
+      insert: value,
+    }
   });
+};
+
+/**
+ * Sets the focus in the editor.
+ */
+FeelEditor.prototype.focus = function() {
+  this._cmEditor.focus();
+};
+
+/**
+ * Returns the current selection ranges. If no text is selected, a single
+ * range with the start and end index at the cursor position will be returned.
+ *
+ * @returns {Object} selection
+ * @returns {Array} selection.ranges
+ */
+FeelEditor.prototype.getSelection = function() {
+  return this._cmEditor.state.selection;
 };
