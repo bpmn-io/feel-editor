@@ -1,6 +1,7 @@
 import { EditorState } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
 import { language } from './language';
+import linter from './lint';
 import theme from './theme';
 
 /**
@@ -40,7 +41,8 @@ export default function FeelEditor({
         changeHandler,
         keyHandler,
         language(),
-        theme
+        theme,
+        linter
       ]
     }),
     parent: container
