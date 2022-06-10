@@ -1,6 +1,7 @@
 import FeelEditor from '../../src';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
+import { diagnosticCount, forceLinting } from '@codemirror/lint';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
@@ -160,6 +161,57 @@ return
       // then
       expect(onKeyDown).to.have.been.calledOnce;
       expect(onKeyDown).to.have.been.calledWith(event);
+    });
+
+  });
+
+
+  describe('lint', function() {
+
+    it('should highlight unexpected operations', function(done) {
+      const initalValue = '= 15';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      forceLinting(cm);
+
+
+      // then
+      // update done async
+      setTimeout(() => {
+        expect(diagnosticCount(cm.state)).to.eql(1);
+        done();
+      }, 0);
+
+    });
+
+
+    it('should highlight missing operations', function(done) {
+      const initalValue = '15 == 15';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      forceLinting(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+        expect(diagnosticCount(cm.state)).to.eql(1);
+        done();
+      }, 0);
+
     });
 
   });
