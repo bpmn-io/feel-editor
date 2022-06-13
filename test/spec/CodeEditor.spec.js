@@ -168,6 +168,29 @@ return
 
   describe('lint', function() {
 
+    it('should not highlight empty document', function(done) {
+      const initalValue = '';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      forceLinting(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+        expect(diagnosticCount(cm.state)).to.eql(0);
+        done();
+      }, 0);
+
+    });
+
+
     it('should highlight unexpected operations', function(done) {
       const initalValue = '= 15';
 

@@ -3,6 +3,12 @@ import { linter } from '@codemirror/lint';
 
 export const FeelLinter = function(editorView) {
   const messages = [];
+
+  // don't lint if the Editor is empty
+  if (editorView.state.doc.length === 0) {
+    return messages;
+  }
+
   const tree = syntaxTree(editorView.state);
 
   tree.iterate({
