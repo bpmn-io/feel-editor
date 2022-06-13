@@ -1,6 +1,7 @@
 import { EditorState } from '@codemirror/state';
-import { EditorView } from '@codemirror/view';
+import { EditorView, keymap } from '@codemirror/view';
 import { language } from './language';
+import { defaultKeymap } from '@codemirror/commands';
 import linter from './lint';
 import theme from './theme';
 
@@ -38,6 +39,9 @@ export default function FeelEditor({
     state: EditorState.create({
       doc: value,
       extensions: [
+        keymap.of([
+          ...defaultKeymap,
+        ]),
         changeHandler,
         keyHandler,
         language(),
