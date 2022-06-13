@@ -9,6 +9,26 @@ describe('lint - Syntax', function() {
     container = TestContainer.get(this);
   });
 
+
+  it('should not return syntax error on empty document', function() {
+
+    // given
+    const editor = new FeelEditor({
+      container,
+      value: ''
+    });
+
+    const cm = editor._cmEditor;
+
+    // when
+    const results = FeelLinter(cm);
+
+    // then
+    expect(results).to.have.length(0);
+
+  });
+
+
   it('should return syntax error', function() {
 
     // given
