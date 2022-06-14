@@ -116,6 +116,23 @@ return
       expect(editor._cmEditor.hasFocus).to.be.true;
     });
 
+
+    it('should not focus for read-only', function() {
+
+      // when
+      const editor = new FeelEditor({
+        container,
+        readOnly: true
+      });
+
+      // when
+      editor.focus();
+
+      // then
+      expect(editor._cmEditor.hasFocus).to.be.false;
+
+    });
+
   });
 
 

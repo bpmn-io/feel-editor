@@ -20,7 +20,8 @@ export default function FeelEditor({
   container,
   onChange = () => {},
   onKeyDown = () => {},
-  value = ''
+  value = '',
+  readOnly = false
 }) {
 
   const changeHandler = EditorView.updateListener.of((update) => {
@@ -35,19 +36,25 @@ export default function FeelEditor({
     }
   );
 
+  const extensions = [
+    keymap.of([
+      ...defaultKeymap,
+    ]),
+    changeHandler,
+    keyHandler,
+    language(),
+    theme,
+    linter
+  ];
+
+  if (readOnly) {
+    extensions.push(EditorView.editable.of(false));
+  }
+
   this._cmEditor = new EditorView({
     state: EditorState.create({
       doc: value,
-      extensions: [
-        keymap.of([
-          ...defaultKeymap,
-        ]),
-        changeHandler,
-        keyHandler,
-        language(),
-        theme,
-        linter
-      ]
+      extensions: extensions
     }),
     parent: container
   });
