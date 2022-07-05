@@ -6,4 +6,7 @@ All notable changes to [min-dom](https://github.com/bpmn-io/min-dom) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
-* `FEAT`: initial release, create a FEEL editor with Code highlighting
+## 0.0.1
+
+* `FEAT`: initial release, create a FEEL editor with Code highlighting ([#4](https://github.com/bpmn-io/feel-editor/pull/4))
+* `FEAT`: highlight syntax errors ([#7](https://github.com/bpmn-io/feel-editor/pull/7))
