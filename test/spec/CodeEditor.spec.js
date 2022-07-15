@@ -2,6 +2,7 @@ import FeelEditor from '../../src';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
 import { diagnosticCount, forceLinting } from '@codemirror/lint';
+import { currentCompletions, startCompletion } from '@codemirror/autocomplete';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
@@ -25,7 +26,19 @@ return
 
     const editor = new FeelEditor({
       container,
-      value: initalValue
+      value: initalValue,
+      variables: [
+        {
+          name: 'Variable1',
+          info: 'Written in Service Task',
+          type: 'Process_1'
+        },
+        {
+          name: 'Variable2',
+          info: 'Written in Service Task',
+          type: 'Process_1'
+        }
+      ]
     });
 
     // then
@@ -251,6 +264,43 @@ return
         expect(diagnosticCount(cm.state)).to.eql(1);
         done();
       }, 0);
+
+    });
+
+  });
+
+
+  describe('autocompletion', function() {
+
+    it('should suggest applicable variables', function(done) {
+      const initalValue = 'foo';
+      const variables = [
+        { name: 'foobar' },
+        { name: 'baz' }
+      ];
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        variables
+      });
+
+      const cm = editor._cmEditor;
+
+      // move cursor to the end
+      cm.dispatch({ selection: { anchor: 3, head: 3 } });
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.have.eql('foobar');
+        done();
+      }, 100);
 
     });
 
