@@ -4,6 +4,7 @@ import { language } from './language';
 import { defaultKeymap } from '@codemirror/commands';
 import linter from './lint';
 import theme from './theme';
+import autocompletion from './autocompletion';
 
 /**
  * Creates a FEEL editor in the supplied container
@@ -18,6 +19,7 @@ import theme from './theme';
  */
 export default function FeelEditor({
   container,
+  variables = [],
   onChange = () => {},
   onKeyDown = () => {},
   value = '',
@@ -43,6 +45,7 @@ export default function FeelEditor({
     changeHandler,
     keyHandler,
     language(),
+    autocompletion(variables),
     theme,
     linter
   ];
