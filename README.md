@@ -25,6 +25,24 @@ const editor = new FeelEditor({
 });
 ```
 
+### Variables
+
+You can provide a variables array that will be used for auto completion. The Variables
+need to be in the following format:
+
+```JavaScript
+const editor = new FeelEditor({
+  container,
+  variables: [
+    {
+      name: 'variablename to match',
+      detail: 'optional inline info',
+      info: 'optional pop-out info'
+    }
+  ]
+});
+```
+
 ## Hacking the Project
 
 To get the development setup make sure to have [NodeJS](https://nodejs.org/en/download/) installed.
