@@ -1,10 +1,13 @@
+import { defaultKeymap } from '@codemirror/commands';
+import { setDiagnosticsEffect } from '@codemirror/lint';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
+
+import autocompletion from './autocompletion';
 import { language } from './language';
-import { defaultKeymap } from '@codemirror/commands';
 import linter from './lint';
 import theme from './theme';
-import autocompletion from './autocompletion';
+
 
 /**
  * Creates a FEEL editor in the supplied container
@@ -13,23 +16,41 @@ import autocompletion from './autocompletion';
  * @param {DOMNode} config.container
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
+ * @param {Function} [config.onLint]
+ * @param {Boolean} [config.readOnly]
  * @param {String} [config.value]
+ * @param {Array} [config.variables]
  *
  * @returns {Object} editor
  */
 export default function FeelEditor({
   container,
-  variables = [],
   onChange = () => {},
   onKeyDown = () => {},
+  onLint = () => {},
+  readOnly = false,
   value = '',
-  readOnly = false
+  variables = []
 }) {
 
   const changeHandler = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
       onChange(update.state.doc.toString());
     }
+  });
+
+  const lintHandler = EditorView.updateListener.of((update) => {
+    const diagnosticEffects = update.transactions
+      .flatMap(t => t.effects)
+      .filter(effect => effect.is(setDiagnosticsEffect));
+
+    if (!diagnosticEffects.length) {
+      return;
+    }
+
+    const messages = diagnosticEffects.flatMap(effect => effect.value);
+
+    onLint(messages);
   });
 
   const keyHandler = EditorView.domEventHandlers(
@@ -47,7 +68,8 @@ export default function FeelEditor({
     language(),
     autocompletion(variables),
     theme,
-    linter
+    linter,
+    lintHandler
   ];
 
   if (readOnly) {
