@@ -285,7 +285,6 @@ return
       // when
       forceLinting(cm);
 
-
       // then
       // update done async
       setTimeout(() => {
@@ -313,6 +312,64 @@ return
       // update done async
       setTimeout(() => {
         expect(diagnosticCount(cm.state)).to.eql(1);
+        done();
+      }, 0);
+
+    });
+
+
+    it('should call onLint with errors', function(done) {
+      const initalValue = '= 15';
+      const onLint = sinon.spy();
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        onLint
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      forceLinting(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+
+        expect(onLint).to.have.been.calledOnce;
+        expect(onLint).to.have.been.calledWith(sinon.match.array);
+        expect(onLint.args[0][0]).to.have.length(1);
+
+        done();
+      }, 0);
+
+    });
+
+
+    it('should call onLint without errors', function(done) {
+      const initalValue = '15';
+      const onLint = sinon.spy();
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        onLint
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      forceLinting(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+
+        expect(onLint).to.have.been.calledOnce;
+        expect(onLint).to.have.been.calledWith(sinon.match.array);
+        expect(onLint.args[0][0]).to.have.length(0);
+
         done();
       }, 0);
 

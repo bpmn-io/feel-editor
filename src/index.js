@@ -6,6 +6,8 @@ import linter from './lint';
 import theme from './theme';
 import autocompletion from './autocompletion';
 
+import { setDiagnosticsEffect } from '@codemirror/lint';
+
 /**
  * Creates a FEEL editor in the supplied container
  *
@@ -13,6 +15,7 @@ import autocompletion from './autocompletion';
  * @param {DOMNode} config.container
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
+ * @param {Function} [config.onLint]
  * @param {String} [config.value]
  *
  * @returns {Object} editor
@@ -22,6 +25,7 @@ export default function FeelEditor({
   variables = [],
   onChange = () => {},
   onKeyDown = () => {},
+  onLint = () => {},
   value = '',
   readOnly = false
 }) {
@@ -30,6 +34,20 @@ export default function FeelEditor({
     if (update.docChanged) {
       onChange(update.state.doc.toString());
     }
+  });
+
+  const lintHandler = EditorView.updateListener.of((update) => {
+    const diagnosticEffects = update.transactions
+      .flatMap(t => t.effects)
+      .filter(effect => effect.is(setDiagnosticsEffect));
+
+    if (!diagnosticEffects.length) {
+      return;
+    }
+
+    const messages = diagnosticEffects.flatMap(effect => effect.value);
+
+    onLint(messages);
   });
 
   const keyHandler = EditorView.domEventHandlers(
@@ -47,7 +65,8 @@ export default function FeelEditor({
     language(),
     autocompletion(variables),
     theme,
-    linter
+    linter,
+    lintHandler
   ];
 
   if (readOnly) {
