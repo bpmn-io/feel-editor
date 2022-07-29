@@ -1,12 +1,13 @@
+import { defaultKeymap } from '@codemirror/commands';
+import { setDiagnosticsEffect } from '@codemirror/lint';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
+
+import autocompletion from './autocompletion';
 import { language } from './language';
-import { defaultKeymap } from '@codemirror/commands';
 import linter from './lint';
 import theme from './theme';
-import autocompletion from './autocompletion';
 
-import { setDiagnosticsEffect } from '@codemirror/lint';
 
 /**
  * Creates a FEEL editor in the supplied container
@@ -16,18 +17,20 @@ import { setDiagnosticsEffect } from '@codemirror/lint';
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
  * @param {Function} [config.onLint]
+ * @param {Boolean} [config.readOnly]
  * @param {String} [config.value]
+ * @param {Array} [config.variables]
  *
  * @returns {Object} editor
  */
 export default function FeelEditor({
   container,
-  variables = [],
   onChange = () => {},
   onKeyDown = () => {},
   onLint = () => {},
+  readOnly = false,
   value = '',
-  readOnly = false
+  variables = []
 }) {
 
   const changeHandler = EditorView.updateListener.of((update) => {
