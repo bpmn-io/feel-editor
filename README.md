@@ -21,6 +21,7 @@ const editor = new FeelEditor({
   container,
   onChange,
   onKeyDown,
+  onLint,
   value
 });
 ```
