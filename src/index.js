@@ -83,8 +83,14 @@ FeelEditor.prototype.setValue = function(value) {
 /**
  * Sets the focus in the editor.
  */
-FeelEditor.prototype.focus = function() {
-  this._cmEditor.focus();
+FeelEditor.prototype.focus = function(position) {
+  const cmEditor = this._cmEditor;
+  cmEditor.focus();
+
+  if (typeof position === 'number') {
+    const end = cmEditor.state.doc.length;
+    cmEditor.dispatch({ selection: { anchor: position <= end ? position : end } });
+  }
 };
 
 /**

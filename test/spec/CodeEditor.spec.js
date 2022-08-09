@@ -112,37 +112,88 @@ return
     });
 
 
-    it('should focus', async function() {
+    describe('focus', function() {
 
-      // given
-      const editor = new FeelEditor({
-        container
+      it('should focus', async function() {
+
+        // given
+        const editor = new FeelEditor({
+          container
+        });
+
+        // assume
+        expect(editor._cmEditor.hasFocus).to.be.false;
+
+        // when
+        editor.focus();
+
+        // then
+        expect(editor._cmEditor.hasFocus).to.be.true;
       });
 
-      // assume
-      expect(editor._cmEditor.hasFocus).to.be.false;
 
-      // when
-      editor.focus();
+      it('should not focus for read-only', function() {
 
-      // then
-      expect(editor._cmEditor.hasFocus).to.be.true;
-    });
+        // when
+        const editor = new FeelEditor({
+          container,
+          readOnly: true
+        });
 
+        // when
+        editor.focus();
 
-    it('should not focus for read-only', function() {
-
-      // when
-      const editor = new FeelEditor({
-        container,
-        readOnly: true
+        // then
+        expect(editor._cmEditor.hasFocus).to.be.false;
       });
 
-      // when
-      editor.focus();
 
-      // then
-      expect(editor._cmEditor.hasFocus).to.be.false;
+      it('should set caret position', async function() {
+
+        // given
+        const editor = new FeelEditor({
+          container,
+          value: 'Foobar'
+        });
+
+        // assume
+        expect(editor._cmEditor.hasFocus).to.be.false;
+
+        // when
+        editor.focus(2);
+
+        // then
+        expect(editor._cmEditor.hasFocus).to.be.true;
+
+        const selection = editor._cmEditor.state.selection;
+        const range = selection.ranges[selection.mainIndex];
+        expect(range.from).to.eql(2);
+        expect(range.to).to.eql(2);
+      });
+
+
+      it('should set caret to end', async function() {
+
+        // given
+        const editor = new FeelEditor({
+          container,
+          value: 'Foo'
+        });
+
+        // assume
+        expect(editor._cmEditor.hasFocus).to.be.false;
+
+        // when
+        editor.focus(Infinity);
+
+        // then
+        expect(editor._cmEditor.hasFocus).to.be.true;
+
+        const selection = editor._cmEditor.state.selection;
+        const range = selection.ranges[selection.mainIndex];
+        expect(range.from).to.eql(3);
+        expect(range.to).to.eql(3);
+      });
 
     });
 
