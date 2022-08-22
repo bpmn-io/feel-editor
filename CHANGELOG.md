@@ -6,6 +6,11 @@ All notable changes to [min-dom](https://github.com/bpmn-io/min-dom) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.3.0
+
+* `FEAT`: add onLint callback ([#10](https://github.com/bpmn-io/feel-editor/pull/10))
+* `FEAT`: set caret position in `editor.focus` ([#15](https://github.com/bpmn-io/feel-editor/pull/15))
+
 ## 0.2.0
 
 * `FEAT`: add variable suggestion ([#9](https://github.com/bpmn-io/feel-editor/pull/9))
