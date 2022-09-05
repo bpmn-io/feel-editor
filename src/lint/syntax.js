@@ -1,7 +1,10 @@
 import { syntaxTree } from '@codemirror/language';
 import { linter } from '@codemirror/lint';
 
-export const FeelLinter = function(editorView) {
+export const FeelLinter = function(editorView, ...rest) {
+
+  // console.log('FeelLinter', editorView, rest);
+
   const messages = [];
 
   // don't lint if the Editor is empty

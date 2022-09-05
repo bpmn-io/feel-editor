@@ -5,6 +5,7 @@
   "files": [
     "dist"
   ],
+  "dev:module": "src/index.js",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {

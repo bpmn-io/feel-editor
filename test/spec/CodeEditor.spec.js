@@ -31,12 +31,18 @@ return
         {
           name: 'Variable1',
           info: 'Written in Service Task',
-          type: 'Process_1'
         },
         {
           name: 'Variable2',
           info: 'Written in Service Task',
-          type: 'Process_1'
+        },
+        {
+          name: 'ContextVariable',
+          info: 'Written in Service Task',
+          values: [
+            { name: 'key1' },
+            { name: 'key2' }
+          ]
         }
       ]
     });
@@ -272,7 +278,7 @@ return
     });
 
 
-    it('should highlight unexpected operations', function(done) {
+    it.only('should highlight unexpected operations', function(done) {
       const initalValue = '= 15';
 
       const editor = new FeelEditor({
