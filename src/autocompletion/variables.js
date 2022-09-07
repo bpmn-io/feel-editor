@@ -1,4 +1,5 @@
 import { syntaxTree } from '@codemirror/language';
+import { isNodeEmpty, isPathExpression } from './autocompletionUtil';
 
 export default variables => context => {
   const options = variables.map(v => ({
@@ -19,11 +20,11 @@ export default variables => context => {
         isNodeEmpty(nodeBefore) ||
         nextNode && nextNode.from === context.pos && isNodeEmpty(nextNode);
 
-  if (context.explicit && isInEmptyNode) {
-    return {
+  if (isInEmptyNode) {
+    return context.explicit ? {
       from: context.pos,
       options: options
-    };
+    } : null;
   }
 
   const result = {
@@ -32,16 +33,9 @@ export default variables => context => {
   };
 
   // Only auto-complete variables
-  if (nodeBefore.name !== 'VariableName') {
+  if ((nodeBefore.parent && nodeBefore.parent.name !== 'VariableName') || isPathExpression(nodeBefore)) {
     return null;
   }
 
   return result;
 };
-
-
-// helpers ///////////////////////////////
-
-function isNodeEmpty(node) {
-  return node.from === node.to;
-}

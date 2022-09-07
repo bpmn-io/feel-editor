@@ -41,6 +41,7 @@ export const syntaxClasses = syntaxHighlighting(
     { tag: t.number, class: 'number' },
     { tag: t.string, class: 'string' },
     { tag: t.function(t.variableName), class: 'function' },
+    { tag: t.function(t.special(t.variableName)), class: 'function' },
     { tag: t.atom, class: 'atom' },
   ])
 );
