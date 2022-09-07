@@ -48,7 +48,7 @@
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@lezer/highlight": "^1.0.0",
-    "lezer-feel": "^0.4.0"
+    "lezer-feel": "^0.13.1"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
