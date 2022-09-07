@@ -11,6 +11,20 @@ export const baseTheme = EditorView.theme({
   },
   '&.cm-editor.cm-focused': {
     outline: 'none',
+  },
+  '& .cm-completionInfo ul': {
+    margin: 0,
+    paddingLeft: '15px'
+  },
+  '& .cm-completionInfo pre': {
+    marginBottom: 0,
+    whiteSpace: 'pre-wrap'
+  },
+  '& .cm-completionInfo p': {
+    marginTop: 0,
+  },
+  '& .cm-completionInfo p:not(:last-of-type)': {
+    marginBottom: 0,
   }
 });
 
