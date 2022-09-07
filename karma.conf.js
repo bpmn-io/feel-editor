@@ -58,6 +58,10 @@ module.exports = function(karma) {
               'style-loader',
               'css-loader'
             ]
+          },
+          {
+            test: /\.json$/,
+            type: 'json'
           }
         ].concat(coverage ?
           {

@@ -48,9 +48,12 @@
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@lezer/highlight": "^1.0.0",
+    "domify": "^1.4.1",
     "lezer-feel": "^0.13.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@testing-library/dom": "^8.17.1",
     "@testing-library/user-event": "^14.4.3",

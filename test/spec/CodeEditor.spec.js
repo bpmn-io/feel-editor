@@ -19,14 +19,14 @@ describe('CodeEditor', function() {
   (singleStart ? it.only : it)('should render', async function() {
 
     // when
-    const initalValue = `for
+    const initialValue = `for
   fruit in [ "apple", "bananas" ], vegetable in vegetables
 return
   { ingredients: [ fruit, vegetable ] }`;
 
     const editor = new FeelEditor({
       container,
-      value: initalValue,
+      value: initialValue,
       variables: [
         {
           name: 'Variable1',
@@ -381,7 +381,7 @@ return
   describe('autocompletion', function() {
 
     it('should suggest applicable variables', function(done) {
-      const initalValue = 'foo';
+      const initalValue = 'fooba';
       const variables = [
         { name: 'foobar' },
         { name: 'baz' }
@@ -396,7 +396,7 @@ return
       const cm = editor._cmEditor;
 
       // move cursor to the end
-      cm.dispatch({ selection: { anchor: 3, head: 3 } });
+      cm.dispatch({ selection: { anchor: 5, head: 5 } });
 
       // when
       startCompletion(cm);
@@ -407,6 +407,33 @@ return
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(1);
         expect(completions[0].label).to.have.eql('foobar');
+        done();
+      }, 100);
+
+    });
+
+
+    it('should suggest built-ins', function(done) {
+      const initalValue = '';
+      const variables = [];
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        variables
+      });
+
+      const cm = editor._cmEditor;
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(84);
+        expect(completions[0].label).to.have.eql('abs()');
         done();
       }, 100);
 

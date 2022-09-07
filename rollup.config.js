@@ -1,3 +1,5 @@
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 
 import pkg from './package.json';
@@ -14,6 +16,8 @@ export default {
   },
   ],
   plugins: [
-    nodeResolve()
+    nodeResolve(),
+    commonjs(),
+    json()
   ]
 };
