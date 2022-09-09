@@ -1,4 +1,6 @@
+import { closeBrackets } from '@codemirror/autocomplete';
 import { defaultKeymap } from '@codemirror/commands';
+import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
@@ -69,6 +71,9 @@ export default function FeelEditor({
     autocompletion(variables),
     theme,
     linter,
+    indentOnInput(),
+    bracketMatching(),
+    closeBrackets(),
     lintHandler
   ];
 
