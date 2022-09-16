@@ -1,4 +1,4 @@
-import tags from './buildins.json';
+import tags from './builtins.json';
 import domify from 'domify';
 import { snippetCompletion } from '@codemirror/autocomplete';
 import { syntaxTree } from '@codemirror/language';
