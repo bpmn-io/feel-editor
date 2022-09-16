@@ -1,8 +1,9 @@
-import tags from './builtins.json';
-import domify from 'domify';
 import { snippetCompletion } from '@codemirror/autocomplete';
 import { syntaxTree } from '@codemirror/language';
+import { domify } from 'min-dom';
+
 import { isNodeEmpty, isPathExpression } from './autocompletionUtil';
+import tags from './builtins.json';
 
 const options = tags.map(tag => snippetCompletion(
   tag.name.replace('()', '(#{1})'),
