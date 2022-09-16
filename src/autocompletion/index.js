@@ -1,5 +1,5 @@
 import { autocompletion } from '@codemirror/autocomplete';
-import builtIns from './builtIns';
+import builtins from './builtins';
 
 import variables from './variables';
 
@@ -8,7 +8,7 @@ export default function(context) {
     autocompletion({
       override: [
         variables(context),
-        builtIns
+        builtins
       ]
     })
   ];
