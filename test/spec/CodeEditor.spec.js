@@ -432,8 +432,37 @@ return
       // update done async
       setTimeout(() => {
         const completions = currentCompletions(cm.state);
-        expect(completions).to.have.length(84);
+        expect(completions).to.have.length(90);
         expect(completions[0].label).to.have.eql('abs()');
+        done();
+      }, 100);
+
+    });
+
+
+    it('should suggest snippets', function(done) {
+      const initalValue = 'fo';
+      const variables = [];
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        variables
+      });
+
+      const cm = editor._cmEditor;
+
+      // move cursor to the end
+      cm.dispatch({ selection: { anchor: 2, head: 2 } });
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      setTimeout(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions[0].label).to.have.eql('for');
         done();
       }, 100);
 
