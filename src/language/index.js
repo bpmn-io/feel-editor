@@ -1,6 +1,6 @@
 import { LanguageSupport } from '@codemirror/language';
-import { FeelLanguage } from './feel-language';
+import { feelLanguage } from 'lang-feel';
 
 export function language() {
-  return new LanguageSupport(FeelLanguage, [ ]);
+  return new LanguageSupport(feelLanguage, [ ]);
 }
