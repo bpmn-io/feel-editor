@@ -38,15 +38,17 @@ export const highlightTheme = EditorView.baseTheme({
   '& .string': {
     color: '#a11'
   },
+  '& .bool': {
+    color: '#219'
+  },
   '& .function': {
     color: '#aa3731',
     fontWeight: 'bold'
   },
-  '& .atom': {
+  '& .control': {
     color: '#708'
   }
 });
-
 
 export const syntaxClasses = syntaxHighlighting(
   HighlightStyle.define([
@@ -54,8 +56,10 @@ export const syntaxClasses = syntaxHighlighting(
     { tag: t.name, class: 'variableName' },
     { tag: t.number, class: 'number' },
     { tag: t.string, class: 'string' },
+    { tag: t.bool, class: 'bool' },
     { tag: t.function(t.variableName), class: 'function' },
     { tag: t.function(t.special(t.variableName)), class: 'function' },
-    { tag: t.atom, class: 'atom' },
+    { tag: t.controlKeyword, class: 'control' },
+    { tag: t.operatorKeyword, class: 'control' }
   ])
 );
