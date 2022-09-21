@@ -1,4 +1,5 @@
-import { autocompletion } from '@codemirror/autocomplete';
+import { autocompletion, completeFromList } from '@codemirror/autocomplete';
+import { snippets } from 'lang-feel';
 import builtins from './builtins';
 
 import variables from './variables';
@@ -8,7 +9,8 @@ export default function(context) {
     autocompletion({
       override: [
         variables(context),
-        builtins
+        builtins,
+        completeFromList(snippets)
       ]
     })
   ];
