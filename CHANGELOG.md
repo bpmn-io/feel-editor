@@ -6,6 +6,13 @@ All notable changes to [min-dom](https://github.com/bpmn-io/min-dom) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.4.0
+
+* `FEAT`: support automatic indentation ([#13](https://github.com/bpmn-io/feel-editor/issues/13))
+* `FEAT`: suggest built-in functions ([#11](https://github.com/bpmn-io/feel-editor/issues/11))
+* `FEAT`: suggest built-in snippets ([#14](https://github.com/bpmn-io/feel-editor/issues/14))
+* `DEPS`: update to lezer-feel@0.13.1 ([9333aa8](https://github.com/bpmn-io/feel-editor/commit/9333aa8ba8cf24363e4f2743836ca57b3eba6812))
+
 ## 0.3.0
 
 * `FEAT`: add onLint callback ([#10](https://github.com/bpmn-io/feel-editor/pull/10))
