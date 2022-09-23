@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to [min-dom](https://github.com/bpmn-io/min-dom) are documented here. We use [semantic versioning](http://semver.org/) for releases.
+All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-editor) are documented here. We use [semantic versioning](http://semver.org/) for releases.
 
 ## Unreleased
 
