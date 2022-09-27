@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 0.4.1
 
-Re-release of 0.4.1 with external dependencies removed from bundle.
+_Re-release of 0.4.1 with external dependencies removed from bundle._
 
 ## 0.4.0
 
