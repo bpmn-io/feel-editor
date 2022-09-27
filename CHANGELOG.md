@@ -6,6 +6,10 @@ All notable changes to [min-dom](https://github.com/bpmn-io/min-dom) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.4.1
+
+Re-release of 0.4.1 with external dependencies removed from bundle.
+
 ## 0.4.0
 
 * `FEAT`: support automatic indentation ([#13](https://github.com/bpmn-io/feel-editor/issues/13))
