@@ -1,6 +1,6 @@
 # @bpmn-io/feel-editor
 
-Embeddable Editor for FEEL expressions.
+Embeddable Editor for [FEEL expressions](https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/).
 
 ## Usage
 
