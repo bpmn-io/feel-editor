@@ -6,7 +6,8 @@ export default variables => context => {
     label: v.name,
     type: 'variable',
     info: v.info,
-    detail: v.detail
+    detail: v.detail,
+    boost: 5
   }));
 
   // In most cases, use what is typed before the cursor

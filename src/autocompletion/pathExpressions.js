@@ -57,7 +57,8 @@ export default variables => context => {
     label: v.name,
     type: 'variable',
     info: v.info,
-    detail: v.detail
+    detail: v.detail,
+    boost: 10
   }));
 
   console.log(options, from, context.state.sliceDoc(from, from + 1));
