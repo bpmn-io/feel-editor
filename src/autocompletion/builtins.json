@@ -1,338 +1,338 @@
 [
   {
     "name": "not()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>negand</code>: boolean</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">not(true);\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>negand</code>: boolean</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">not(true)\n// false\n</code></pre>\n"
   },
   {
     "name": "is defined()",
-    "description": "<p>Checks if a given value is defined. A value is defined if it exists, and it is an instance of one of the FEEL data types including <code>null</code>.</p>\n<p>The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a <code>null</code> variable and a value that doesn&#39;t exist.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>value</code>: any</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">is defined(1)\n// true\n\nis defined(null)\n// true\n\nis defined(x)\n// false - if no variable &quot;x&quot; exists\n\nis defined(x.y)\n// false - if no variable &quot;x&quot; exists or it doesn&#39;t have a property &quot;y&quot;\n</code></pre>\n"
+    "description": "<p>Checks if a given value is defined. A value is defined if it exists, and it is an instance of one of the FEEL data types including <code>null</code>.</p>\n<p>The function can be used to check if a variable or a context entry (e.g. a property of a variable) exists. It allows differentiating between a <code>null</code> variable and a value that doesn&#39;t exist.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>value</code>: any</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">is defined(1)\n// true\n\nis defined(null)\n// true\n\nis defined(x)\n// false - if no variable &quot;x&quot; exists\n\nis defined(x.y)\n// false - if no variable &quot;x&quot; exists or it doesn&#39;t have a property &quot;y&quot;\n</code></pre>\n"
   },
   {
     "name": "get value()",
-    "description": "<p>Returns the value of the context entry with the given key.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n<li><code>key</code>: string</li>\n</ul>\n</li>\n<li>result: any</li>\n</ul>\n<pre><code class=\"language-js\">get value({foo: 123}, &quot;foo&quot;)\n// 123\n</code></pre>\n"
+    "description": "<p>Returns the value of the context entry with the given key.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n<li><code>key</code>: string</li>\n</ul>\n</li>\n<li>result: any</li>\n</ul>\n<pre><code class=\"language-feel\">get value({foo: 123}, &quot;foo&quot;)\n// 123\n</code></pre>\n"
   },
   {
     "name": "get entries()",
-    "description": "<p>Returns the entries of the context as a list of key-value-pairs.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n</ul>\n</li>\n<li>result: list of context which contains two entries for &quot;key&quot; and &quot;value&quot;</li>\n</ul>\n<pre><code class=\"language-js\">get entries({foo: 123})\n// [{key: &quot;foo&quot;, value: 123}]\n</code></pre>\n"
+    "description": "<p>Returns the entries of the context as a list of key-value-pairs.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n</ul>\n</li>\n<li>result: list of context which contains two entries for &quot;key&quot; and &quot;value&quot;</li>\n</ul>\n<pre><code class=\"language-feel\">get entries({foo: 123})\n// [{key: &quot;foo&quot;, value: 123}]\n</code></pre>\n"
   },
   {
     "name": "put()",
-    "description": "<p>Add the given key and value to a context. Returns a new context that includes the entry. It might override an existing entry of the context.</p>\n<p>Returns <code>null</code> if the value is not defined.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n<li><code>key</code>: string</li>\n<li><code>value</code>: any</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-js\">put({ x: 1 }, &quot;y&quot;, 2);\n// {x:1, y:2}\n</code></pre>\n"
+    "description": "<p>Add the given key and value to a context. Returns a new context that includes the entry. It might override an existing entry of the context.</p>\n<p>Returns <code>null</code> if the value is not defined.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>context</code>: context</li>\n<li><code>key</code>: string</li>\n<li><code>value</code>: any</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-feel\">put({x:1}, &quot;y&quot;, 2)\n// {x:1, y:2}\n</code></pre>\n"
   },
   {
     "name": "put all()",
-    "description": "<p>Union the given contexts (two or more). Returns a new context that includes all entries of the given contexts. It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts are passed in the method.</p>\n<p>Returns <code>null</code> if one of the values is not a context.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>contexts</code>: contexts as varargs</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-js\">put all({x:1}, {y:2})\n// {x:1, y:2}\n</code></pre>\n"
+    "description": "<p>Union the given contexts (two or more). Returns a new context that includes all entries of the given contexts. It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts are passed in the method.</p>\n<p>Returns <code>null</code> if one of the values is not a context.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>contexts</code>: contexts as varargs</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-feel\">put all({x:1}, {y:2})\n// {x:1, y:2}\n</code></pre>\n"
   },
   {
     "name": "date()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string / date-time</li>\n<li>or <code>year</code>, <code>month</code>, <code>day</code>: number</li>\n</ul>\n</li>\n<li>result: date</li>\n</ul>\n<pre><code class=\"language-js\">date(birthday)\n// date(&quot;2018-04-29&quot;)\n\ndate(date and time(&quot;2012-12-25T11:00:00&quot;))\n// date(&quot;2012-12-25&quot;)\n\ndate(2012, 12, 25)\n// date(&quot;2012-12-25&quot;)\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string / date-time</li>\n<li>or <code>year</code>, <code>month</code>, <code>day</code>: number</li>\n</ul>\n</li>\n<li>result: date</li>\n</ul>\n<pre><code class=\"language-feel\">date(birthday)\n// date(&quot;2018-04-29&quot;)\n\ndate(date and time(&quot;2012-12-25T11:00:00&quot;))\n// date(&quot;2012-12-25&quot;)\n\ndate(2012, 12, 25)\n// date(&quot;2012-12-25&quot;)\n</code></pre>\n"
   },
   {
     "name": "time()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string / date-time</li>\n<li>or <code>hour</code>, <code>minute</code>, <code>second</code>: number<ul>\n<li>(optional) <code>offset</code>: day-time-duration</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>result: time</li>\n</ul>\n<pre><code class=\"language-js\">time(lunchTime)\n// time(&quot;12:00:00&quot;)\n\ntime(date and time(&quot;2012-12-25T11:00:00&quot;))\n// time(&quot;11:00:00&quot;)\n\ntime(23, 59, 0)\n// time(&quot;23:59:00&quot;)\n\ntime(14, 30, 0, duration(&quot;PT1H&quot;))\n// time(&quot;15:30:00&quot;)\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string / date-time</li>\n<li>or <code>hour</code>, <code>minute</code>, <code>second</code>: number<ul>\n<li>(optional) <code>offset</code>: day-time-duration</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>result: time</li>\n</ul>\n<pre><code class=\"language-feel\">time(lunchTime)\n// time(&quot;12:00:00&quot;)\n\ntime(date and time(&quot;2012-12-25T11:00:00&quot;))\n// time(&quot;11:00:00&quot;)\n\ntime(23, 59, 0)\n// time(&quot;23:59:00&quot;)\n\ntime(14, 30, 0, duration(&quot;PT1H&quot;))\n// time(&quot;15:30:00&quot;)\n</code></pre>\n"
   },
   {
     "name": "date and time()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date / date-time</li>\n<li><code>time</code>: time</li>\n<li>or <code>from</code>: string</li>\n</ul>\n</li>\n<li>result: date-time</li>\n</ul>\n<pre><code class=\"language-js\">date and time(date(&quot;2012-12-24&quot;),time(&quot;T23:59:00&quot;))\n// date and time(&quot;2012-12-24T23:59:00&quot;)\n\ndate and time(date and time(&quot;2012-12-25T11:00:00&quot;),time(&quot;T23:59:00&quot;))\n// date and time(&quot;2012-12-25T23:59:00&quot;)\n\ndate and time(birthday)\n// date and time(&quot;2018-04-29T009:30:00&quot;)\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date / date-time</li>\n<li><code>time</code>: time</li>\n<li>or <code>from</code>: string</li>\n</ul>\n</li>\n<li>result: date-time</li>\n</ul>\n<pre><code class=\"language-feel\">date and time(date(&quot;2012-12-24&quot;),time(&quot;T23:59:00&quot;))\n// date and time(&quot;2012-12-24T23:59:00&quot;)\n\ndate and time(date and time(&quot;2012-12-25T11:00:00&quot;),time(&quot;T23:59:00&quot;))\n// date and time(&quot;2012-12-25T23:59:00&quot;)\n\ndate and time(birthday)\n// date and time(&quot;2018-04-29T009:30:00&quot;)\n</code></pre>\n"
   },
   {
     "name": "duration()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string</li>\n</ul>\n</li>\n<li>result: day-time-duration or year-month-duration</li>\n</ul>\n<pre><code class=\"language-js\">duration(weekDays);\n// duration(&quot;P5D&quot;)\n\nduration(age);\n// duration(&quot;P32Y&quot;)\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string</li>\n</ul>\n</li>\n<li>result: day-time-duration or year-month-duration</li>\n</ul>\n<pre><code class=\"language-feel\">duration(weekDays)\n// duration(&quot;P5D&quot;)\n\nduration(age)\n// duration(&quot;P32Y&quot;)\n</code></pre>\n"
   },
   {
     "name": "years and months duration()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: date</li>\n<li><code>to</code>: date</li>\n</ul>\n</li>\n<li>result: year-month-duration</li>\n</ul>\n<pre><code class=\"language-js\">years and months duration(date(&quot;2011-12-22&quot;), date(&quot;2013-08-24&quot;))\n// duration(&quot;P1Y8M&quot;)\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: date</li>\n<li><code>to</code>: date</li>\n</ul>\n</li>\n<li>result: year-month-duration</li>\n</ul>\n<pre><code class=\"language-feel\">years and months duration(date(&quot;2011-12-22&quot;), date(&quot;2013-08-24&quot;))\n// duration(&quot;P1Y8M&quot;)\n</code></pre>\n"
   },
   {
     "name": "number()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">number(&quot;1500.5&quot;);\n// 1500.5\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: string</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">number(&quot;1500.5&quot;)\n// 1500.5\n</code></pre>\n"
   },
   {
     "name": "string()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: any</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">string(1.1);\n// &quot;1.1&quot;\n\nstring(date(&quot;2012-12-25&quot;));\n// &quot;2012-12-25&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>from</code>: any</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">string(1.1)\n// &quot;1.1&quot;\n\nstring(date(&quot;2012-12-25&quot;))\n// &quot;2012-12-25&quot;\n</code></pre>\n"
   },
   {
     "name": "context()",
-    "description": "<p>Constructs a context of the given list of key-value pairs. It is the reverse function to <a href=\"feel-built-in-functions-context.md#get-entries\">get entries()</a>.</p>\n<p>Each key-value pair must be a context with two entries: <code>key</code> and <code>value</code>. The entry with name <code>key</code> must have a value of the type <code>string</code>.</p>\n<p>It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts in the given list.</p>\n<p>Returns <code>null</code> if one of the entries is not a context or if a context doesn&#39;t contain the required entries.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>entries</code>: list of contexts</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-js\">context([\n  { key: &quot;a&quot;, value: 1 },\n  { key: &quot;b&quot;, value: 2 },\n]);\n// {a:1, b:2}\n</code></pre>\n"
+    "description": "<p>Constructs a context of the given list of key-value pairs. It is the reverse function to <a href=\"feel-built-in-functions-context.md#get-entries\">get entries()</a>.</p>\n<p>Each key-value pair must be a context with two entries: <code>key</code> and <code>value</code>. The entry with name <code>key</code> must have a value of the type <code>string</code>.</p>\n<p>It might override context entries if the keys are equal. The entries are overridden in the same order as the contexts in the given list.</p>\n<p>Returns <code>null</code> if one of the entries is not a context or if a context doesn&#39;t contain the required entries.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>entries</code>: list of contexts</li>\n</ul>\n</li>\n<li>result: context</li>\n</ul>\n<pre><code class=\"language-feel\">context([{&quot;key&quot;:&quot;a&quot;, &quot;value&quot;:1}, {&quot;key&quot;:&quot;b&quot;, &quot;value&quot;:2}])\n// {a:1, b:2}\n</code></pre>\n"
   },
   {
     "name": "list contains()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>element</code>: any</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">list contains([1,2,3], 2)\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>element</code>: any</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">list contains([1,2,3], 2)\n// true\n</code></pre>\n"
   },
   {
     "name": "count()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">count([1, 2, 3]);\n// 3\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">count([1,2,3])\n// 3\n</code></pre>\n"
   },
   {
     "name": "min()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">min([1, 2, 3]);\n// 1\n\nmin(1, 2, 3);\n// 1\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">min([1,2,3])\n// 1\n\nmin(1,2,3)\n// 1\n</code></pre>\n"
   },
   {
     "name": "max()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">min([1, 2, 3]);\n// 3\n\nmin(1, 2, 3);\n// 3\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">max([1,2,3])\n// 3\n\nmax(1,2,3)\n// 3\n</code></pre>\n"
   },
   {
     "name": "sum()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">min([1, 2, 3]);\n// 6\n\nmin(1, 2, 3);\n// 6\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">sum([1,2,3])\n// 6\n\nsum(1,2,3)\n// 6\n</code></pre>\n"
   },
   {
     "name": "product()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">product([2, 3, 4]);\n// 24\n\nproduct(2, 3, 4);\n// 24\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">product([2, 3, 4])\n// 24\n\nproduct(2, 3, 4)\n// 24\n</code></pre>\n"
   },
   {
     "name": "mean()",
-    "description": "<p>Returns the arithmetic mean (i.e. average).</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">mean([1, 2, 3]);\n// 2\n\nmean(1, 2, 3);\n// 2\n</code></pre>\n"
+    "description": "<p>Returns the arithmetic mean (i.e. average).</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">mean([1,2,3])\n// 2\n\nmean(1,2,3)\n// 2\n</code></pre>\n"
   },
   {
     "name": "median()",
-    "description": "<p>Returns the median element of the list of numbers.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">median(8, 2, 5, 3, 4);\n// 4\n\nmedian([6, 1, 2, 3]);\n// 2.5\n</code></pre>\n"
+    "description": "<p>Returns the median element of the list of numbers.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">median(8, 2, 5, 3, 4)\n// 4\n\nmedian([6, 1, 2, 3])\n// 2.5\n</code></pre>\n"
   },
   {
     "name": "stddev()",
-    "description": "<p>Returns the standard deviation.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">stddev(2, 4, 7, 5);\n// 2.0816659994661326\n\nstddev([2, 4, 7, 5]);\n// 2.0816659994661326\n</code></pre>\n"
+    "description": "<p>Returns the standard deviation.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">stddev(2, 4, 7, 5)\n// 2.0816659994661326\n\nstddev([2, 4, 7, 5])\n// 2.0816659994661326\n</code></pre>\n"
   },
   {
     "name": "mode()",
-    "description": "<p>Returns the mode of the list of numbers.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: list of numbers</li>\n</ul>\n<pre><code class=\"language-js\">mode(6, 3, 9, 6, 6);\n// [6]\n\nmode([6, 1, 9, 6, 1]);\n// [1, 6]\n</code></pre>\n"
+    "description": "<p>Returns the mode of the list of numbers.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of numbers</li>\n<li>or numbers as varargs</li>\n</ul>\n</li>\n<li>result: list of numbers</li>\n</ul>\n<pre><code class=\"language-feel\">mode(6, 3, 9, 6, 6)\n// [6]\n\nmode([6, 1, 9, 6, 1])\n// [1, 6]\n</code></pre>\n"
   },
   {
     "name": "and()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">and([true, false]);\n// false\n\nand(false, null, true);\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">and([true,false])\n// false\n\nand(false,null,true)\n// false\n</code></pre>\n"
   },
   {
     "name": "all()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">and([true, false]);\n// false\n\nand(false, null, true);\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">and([true,false])\n// false\n\nand(false,null,true)\n// false\n</code></pre>\n"
   },
   {
     "name": "or()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">or([false, true]);\n// true\n\nor(false, null, true);\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">or([false,true])\n// true\n\nor(false,null,true)\n// true\n</code></pre>\n"
   },
   {
     "name": "any()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">or([false, true]);\n// true\n\nor(false, null, true);\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list of booleans</li>\n<li>or booleans as varargs</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">or([false,true])\n// true\n\nor(false,null,true)\n// true\n</code></pre>\n"
   },
   {
     "name": "sublist()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>start position</code>: number</li>\n<li>(optional) <code>length</code>: number</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">sublist([1, 2, 3], 2);\n// [2,3]\n\nsublist([1, 2, 3], 1, 2);\n// [1,2]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>start position</code>: number</li>\n<li>(optional) <code>length</code>: number</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">sublist([1,2,3], 2)\n// [2,3]\n\nsublist([1,2,3], 1, 2)\n// [1,2]\n</code></pre>\n"
   },
   {
     "name": "append()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>items</code>: elements as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">append([1], 2, 3);\n// [1,2,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>items</code>: elements as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">append([1], 2, 3)\n// [1,2,3]\n</code></pre>\n"
   },
   {
     "name": "concatenate()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>lists</code>: lists as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">concatenate([1, 2], [3]);\n// [1,2,3]\n\nconcatenate([1], [2], [3]);\n// [1,2,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>lists</code>: lists as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">concatenate([1,2],[3])\n// [1,2,3]\n\nconcatenate([1],[2],[3])\n// [1,2,3]\n</code></pre>\n"
   },
   {
     "name": "insert before()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>position</code>: number</li>\n<li><code>newItem</code>: any</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">insert before([1,3],1,2)\n// [1,2,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>position</code>: number</li>\n<li><code>newItem</code>: any</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">insert before([1,3],1,2)\n// [1,2,3]\n</code></pre>\n"
   },
   {
     "name": "remove()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>position</code>: number</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">remove([1, 2, 3], 2);\n// [1,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>position</code>: number</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">remove([1,2,3], 2)\n// [1,3]\n</code></pre>\n"
   },
   {
     "name": "reverse()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">reverse([1, 2, 3]);\n// [3,2,1]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">reverse([1,2,3])\n// [3,2,1]\n</code></pre>\n"
   },
   {
     "name": "index of()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>match</code>: any</li>\n</ul>\n</li>\n<li>result: list of numbers</li>\n</ul>\n<pre><code class=\"language-js\">index of([1,2,3,2],2)\n// [2,4]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>match</code>: any</li>\n</ul>\n</li>\n<li>result: list of numbers</li>\n</ul>\n<pre><code class=\"language-feel\">index of([1,2,3,2],2)\n// [2,4]\n</code></pre>\n"
   },
   {
     "name": "union()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>lists</code>: lists as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">union([1, 2], [2, 3]);\n// [1,2,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>lists</code>: lists as varargs</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">union([1,2],[2,3])\n// [1,2,3]\n</code></pre>\n"
   },
   {
     "name": "distinct values()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">distinct values([1,2,3,2,1])\n// [1,2,3]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">distinct values([1,2,3,2,1])\n// [1,2,3]\n</code></pre>\n"
   },
   {
     "name": "flatten()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">flatten([[1, 2], [[3]], 4]);\n// [1,2,3,4]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">flatten([[1,2],[[3]], 4])\n// [1,2,3,4]\n</code></pre>\n"
   },
   {
     "name": "sort()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>precedes</code>: function with two arguments and boolean result</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-js\">sort(list: [3,1,4,5,2], precedes: function(x,y) x &lt; y)\n// [1,2,3,4,5]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>list</code>: list</li>\n<li><code>precedes</code>: function with two arguments and boolean result</li>\n</ul>\n</li>\n<li>result: list</li>\n</ul>\n<pre><code class=\"language-feel\">sort(list: [3,1,4,5,2], precedes: function(x,y) x &lt; y)\n// [1,2,3,4,5]\n</code></pre>\n"
   },
   {
     "name": "string join()",
-    "description": "<p>This joins a list of strings into a single string. This is similar to\nJava&#39;s <a href=\"https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#joining(java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence)\">joining</a>\nfunction.</p>\n<p>If an item of the list is <code>null</code>, the item is ignored for the result string. If an item is\nneither a string nor <code>null</code>, the function returns <code>null</code> instead of a string.</p>\n<ul>\n<li>Parameters:<ul>\n<li><code>list</code>: The list of strings to join</li>\n<li><code>delimiter</code>: (Optional) The string used between each element (default: empty string)</li>\n<li><code>prefix</code>: (Optional) The string used at the beginning of the joined result (default:\nempty string)</li>\n<li><code>suffix</code>: (Optional) The string used at the end of the joined result (default: empty\nstring)</li>\n</ul>\n</li>\n<li>Result: The joined list as a string</li>\n</ul>\n<pre><code class=\"language-js\">string join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])\n// &quot;abc&quot;\nstring join([&quot;a&quot;], &quot;X&quot;)\n// &quot;a&quot;\nstring join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], &quot;, &quot;)\n// &quot;a, b, c&quot;\nstring join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], &quot;, &quot;, &quot;[&quot;, &quot;]&quot;)\n// &quot;[a, b, c]&quot;\nstring join([&quot;a&quot;,null,&quot;c&quot;])\n// &quot;ac&quot;\nstring join([])\n// &quot;&quot;\n</code></pre>\n"
+    "description": "<p>This joins a list of strings into a single string. This is similar to\nJava&#39;s <a href=\"https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/stream/Collectors.html#joining(java.lang.CharSequence,java.lang.CharSequence,java.lang.CharSequence)\">joining</a>\nfunction.</p>\n<p>If an item of the list is <code>null</code>, the item is ignored for the result string. If an item is\nneither a string nor <code>null</code>, the function returns <code>null</code> instead of a string.</p>\n<ul>\n<li>Parameters:<ul>\n<li><code>list</code>: The list of strings to join</li>\n<li><code>delimiter</code>: (Optional) The string used between each element (default: empty string)</li>\n<li><code>prefix</code>: (Optional) The string used at the beginning of the joined result (default:\nempty string)</li>\n<li><code>suffix</code>: (Optional) The string used at the end of the joined result (default: empty\nstring)</li>\n</ul>\n</li>\n<li>Result: The joined list as a string</li>\n</ul>\n<pre><code class=\"language-feel\">string join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])\n// &quot;abc&quot;\nstring join([&quot;a&quot;], &quot;X&quot;)\n// &quot;a&quot;\nstring join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], &quot;, &quot;)\n// &quot;a, b, c&quot;\nstring join([&quot;a&quot;,&quot;b&quot;,&quot;c&quot;], &quot;, &quot;, &quot;[&quot;, &quot;]&quot;)\n// &quot;[a, b, c]&quot;\nstring join([&quot;a&quot;,null,&quot;c&quot;])\n// &quot;ac&quot;\nstring join([])\n// &quot;&quot;\n</code></pre>\n"
   },
   {
     "name": "decimal()",
-    "description": "<p>Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in, it uses <code>HALF_EVEN</code> as default.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n<li><code>scale</code>: number</li>\n<li>(optional) <code>mode</code>: string - one of <code>UP, DOWN, CEILING, FLOOR, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY</code> (default: <code>HALF_EVEN</code>)</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">decimal(1 / 3, 2);\n// .33\n\ndecimal(1.5, 0);\n// 2\n\ndecimal(2.5, 0, &quot;half_up&quot;);\n// 3\n</code></pre>\n"
+    "description": "<p>Round the given number at the given scale using the given rounding mode. If no rounding mode is passed in, it uses <code>HALF_EVEN</code> as default.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n<li><code>scale</code>: number</li>\n<li>(optional) <code>mode</code>: string - one of <code>UP, DOWN, CEILING, FLOOR, HALF_UP, HALF_DOWN, HALF_EVEN, UNNECESSARY</code> (default: <code>HALF_EVEN</code>)</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">decimal(1/3, 2)\n// .33\n\ndecimal(1.5, 0)\n// 2\n\ndecimal(2.5, 0, &quot;half_up&quot;)\n// 3\n</code></pre>\n"
   },
   {
     "name": "floor()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">floor(1.5);\n// 1\n\nfloor(-1.5);\n// -2\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">floor(1.5)\n// 1\n\nfloor(-1.5)\n// -2\n</code></pre>\n"
   },
   {
     "name": "ceiling()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">ceiling(1.5);\n// 2\n\nfloor(-1.5);\n// -1\n</code></pre>\n"
+    "description": "<p>Round the given number at the given scale using the ceiling rounding mode.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>n</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">ceiling(1.5)\n// 2\n\nceiling(-1.5)\n// -1\n</code></pre>\n"
   },
   {
     "name": "abs()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">abs(10);\n// 10\n\nabs(-10);\n// 10\n</code></pre>\n"
+    "description": "<p>Returns the absolute value of the given numeric value.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">abs(10)\n// 10\n\nabs(-10)\n// 10\n</code></pre>\n"
   },
   {
     "name": "modulo()",
-    "description": "<p>Returns the remainder of the division of dividend by divisor.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>dividend</code>: number</li>\n<li><code>divisor</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">modulo(12, 5);\n// 2\n</code></pre>\n"
+    "description": "<p>Returns the remainder of the division of dividend by divisor.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>dividend</code>: number</li>\n<li><code>divisor</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">modulo(12, 5)\n// 2\n</code></pre>\n"
   },
   {
     "name": "sqrt()",
-    "description": "<p>Returns the square root.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">sqrt(16);\n// 4\n</code></pre>\n"
+    "description": "<p>Returns the square root.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">sqrt(16)\n// 4\n</code></pre>\n"
   },
   {
     "name": "log()",
-    "description": "<p>Returns the natural logarithm (base e) of the number.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">log(10);\n// 2.302585092994046\n</code></pre>\n"
+    "description": "<p>Returns the natural logarithm (base e) of the number.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">log(10)\n// 2.302585092994046\n</code></pre>\n"
   },
   {
     "name": "exp()",
-    "description": "<p>Returns the Euler’s number e raised to the power of number .</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">exp(5);\n// 148.4131591025766\n</code></pre>\n"
+    "description": "<p>Returns the Euler’s number e raised to the power of number .</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">exp(5)\n// 148.4131591025766\n</code></pre>\n"
   },
   {
     "name": "odd()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">odd(5);\n// true\n</code></pre>\n"
+    "description": "<p>Returns <code>true</code> if the given numeric value is odd. Otherwise, it returns <code>false</code>.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">odd(5)\n// true\n\nodd(2)\n// false\n</code></pre>\n"
   },
   {
     "name": "even()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">odd(5);\n// false\n</code></pre>\n"
+    "description": "<p>Returns <code>true</code> if the given numeric value is even. Otherwise, it returns <code>false</code>.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>number</code>: number</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">even(5)\n// false\n\neven(2)\n// true\n</code></pre>\n"
   },
   {
     "name": "before()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">before(1, 10)\n// true\n\nbefore(10, 1)\n// false\n\nbefore(1, [2..5])\n// true\n\nbefore([1..5], 10)\n// true\n\nbefore([1..5], [6..10])\n// true\n\nbefore([1..5),[5..10])\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">before(1, 10)\n// true\n\nbefore(10, 1)\n// false\n\nbefore(1, [2..5])\n// true\n\nbefore([1..5], 10)\n// true\n\nbefore([1..5], [6..10])\n// true\n\nbefore([1..5),[5..10])\n// true\n</code></pre>\n"
   },
   {
     "name": "after()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">after(10, 1)\n// true\n\nafter(1, 10)\n// false\n\nafter(12, [2..5])\n// true\n\n([1..5], 10)\n// false\n\nbefore([6..10], [1..5])\n// true\n\nbefore([5..10], [1..5))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">after(10, 1)\n// true\n\nafter(1, 10)\n// false\n\nafter(12, [2..5])\n// true\n\n([1..5], 10)\n// false\n\nbefore([6..10], [1..5])\n// true\n\nbefore([5..10], [1..5))\n// true\n</code></pre>\n"
   },
   {
     "name": "meets()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">meets([1..5], [5..10])\n// true\n\nmeets([1..3], [4..6])\n// false\n\nmeets([1..3], [3..5])\n// true\n\nmeets([1..5], (5..8])\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">meets([1..5], [5..10])\n// true\n\nmeets([1..3], [4..6])\n// false\n\nmeets([1..3], [3..5])\n// true\n\nmeets([1..5], (5..8])\n// false\n</code></pre>\n"
   },
   {
     "name": "met by()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">met by([5..10], [1..5])\n// true\n\nmet by([3..4], [1..2])\n// false\n\nmet by([3..5], [1..3])\n// true\n\nmet by((5..8], [1..5))\n// false\n\nmet by([5..10], [1..5))\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">met by([5..10], [1..5])\n// true\n\nmet by([3..4], [1..2])\n// false\n\nmet by([3..5], [1..3])\n// true\n\nmet by((5..8], [1..5))\n// false\n\nmet by([5..10], [1..5))\n// false\n</code></pre>\n"
   },
   {
     "name": "overlaps()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">overlaps([5..10], [1..6])\n// true\n\noverlaps((3..7], [1..4])\n// true\n\noverlaps([1..3], (3..6])\n// false\n\noverlaps((5..8], [1..5))\n// false\n\noverlaps([4..10], [1..5))\n// treu\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">overlaps([5..10], [1..6])\n// true\n\noverlaps((3..7], [1..4])\n// true\n\noverlaps([1..3], (3..6])\n// false\n\noverlaps((5..8], [1..5))\n// false\n\noverlaps([4..10], [1..5))\n// treu\n</code></pre>\n"
   },
   {
     "name": "overlaps before()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">overlaps before([1..5], [4..10])\n// true\n\noverlaps before([3..4], [1..2])\n// false\n\noverlaps before([1..3], (3..5])\n// false\n\noverlaps before([1..5), (3..8])\n// true\n\noverlaps before([1..5), [5..10])\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">overlaps before([1..5], [4..10])\n// true\n\noverlaps before([3..4], [1..2])\n// false\n\noverlaps before([1..3], (3..5])\n// false\n\noverlaps before([1..5), (3..8])\n// true\n\noverlaps before([1..5), [5..10])\n// false\n</code></pre>\n"
   },
   {
     "name": "overlaps after()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">overlaps after([4..10], [1..5])\n// true\n\noverlaps after([3..4], [1..2])\n// false\n\noverlaps after([3..5], [1..3))\n// false\n\noverlaps after((5..8], [1..5))\n// false\n\noverlaps after([4..10], [1..5))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range1</code>: range</li>\n<li><code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">overlaps after([4..10], [1..5])\n// true\n\noverlaps after([3..4], [1..2])\n// false\n\noverlaps after([3..5], [1..3))\n// false\n\noverlaps after((5..8], [1..5))\n// false\n\noverlaps after([4..10], [1..5))\n// true\n</code></pre>\n"
   },
   {
     "name": "finishes()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">finishes(5, [1..5])\n// true\n\nfinishes(10, [1..7])\n// false\n\nfinishes([3..5], [1..5])\n// true\n\nfinishes((1..5], [1..5))\n// false\n\nfinishes([5..10], [1..10))\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">finishes(5, [1..5])\n// true\n\nfinishes(10, [1..7])\n// false\n\nfinishes([3..5], [1..5])\n// true\n\nfinishes((1..5], [1..5))\n// false\n\nfinishes([5..10], [1..10))\n// false\n</code></pre>\n"
   },
   {
     "name": "finished by()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">finishes by([5..10], 10)\n// true\n\nfinishes by([3..4], 2)\n// false\n\nfinishes by([3..5], [1..5])\n// true\n\nfinishes by((5..8], [1..5))\n// false\n\nfinishes by([5..10], (1..10))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">finishes by([5..10], 10)\n// true\n\nfinishes by([3..4], 2)\n// false\n\nfinishes by([3..5], [1..5])\n// true\n\nfinishes by((5..8], [1..5))\n// false\n\nfinishes by([5..10], (1..10))\n// true\n</code></pre>\n"
   },
   {
     "name": "includes()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">includes([5..10], 6)\n// true\n\nincludes([3..4], 5)\n// false\n\nincludes([1..10], [4..6])\n// true\n\nincludes((5..8], [1..5))\n// false\n\nincludes([1..10], [1..5))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">includes([5..10], 6)\n// true\n\nincludes([3..4], 5)\n// false\n\nincludes([1..10], [4..6])\n// true\n\nincludes((5..8], [1..5))\n// false\n\nincludes([1..10], [1..5))\n// true\n</code></pre>\n"
   },
   {
     "name": "during()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">during(5, [1..10])\n// true\n\nduring(12, [1..10])\n// false\n\nduring(1, (1..10])\n// false\n\nduring([4..6], [1..10))\n// true\n\nduring((1..5], (1..10])\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">during(5, [1..10])\n// true\n\nduring(12, [1..10])\n// false\n\nduring(1, (1..10])\n// false\n\nduring([4..6], [1..10))\n// true\n\nduring((1..5], (1..10])\n// true\n</code></pre>\n"
   },
   {
     "name": "starts()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">starts(1, [1..5])\n// true\n\nstarts(1, (1..8])\n// false\n\nstarts((1..5], [1..5])\n// false\n\nstarts([1..10], [1..10])\n// true\n\nstarts((1..10), (1..10))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point</code>: any, <code>range</code>: range</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">starts(1, [1..5])\n// true\n\nstarts(1, (1..8])\n// false\n\nstarts((1..5], [1..5])\n// false\n\nstarts([1..10], [1..10])\n// true\n\nstarts((1..10), (1..10))\n// true\n</code></pre>\n"
   },
   {
     "name": "started by()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">started by([1..10], 1)\n// true\n\nstarted by((1..10], 1)\n// false\n\nstarted by([1..10], [1..5])\n// true\n\nstarted by((1..10], [1..5))\n// false\n\nstarted by([1..10], [1..10))\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>range</code>: range, <code>point</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">started by([1..10], 1)\n// true\n\nstarted by((1..10], 1)\n// false\n\nstarted by([1..10], [1..5])\n// true\n\nstarted by((1..10], [1..5))\n// false\n\nstarted by([1..10], [1..10))\n// true\n</code></pre>\n"
   },
   {
     "name": "coincides()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">coincides(5, 5)\n// true\n\ncoincides(3, 4)\n// false\n\ncoincides([1..5], [1..5])\n// true\n\ncoincides((1..5], [1..5))\n// false\n\ncoincides([1..5], [2..6])\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>point1</code>, <code>point2</code>: any</li>\n<li>or <code>range1</code>, <code>range2</code>: range</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">coincides(5, 5)\n// true\n\ncoincides(3, 4)\n// false\n\ncoincides([1..5], [1..5])\n// true\n\ncoincides((1..5], [1..5))\n// false\n\ncoincides([1..5], [2..6])\n// false\n</code></pre>\n"
   },
   {
     "name": "substring()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>start position</code>: number</li>\n<li>(optional) <code>length</code>: number</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">substring(&quot;foobar&quot;, 3);\n// &quot;obar&quot;\n\nsubstring(&quot;foobar&quot;, 3, 3);\n// &quot;oba&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>start position</code>: number</li>\n<li>(optional) <code>length</code>: number</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">substring(&quot;foobar&quot;,3)\n// &quot;obar&quot;\n\nsubstring(&quot;foobar&quot;,3,3)\n// &quot;oba&quot;\n</code></pre>\n"
   },
   {
     "name": "string length()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">string length(&quot;foo&quot;)\n// 3\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">string length(&quot;foo&quot;)\n// 3\n</code></pre>\n"
   },
   {
     "name": "upper case()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">upper case(&quot;aBc4&quot;)\n// &quot;ABC4&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">upper case(&quot;aBc4&quot;)\n// &quot;ABC4&quot;\n</code></pre>\n"
   },
   {
     "name": "lower case()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">lower case(&quot;aBc4&quot;)\n// &quot;abc4&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">lower case(&quot;aBc4&quot;)\n// &quot;abc4&quot;\n</code></pre>\n"
   },
   {
     "name": "substring before()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">substring before(&quot;foobar&quot;, &quot;bar&quot;)\n// &quot;foo&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">substring before(&quot;foobar&quot;, &quot;bar&quot;)\n// &quot;foo&quot;\n</code></pre>\n"
   },
   {
     "name": "substring after()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">substring after(&quot;foobar&quot;, &quot;ob&quot;)\n// &quot;ar&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">substring after(&quot;foobar&quot;, &quot;ob&quot;)\n// &quot;ar&quot;\n</code></pre>\n"
   },
   {
     "name": "contains()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">contains(&quot;foobar&quot;, &quot;of&quot;);\n// false\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">contains(&quot;foobar&quot;, &quot;of&quot;)\n// false\n</code></pre>\n"
   },
   {
     "name": "starts with()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">starts with(&quot;foobar&quot;, &quot;fo&quot;)\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">starts with(&quot;foobar&quot;, &quot;fo&quot;)\n// true\n</code></pre>\n"
   },
   {
     "name": "ends with()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">ends with(&quot;foobar&quot;, &quot;r&quot;)\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>match</code>: string</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">ends with(&quot;foobar&quot;, &quot;r&quot;)\n// true\n</code></pre>\n"
   },
   {
     "name": "matches()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-js\">matches(&quot;foobar&quot;, &quot;^fo*bar&quot;);\n// true\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: boolean</li>\n</ul>\n<pre><code class=\"language-feel\">matches(&quot;foobar&quot;, &quot;^fo*bar&quot;)\n// true\n</code></pre>\n"
   },
   {
     "name": "replace()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n<li><code>replacement</code>: string (e.g. <code>$1</code> returns the first match group)</li>\n<li>(optional) <code>flags</code>: string (&quot;s&quot;, &quot;m&quot;, &quot;i&quot;, &quot;x&quot;)</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">replace(&quot;abcd&quot;, &quot;(ab)|(a)&quot;, &quot;[1=$1][2=$2]&quot;);\n// &quot;[1=ab][2=]cd&quot;\n\nreplace(&quot;0123456789&quot;, &quot;(d{3})(d{3})(d{4})&quot;, &quot;($1) $2-$3&quot;);\n// &quot;(012) 345-6789&quot;\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>input</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n<li><code>replacement</code>: string (e.g. <code>$1</code> returns the first match group)</li>\n<li>(optional) <code>flags</code>: string (&quot;s&quot;, &quot;m&quot;, &quot;i&quot;, &quot;x&quot;)</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">replace(&quot;abcd&quot;, &quot;(ab)|(a)&quot;, &quot;[1=$1][2=$2]&quot;)\n// &quot;[1=ab][2=]cd&quot;\n\nreplace(&quot;0123456789&quot;, &quot;(\\d{3})(\\d{3})(\\d{4})&quot;, &quot;($1) $2-$3&quot;)\n// &quot;(012) 345-6789&quot;\n</code></pre>\n"
   },
   {
     "name": "split()",
-    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>delimiter</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: list of strings</li>\n</ul>\n<pre><code class=\"language-js\">split(&quot;John Doe&quot;, &quot;s&quot;);\n// [&quot;John&quot;, &quot;Doe&quot;]\n\nsplit(&quot;a;b;c;;&quot;, &quot;;&quot;);\n// [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;&quot;, &quot;&quot;]\n</code></pre>\n"
+    "description": "<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>delimiter</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: list of strings</li>\n</ul>\n<pre><code class=\"language-feel\">split(&quot;John Doe&quot;, &quot;\\s&quot; )\n// [&quot;John&quot;, &quot;Doe&quot;]\n\nsplit(&quot;a;b;c;;&quot;, &quot;;&quot;)\n// [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;&quot;, &quot;&quot;]\n</code></pre>\n"
   },
   {
     "name": "extract()",
-    "description": "<p>Returns all matches of the pattern in the given string. Returns an empty list if the pattern doesn&#39;t\nmatch.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: list of strings</li>\n</ul>\n<pre><code class=\"language-js\">extract(&quot;references are 1234, 1256, 1378&quot;, &quot;12[0-9]*&quot;);\n// [&quot;1234&quot;,&quot;1256&quot;]\n</code></pre>\n"
+    "description": "<p>Returns all matches of the pattern in the given string. Returns an empty list if the pattern doesn&#39;t\nmatch.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>string</code>: string</li>\n<li><code>pattern</code>: string (regular expression)</li>\n</ul>\n</li>\n<li>result: list of strings</li>\n</ul>\n<pre><code class=\"language-feel\">extract(&quot;references are 1234, 1256, 1378&quot;, &quot;12[0-9]*&quot;)\n// [&quot;1234&quot;,&quot;1256&quot;]\n</code></pre>\n"
   },
   {
     "name": "now()",
-    "description": "<p>Returns the current date and time including the timezone.</p>\n<ul>\n<li>parameters: no</li>\n<li>result: date-time with timezone</li>\n</ul>\n<pre><code class=\"language-js\">now();\n// date and time(&quot;2020-07-31T14:27:30@Europe/Berlin&quot;)\n</code></pre>\n"
+    "description": "<p>Returns the current date and time including the timezone.</p>\n<ul>\n<li>parameters: no</li>\n<li>result: date-time with timezone</li>\n</ul>\n<pre><code class=\"language-feel\">now()\n// date and time(&quot;2020-07-31T14:27:30@Europe/Berlin&quot;)\n</code></pre>\n"
   },
   {
     "name": "today()",
-    "description": "<p>Returns the current date.</p>\n<ul>\n<li>parameters: no</li>\n<li>result: date</li>\n</ul>\n<pre><code class=\"language-js\">today();\n// date(&quot;2020-07-31&quot;)\n</code></pre>\n"
+    "description": "<p>Returns the current date.</p>\n<ul>\n<li>parameters: no</li>\n<li>result: date</li>\n</ul>\n<pre><code class=\"language-feel\">today()\n// date(&quot;2020-07-31&quot;)\n</code></pre>\n"
   },
   {
     "name": "day of week()",
-    "description": "<p>Returns the day of the week according to the Gregorian calendar. Note that it always returns the English name of the day.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">day of week(date(&quot;2019-09-17&quot;))\n// &quot;Tuesday&quot;\n</code></pre>\n"
+    "description": "<p>Returns the day of the week according to the Gregorian calendar. Note that it always returns the English name of the day.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">day of week(date(&quot;2019-09-17&quot;))\n// &quot;Tuesday&quot;\n</code></pre>\n"
   },
   {
     "name": "day of year()",
-    "description": "<p>Returns the Gregorian number of the day within the year.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">day of year(date(&quot;2019-09-17&quot;))\n// 260\n</code></pre>\n"
+    "description": "<p>Returns the Gregorian number of the day within the year.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">day of year(date(&quot;2019-09-17&quot;))\n// 260\n</code></pre>\n"
   },
   {
     "name": "week of year()",
-    "description": "<p>Returns the Gregorian number of the week within the year, according to ISO 8601.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-js\">week of year(date(&quot;2019-09-17&quot;))\n// 38\n</code></pre>\n"
+    "description": "<p>Returns the Gregorian number of the week within the year, according to ISO 8601.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: number</li>\n</ul>\n<pre><code class=\"language-feel\">week of year(date(&quot;2019-09-17&quot;))\n// 38\n</code></pre>\n"
   },
   {
     "name": "month of year()",
-    "description": "<p>Returns the month of the week according to the Gregorian calendar. Note that it always returns the English name of the month.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-js\">month of year(date(&quot;2019-09-17&quot;))\n// &quot;September&quot;\n</code></pre>\n"
+    "description": "<p>Returns the month of the week according to the Gregorian calendar. Note that it always returns the English name of the month.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>date</code>: date/date-time</li>\n</ul>\n</li>\n<li>result: string</li>\n</ul>\n<pre><code class=\"language-feel\">month of year(date(&quot;2019-09-17&quot;))\n// &quot;September&quot;\n</code></pre>\n"
   },
   {
     "name": "abs()",
-    "description": "<p>Returns the absolute value of a given duration.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>n</code>: days-time-duration/years-months-duration</li>\n</ul>\n</li>\n<li>result: duration</li>\n</ul>\n<pre><code class=\"language-js\">abs(duration(&quot;-PT5H&quot;));\n// &quot;duration(&quot;PT5H&quot;)&quot;\n\nabs(duration(&quot;PT5H&quot;));\n// &quot;duration(&quot;PT5H&quot;)&quot;\n\nabs(duration(&quot;-P2M&quot;));\n// duration(&quot;P2M&quot;)\n</code></pre>\n"
+    "description": "<p>Returns the absolute value of a given duration.</p>\n<ul>\n<li>parameters:<ul>\n<li><code>n</code>: days-time-duration/years-months-duration</li>\n</ul>\n</li>\n<li>result: duration</li>\n</ul>\n<pre><code class=\"language-feel\">abs(duration(&quot;-PT5H&quot;))\n// &quot;duration(&quot;PT5H&quot;)&quot;\n\nabs(duration(&quot;PT5H&quot;))\n// &quot;duration(&quot;PT5H&quot;)&quot;\n\nabs(duration(&quot;-P2M&quot;))\n// duration(&quot;P2M&quot;)\n</code></pre>\n"
   }
 ]
