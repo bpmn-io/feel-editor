@@ -44,6 +44,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.20.2",
     "@codemirror/autocomplete": "^6.1.1",
     "@codemirror/commands": "^6.0.0",
     "@codemirror/language": "^6.0.0",
@@ -51,6 +52,8 @@
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@lezer/highlight": "^1.0.0",
+    "babel-loader": "^9.1.0",
+    "babel-plugin-istanbul": "^6.1.1",
     "lang-feel": "^0.0.3",
     "lezer-feel": "^0.14.1",
     "min-dom": "^4.0.1"
@@ -65,7 +68,6 @@
     "eslint": "^7.32.0",
     "eslint-plugin-bpmn-io": "^0.13.0",
     "glob": "^8.0.3",
-    "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^6.3.19",
     "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "^2.2.0",

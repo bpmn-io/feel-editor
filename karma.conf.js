@@ -67,8 +67,16 @@ module.exports = function(karma) {
           {
             test: /\.js$/,
             use: {
-              loader: 'istanbul-instrumenter-loader',
-              options: { esModules: true }
+              loader: 'babel-loader',
+              options: {
+                plugins: [
+                  [ 'istanbul', {
+                    include: [
+                      'src/**'
+                    ]
+                  } ]
+                ],
+              }
             },
             enforce: 'post',
             include: /src\.*/,
