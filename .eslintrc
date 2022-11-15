@@ -1,5 +1,17 @@
 {
   "extends": [
     "plugin:bpmn-io/browser"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "karma.conf.js",
+        "rollup.config.js",
+        "scripts/**/*.js"
+      ],
+      "extends": [
+        "plugin:bpmn-io/node"
+      ]
+    }
   ]
 }
