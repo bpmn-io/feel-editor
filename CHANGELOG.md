@@ -6,6 +6,11 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.5.0
+
+* `FEAT`: scroll into view when focused ([#30](https://github.com/bpmn-io/feel-editor/pull/30))
+* `CHORE`: update documentation for built-in functions ([#27](https://github.com/bpmn-io/feel-editor/pull/27))
+
 ## 0.4.1
 
 _Re-release of 0.4.1 with external dependencies removed from bundle._
