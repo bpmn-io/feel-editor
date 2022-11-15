@@ -3,6 +3,7 @@ import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
 import { diagnosticCount, forceLinting } from '@codemirror/lint';
 import { currentCompletions, startCompletion } from '@codemirror/autocomplete';
+import { domify } from 'min-dom';
 
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
@@ -145,6 +146,34 @@ return
 
         // then
         expect(editor._cmEditor.hasFocus).to.be.false;
+      });
+
+
+      it('should scroll into view', function() {
+
+        // given
+        const scrollContainer = domify(`
+        <div style="height: 100px; overflow: auto;">
+          <div style="height: 1000px"></div>
+          <div id="editor-container"></div>
+        </div>`);
+        const editorContainer = scrollContainer.querySelector('#editor-container');
+        container.appendChild(scrollContainer);
+
+        const editor = new FeelEditor({
+          container: editorContainer
+        });
+
+        // assume
+        expect(scrollContainer.scrollTop).to.be.eql(0);
+        expect(editor._cmEditor.hasFocus).to.be.false;
+
+        // when
+        editor.focus();
+
+        // then
+        expect(scrollContainer.scrollTop).to.be.greaterThan(0);
+        expect(editor._cmEditor.hasFocus).to.be.true;
       });
 
 
