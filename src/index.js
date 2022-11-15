@@ -112,6 +112,10 @@ FeelEditor.prototype.setValue = function(value) {
  */
 FeelEditor.prototype.focus = function(position) {
   const cmEditor = this._cmEditor;
+
+  // the Codemirror `focus` method always calls `focus` with `preventScroll`,
+  // so we have to focus + scroll manually
+  cmEditor.contentDOM.focus();
   cmEditor.focus();
 
   if (typeof position === 'number') {
