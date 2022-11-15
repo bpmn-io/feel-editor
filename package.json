@@ -16,7 +16,7 @@
     "builtins": "run-s pull:platform-docs compile:builtins",
     "lint": "eslint src",
     "pull:platform-docs": "git -C camunda-platform-docs pull || git clone git@github.com:camunda/camunda-platform-docs.git camunda-platform-docs",
-    "start": "SINGLE_START=true npm run dev",
+    "start": "cross-env SINGLE_START=true npm run dev",
     "dev": "npm test -- --auto-watch --no-single-run",
     "prepare": "run-s build"
   },
