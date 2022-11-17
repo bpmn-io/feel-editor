@@ -54,8 +54,7 @@
     "@lezer/highlight": "^1.0.0",
     "babel-loader": "^9.1.0",
     "babel-plugin-istanbul": "^6.1.1",
-    "lang-feel": "^0.0.3",
-    "lezer-feel": "^0.14.1",
+    "lang-feel": "^0.1.0",
     "min-dom": "^4.0.1"
   },
   "devDependencies": {
