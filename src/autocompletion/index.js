@@ -4,11 +4,11 @@ import builtins from './builtins';
 
 import variables from './variables';
 
-export default function(context) {
+export default function() {
   return [
     autocompletion({
       override: [
-        variables(context),
+        variables,
         builtins,
         completeFromList(snippets)
       ]

@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: allow to set variables dynamically ([#33](https://github.com/bpmn-io/feel-editor/pull/33))
+
 ## 0.5.0
 
 * `FEAT`: scroll into view when focused ([#30](https://github.com/bpmn-io/feel-editor/pull/30))
