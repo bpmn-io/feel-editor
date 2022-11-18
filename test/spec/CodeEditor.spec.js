@@ -497,6 +497,135 @@ return
 
     });
 
+
+    describe('position tooltips inside container', function() {
+
+      const initalValue = 'fooba';
+      const variables = [
+        { name: 'foobar',
+          info: () => {
+            const html = domify('<div id="oversizedDescription" style="width: 100px; height: 100px"><div>');
+            return html;
+          }
+        }
+      ];
+
+      let tooltipContainer;
+      let feelContainer;
+
+
+      beforeEach(() => {
+        tooltipContainer = domify(`<div id="tooltipContainer" style="width: 500px; height: 500px; position: relative;">
+                                    <div id="feelEditor" style="width: 50px; height: 20px; position: absolute; bottom: 0; right: 0;"></div>
+                                  </div>`);
+        feelContainer = tooltipContainer.querySelector('#feelEditor');
+        container.appendChild(tooltipContainer);
+
+        tooltipContainer.scrollIntoView();
+      });
+
+
+      it('should position tooltips inside container', function(done) {
+        const editor = new FeelEditor({
+          container: feelContainer,
+
+          tooltipContainer: tooltipContainer,
+          value: initalValue,
+          variables
+        });
+
+        const cm = editor._cmEditor;
+
+        // move cursor to the end
+        cm.dispatch({ selection: { anchor: 5, head: 5 } });
+
+        // when
+        startCompletion(cm);
+
+        // then
+        // update done async
+        setTimeout(() => {
+          const tooltip = container.querySelector('#oversizedDescription');
+
+          const tooltipBB = tooltip.getBoundingClientRect();
+          const containerBB = tooltipContainer.getBoundingClientRect();
+
+          expect(tooltip).to.exist;
+          expect(tooltipBB.bottom).to.be.below(containerBB.bottom);
+
+          done();
+        }, 100);
+
+      });
+
+
+      it('should position tooltips inside container defined by CSS selector', function(done) {
+        const editor = new FeelEditor({
+          container: feelContainer,
+
+          tooltipContainer: '#tooltipContainer',
+          value: initalValue,
+          variables
+        });
+
+        const cm = editor._cmEditor;
+
+        // move cursor to the end
+        cm.dispatch({ selection: { anchor: 5, head: 5 } });
+
+        // when
+        startCompletion(cm);
+
+        // then
+        // update done async
+        setTimeout(() => {
+          const tooltip = container.querySelector('#oversizedDescription');
+
+          const tooltipBB = tooltip.getBoundingClientRect();
+          const containerBB = tooltipContainer.getBoundingClientRect();
+
+          expect(tooltip).to.exist;
+          expect(tooltipBB.bottom).to.be.below(containerBB.bottom);
+
+          done();
+        }, 100);
+
+      });
+
+
+      it('should use window by default', function(done) {
+        const editor = new FeelEditor({
+          container: feelContainer,
+          value: initalValue,
+          variables
+        });
+
+        const cm = editor._cmEditor;
+
+        // move cursor to the end
+        cm.dispatch({ selection: { anchor: 5, head: 5 } });
+
+        // when
+        startCompletion(cm);
+
+        // then
+        // update done async
+        setTimeout(() => {
+          const tooltip = container.querySelector('#oversizedDescription');
+
+          const tooltipBB = tooltip.getBoundingClientRect();
+          const containerBB = tooltipContainer.getBoundingClientRect();
+
+          expect(tooltip).to.exist;
+          expect(tooltipBB.bottom).to.be.above(containerBB.bottom);
+
+          done();
+        }, 100);
+
+      });
+
+    });
+
   });
 
 });
