@@ -74,20 +74,20 @@ export default function FeelEditor({
   }) : [];
 
   const extensions = [
+    autocompletion(variables),
+    bracketMatching(),
+    changeHandler,
+    closeBrackets(),
+    indentOnInput(),
+    keyHandler,
     keymap.of([
       ...defaultKeymap,
     ]),
-    changeHandler,
-    keyHandler,
     language(),
-    autocompletion(variables),
-    theme,
     linter,
-    indentOnInput(),
-    bracketMatching(),
-    closeBrackets(),
     lintHandler,
     tooltipLayout,
+    theme
   ];
 
   if (readOnly) {
