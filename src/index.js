@@ -3,7 +3,7 @@ import { defaultKeymap } from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
 import { EditorState } from '@codemirror/state';
-import { EditorView, keymap } from '@codemirror/view';
+import { EditorView, keymap, tooltips } from '@codemirror/view';
 
 import autocompletion from './autocompletion';
 import { language } from './language';
@@ -16,6 +16,7 @@ import theme from './theme';
  *
  * @param {Object} config
  * @param {DOMNode} config.container
+ * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
  * @param {Function} [config.onLint]
@@ -27,6 +28,7 @@ import theme from './theme';
  */
 export default function FeelEditor({
   container,
+  tooltipContainer,
   onChange = () => {},
   onKeyDown = () => {},
   onLint = () => {},
@@ -61,6 +63,16 @@ export default function FeelEditor({
     }
   );
 
+  if (typeof tooltipContainer === 'string') {
+    tooltipContainer = document.querySelector(tooltipContainer);
+  }
+
+  const tooltipLayout = tooltipContainer ? tooltips({
+    tooltipSpace: function() {
+      return tooltipContainer.getBoundingClientRect();
+    }
+  }) : [];
+
   const extensions = [
     keymap.of([
       ...defaultKeymap,
@@ -74,7 +86,8 @@ export default function FeelEditor({
     indentOnInput(),
     bracketMatching(),
     closeBrackets(),
-    lintHandler
+    lintHandler,
+    tooltipLayout,
   ];
 
   if (readOnly) {
