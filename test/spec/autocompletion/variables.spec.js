@@ -1,22 +1,22 @@
 import { language } from '../../../src/language';
 import { EditorState } from '@codemirror/state';
 import variables from '../../../src/autocompletion/variables';
+import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
+
 
 describe('autocompletion - variables', function() {
 
   it('should return variable suggestions in correct format', function() {
 
     // given
-    const completionSource = variables([ {
+    const context = createContext('foo', [ {
       name: 'foobar',
       info: 'info',
       detail: 'detail'
     } ]);
 
-    const context = createContext('foo');
-
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -34,11 +34,10 @@ describe('autocompletion - variables', function() {
   it('should suggest for current variable', function() {
 
     // given
-    const completionSource = variables([ { name: 'foobar' } ]);
-    const context = createContext('15 + foo');
+    const context = createContext('15 + foo', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -50,11 +49,10 @@ describe('autocompletion - variables', function() {
   it('should not suggest on path expressions', function() {
 
     // given
-    const completionSource = variables([ { name: 'foobar' } ]);
-    const context = createContext('myObject.fo', 11);
+    const context = createContext('myObject.fo', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).not.to.exist;
@@ -64,11 +62,10 @@ describe('autocompletion - variables', function() {
   it('should not suggest on empty expression', function() {
 
     // given
-    const completionSource = variables([ { name: 'foobar' } ]);
-    const context = createContext('');
+    const context = createContext('', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).not.to.exist;
@@ -78,11 +75,10 @@ describe('autocompletion - variables', function() {
   it('should suggest on empty expression when explicitly requested', function() {
 
     // given
-    const completionSource = variables([ { name: 'foobar' } ]);
-    const context = createContext('', true);
+    const context = createContext('', [ { name: 'foobar' } ], true);
 
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -93,11 +89,10 @@ describe('autocompletion - variables', function() {
   it('should suggest on empty expression when explicitly requested', function() {
 
     // given
-    const completionSource = variables([ { name: 'foobar' } ]);
-    const context = createContext('', true);
+    const context = createContext('', [ { name: 'foobar' } ], true);
 
     // when
-    const autoCompletion = completionSource(context);
+    const autoCompletion = variables(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -109,10 +104,13 @@ describe('autocompletion - variables', function() {
 
 // helpers /////////////////////////////
 
-function createContext(doc, explicit = false) {
+function createContext(doc, variables = [], explicit = false) {
   const state = EditorState.create({
     doc,
-    extensions: [ language() ]
+    extensions: [
+      variablesFacet.of(variables),
+      language()
+    ]
   });
 
   return {

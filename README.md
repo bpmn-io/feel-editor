@@ -44,6 +44,18 @@ const editor = new FeelEditor({
 });
 ```
 
+The variables can be updated on the instance via `FeelEditor#setVariables()`:
+
+```javascript
+editor.setVariables([
+  {
+    name: 'newName',
+    detail: 'new variable inline info',
+    info: 'new pop-out info
+  }
+]);
+```
+
 ## Hacking the Project
 
 To get the development setup make sure to have [NodeJS](https://nodejs.org/en/download/) installed.

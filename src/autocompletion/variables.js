@@ -1,7 +1,14 @@
 import { syntaxTree } from '@codemirror/language';
 import { isNodeEmpty, isPathExpression } from './autocompletionUtil';
+import { variablesFacet } from './VariableFacet';
 
-export default variables => context => {
+/**
+ * @type {import('@codemirror/autocomplete').CompletionSource}
+ */
+export default context => {
+
+  const variables = context.state.facet(variablesFacet)[0];
+
   const options = variables.map(v => ({
     label: v.name,
     type: 'variable',

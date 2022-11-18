@@ -94,7 +94,7 @@ return
   });
 
 
-  describe('setter', function() {
+  describe('#setValue', function() {
 
     it('should accept external change', async function() {
 
@@ -111,121 +111,219 @@ return
       // then
       expect(editor._cmEditor.state.doc.toString()).to.equal('Changed');
     });
+  });
 
 
-    describe('focus', function() {
+  describe('#focus', function() {
 
-      it('should focus', async function() {
+    it('should focus', async function() {
 
-        // given
-        const editor = new FeelEditor({
-          container
-        });
-
-        // assume
-        expect(editor._cmEditor.hasFocus).to.be.false;
-
-        // when
-        editor.focus();
-
-        // then
-        expect(editor._cmEditor.hasFocus).to.be.true;
+      // given
+      const editor = new FeelEditor({
+        container
       });
 
+      // assume
+      expect(editor._cmEditor.hasFocus).to.be.false;
 
-      it('should not focus for read-only', function() {
+      // when
+      editor.focus();
 
-        // when
-        const editor = new FeelEditor({
-          container,
-          readOnly: true
-        });
+      // then
+      expect(editor._cmEditor.hasFocus).to.be.true;
+    });
 
-        // when
-        editor.focus();
 
-        // then
-        expect(editor._cmEditor.hasFocus).to.be.false;
+    it('should not focus for read-only', function() {
+
+      // when
+      const editor = new FeelEditor({
+        container,
+        readOnly: true
       });
 
+      // when
+      editor.focus();
 
-      it('should scroll into view', function() {
+      // then
+      expect(editor._cmEditor.hasFocus).to.be.false;
+    });
 
-        // given
-        const scrollContainer = domify(`
+
+    it('should scroll into view', function() {
+
+      // given
+      const scrollContainer = domify(`
         <div style="height: 100px; overflow: auto;">
           <div style="height: 1000px"></div>
           <div id="editor-container"></div>
         </div>`);
-        const editorContainer = scrollContainer.querySelector('#editor-container');
-        container.appendChild(scrollContainer);
+      const editorContainer = scrollContainer.querySelector('#editor-container');
+      container.appendChild(scrollContainer);
 
-        const editor = new FeelEditor({
-          container: editorContainer
-        });
-
-        // assume
-        expect(scrollContainer.scrollTop).to.be.eql(0);
-        expect(editor._cmEditor.hasFocus).to.be.false;
-
-        // when
-        editor.focus();
-
-        // then
-        expect(scrollContainer.scrollTop).to.be.greaterThan(0);
-        expect(editor._cmEditor.hasFocus).to.be.true;
+      const editor = new FeelEditor({
+        container: editorContainer
       });
 
+      // assume
+      expect(scrollContainer.scrollTop).to.be.eql(0);
+      expect(editor._cmEditor.hasFocus).to.be.false;
 
-      it('should set caret position', async function() {
+      // when
+      editor.focus();
 
-        // given
-        const editor = new FeelEditor({
-          container,
-          value: 'Foobar'
-        });
-
-        // assume
-        expect(editor._cmEditor.hasFocus).to.be.false;
-
-        // when
-        editor.focus(2);
-
-        // then
-        expect(editor._cmEditor.hasFocus).to.be.true;
-
-        const selection = editor._cmEditor.state.selection;
-        const range = selection.ranges[selection.mainIndex];
-        expect(range.from).to.eql(2);
-        expect(range.to).to.eql(2);
-      });
-
-
-      it('should set caret to end', async function() {
-
-        // given
-        const editor = new FeelEditor({
-          container,
-          value: 'Foo'
-        });
-
-        // assume
-        expect(editor._cmEditor.hasFocus).to.be.false;
-
-        // when
-        editor.focus(Infinity);
-
-        // then
-        expect(editor._cmEditor.hasFocus).to.be.true;
-
-        const selection = editor._cmEditor.state.selection;
-        const range = selection.ranges[selection.mainIndex];
-        expect(range.from).to.eql(3);
-        expect(range.to).to.eql(3);
-      });
-
+      // then
+      expect(scrollContainer.scrollTop).to.be.greaterThan(0);
+      expect(editor._cmEditor.hasFocus).to.be.true;
     });
 
+
+    it('should set caret position', async function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        value: 'Foobar'
+      });
+
+      // assume
+      expect(editor._cmEditor.hasFocus).to.be.false;
+
+      // when
+      editor.focus(2);
+
+      // then
+      expect(editor._cmEditor.hasFocus).to.be.true;
+
+      const selection = editor._cmEditor.state.selection;
+      const range = selection.ranges[selection.mainIndex];
+      expect(range.from).to.eql(2);
+      expect(range.to).to.eql(2);
+    });
+
+
+    it('should set caret to end', async function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        value: 'Foo'
+      });
+
+      // assume
+      expect(editor._cmEditor.hasFocus).to.be.false;
+
+      // when
+      editor.focus(Infinity);
+
+      // then
+      expect(editor._cmEditor.hasFocus).to.be.true;
+
+      const selection = editor._cmEditor.state.selection;
+      const range = selection.ranges[selection.mainIndex];
+      expect(range.from).to.eql(3);
+      expect(range.to).to.eql(3);
+    });
+
+  });
+
+
+  describe('#setVariables', function() {
+
+    it('should set variables', async function() {
+
+      // given
+      const editor = new FeelEditor({
+        container
+      });
+
+      // then
+      expect(() => {
+        editor.setVariables([
+          {
+            name: 'Variable1',
+            info: 'Written in Service Task',
+            type: 'Process_1'
+          },
+          {
+            name: 'Variable2',
+            info: 'Written in Service Task',
+            type: 'Process_1'
+          }
+        ]);
+      }).not.to.throw();
+    });
+
+
+    it('should suggest updated variables', async function() {
+
+      const initalValue = 'fooba';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 5);
+
+      // when
+      editor.setVariables([
+        { name: 'foobar' },
+        { name: 'baz' }
+      ]);
+      startCompletion(cm);
+
+      // then
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.have.eql('foobar');
+      });
+    });
+
+
+    it('should change suggestion when variables are updated', async function() {
+
+      const initalValue = 'fooba';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        variables: [
+          { name: 'foobar' },
+          { name: 'baz' }
+        ]
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 5);
+
+      // assume
+      startCompletion(cm);
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.eql('foobar');
+      });
+
+      // when
+      editor.setVariables([
+        { name: 'foobaz' }
+      ]);
+      startCompletion(cm);
+
+      // then
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.eql('foobaz');
+      });
+    });
   });
 
 
@@ -286,7 +384,7 @@ return
         value: initalValue
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       forceLinting(cm);
@@ -309,7 +407,7 @@ return
         value: initalValue
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       forceLinting(cm);
@@ -332,7 +430,7 @@ return
         value: initalValue
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       forceLinting(cm);
@@ -357,7 +455,7 @@ return
         onLint
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       forceLinting(cm);
@@ -386,7 +484,7 @@ return
         onLint
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       forceLinting(cm);
@@ -422,22 +520,22 @@ return
         variables
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // move cursor to the end
-      cm.dispatch({ selection: { anchor: 5, head: 5 } });
+      select(cm, 5);
 
       // when
       startCompletion(cm);
 
       // then
       // update done async
-      setTimeout(() => {
+      expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(1);
         expect(completions[0].label).to.have.eql('foobar');
         done();
-      }, 100);
+      });
 
     });
 
@@ -452,19 +550,19 @@ return
         variables
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // when
       startCompletion(cm);
 
       // then
       // update done async
-      setTimeout(() => {
+      expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(90);
         expect(completions[0].label).to.have.eql('abs()');
         done();
-      }, 100);
+      });
 
     });
 
@@ -479,21 +577,21 @@ return
         variables
       });
 
-      const cm = editor._cmEditor;
+      const cm = getCm(editor);
 
       // move cursor to the end
-      cm.dispatch({ selection: { anchor: 2, head: 2 } });
+      select(cm, 2);
 
       // when
       startCompletion(cm);
 
       // then
       // update done async
-      setTimeout(() => {
+      expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions[0].label).to.have.eql('for');
         done();
-      }, 100);
+      });
 
     });
 
@@ -629,3 +727,40 @@ return
   });
 
 });
+
+
+// helper //////////////////////
+
+function select(editor, anchor, head = anchor) {
+  const cm = getCm(editor);
+
+  cm.dispatch({
+    selection: {
+      anchor,
+      head
+    }
+  });
+}
+
+function getCm(editor) {
+  return editor._cmEditor || editor;
+}
+
+async function expectEventually(fn) {
+  const nextFrame = () => new Promise(resolve => {
+    requestAnimationFrame(resolve);
+  });
+
+  let e, i = 10;
+  do {
+    try {
+      await nextFrame();
+      await fn();
+      return;
+    } catch (error) {
+      e = error;
+    }
+  } while (i--);
+
+  throw e;
+}

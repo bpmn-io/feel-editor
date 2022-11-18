@@ -2,14 +2,23 @@ import { closeBrackets } from '@codemirror/autocomplete';
 import { defaultKeymap } from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
-import { EditorState } from '@codemirror/state';
+import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, tooltips } from '@codemirror/view';
 
 import autocompletion from './autocompletion';
+import { variablesFacet } from './autocompletion/VariableFacet';
 import { language } from './language';
 import linter from './lint';
 import theme from './theme';
 
+/**
+ * @typedef {object} Variable
+ * @property {string} name
+ * @property {string} [info]
+ * @property {string} [detail]
+ */
+
+const autocompletionConf = new Compartment();
 
 /**
  * Creates a FEEL editor in the supplied container
@@ -22,7 +31,7 @@ import theme from './theme';
  * @param {Function} [config.onLint]
  * @param {Boolean} [config.readOnly]
  * @param {String} [config.value]
- * @param {Array} [config.variables]
+ * @param {Variable[]} [config.variables]
  *
  * @returns {Object} editor
  */
@@ -74,7 +83,8 @@ export default function FeelEditor({
   }) : [];
 
   const extensions = [
-    autocompletion(variables),
+    autocompletionConf.of(variablesFacet.of(variables)),
+    autocompletion(),
     bracketMatching(),
     changeHandler,
     closeBrackets(),
@@ -146,4 +156,15 @@ FeelEditor.prototype.focus = function(position) {
  */
 FeelEditor.prototype.getSelection = function() {
   return this._cmEditor.state.selection;
+};
+
+/**
+ * Set variables to be used for autocompletion.
+ * @param {Variable[]} variables
+ * @returns {void}
+ */
+FeelEditor.prototype.setVariables = function(variables) {
+  this._cmEditor.dispatch({
+    effects: autocompletionConf.reconfigure(variablesFacet.of(variables))
+  });
 };
