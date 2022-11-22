@@ -11,7 +11,7 @@ export default function() {
       override: [
         variables,
         builtins,
-        completeFromList(snippets),
+        completeFromList(snippets.map(s => ({ ...s, boost: -1 }))),
         pathExpression
       ]
     })

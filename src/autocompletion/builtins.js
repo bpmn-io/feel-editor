@@ -11,9 +11,10 @@ const options = tags.map(tag => snippetCompletion(
     label: tag.name,
     type: 'function',
     info: () => {
-      const html = domify(tag.description);
+      const html = domify(`<div class="description">${tag.description}<div>`);
       return html;
-    }
+    },
+    boost: -1
   }
 ));
 
