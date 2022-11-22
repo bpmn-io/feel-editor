@@ -6,7 +6,11 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.6.0
+
 * `FEAT`: allow to set variables dynamically ([#33](https://github.com/bpmn-io/feel-editor/pull/33))
+* `FEAT`: allow to configure tooltip container ([#32](https://github.com/bpmn-io/feel-editor/pull/32))
+* `DEPS`: update dependencies (lang-feel, codemirror)
 
 ## 0.5.0
 
