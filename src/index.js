@@ -13,9 +13,11 @@ import theme from './theme';
 
 /**
  * @typedef {object} Variable
- * @property {string} name
- * @property {string} [info]
- * @property {string} [detail]
+ * @property {string} name name or key of the variable
+ * @property {string} [info] short information about the variable, e.g. type
+ * @property {string} [detail] longer description of the variable content
+ * @property {boolean} [isList] whether the variable is a list
+ * @property {array<Variable>} [schema] array of child variables if the variable is a context or list
  */
 
 const autocompletionConf = new Compartment();

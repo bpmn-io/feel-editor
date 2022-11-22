@@ -28,8 +28,9 @@ const editor = new FeelEditor({
 
 ### Variables
 
-You can provide a variables array that will be used for auto completion. The Variables
-need to be in the following format:
+You can provide a variables array that will be used for auto completion. Nested 
+structures are supported.  
+The Variables need to be in the following format:
 
 ```JavaScript
 const editor = new FeelEditor({
@@ -38,7 +39,13 @@ const editor = new FeelEditor({
     {
       name: 'variablename to match',
       detail: 'optional inline info',
-      info: 'optional pop-out info'
+      info: 'optional pop-out info',
+      schema: [
+        {
+          name: 'nested variable',
+          ...
+        }
+      ]
     }
   ]
 });
@@ -51,7 +58,7 @@ editor.setVariables([
   {
     name: 'newName',
     detail: 'new variable inline info',
-    info: 'new pop-out info
+    info: 'new pop-out info'
   }
 ]);
 ```
