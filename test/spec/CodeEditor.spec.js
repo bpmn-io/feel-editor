@@ -32,12 +32,51 @@ return
         {
           name: 'Variable1',
           info: 'Written in Service Task',
-          type: 'Process_1'
+          detail: 'Process_1'
         },
         {
           name: 'Variable2',
           info: 'Written in Service Task',
-          type: 'Process_1'
+          detail: 'Process_1'
+        },
+        {
+          name: 'ContextVariable',
+          info: 'This is a Context Variable',
+          detail: 'Context',
+          schema: [
+            {
+              name: 'child',
+              info: 'This is a child variable',
+              detail: 'Context',
+              schema: [
+                {
+                  name: 'level2',
+                  info: 'This is a level 2 variable',
+                  detail: 'String'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'ListVariable',
+          info: 'This is a Context Variable',
+          detail: 'List',
+          isList: true,
+          schema: [
+            {
+              name: 'child',
+              info: 'This is a child variable',
+              detail: 'Context',
+              schema: [
+                {
+                  name: 'level2',
+                  info: 'This is a level 2 variable',
+                  detail: 'String'
+                }
+              ]
+            }
+          ]
         }
       ]
     });
@@ -243,12 +282,12 @@ return
           {
             name: 'Variable1',
             info: 'Written in Service Task',
-            type: 'Process_1'
+            detail: 'Process_1'
           },
           {
             name: 'Variable2',
             info: 'Written in Service Task',
-            type: 'Process_1'
+            detail: 'Process_1'
           }
         ]);
       }).not.to.throw();

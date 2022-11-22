@@ -1,6 +1,7 @@
 import { autocompletion, completeFromList } from '@codemirror/autocomplete';
 import { snippets } from 'lang-feel';
 import builtins from './builtins';
+import pathExpression from './pathExpressions';
 
 import variables from './variables';
 
@@ -10,7 +11,8 @@ export default function() {
       override: [
         variables,
         builtins,
-        completeFromList(snippets)
+        completeFromList(snippets),
+        pathExpression
       ]
     })
   ];
