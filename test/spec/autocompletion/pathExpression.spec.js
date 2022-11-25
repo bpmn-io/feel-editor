@@ -136,6 +136,43 @@ describe('autocompletion - pathExpressions', function() {
 
     });
 
+
+    it('should suggest when list is part of path', function() {
+
+      // given
+      const context = createContext('foo.bar[0].ba', [ {
+        name: 'foo',
+        schema: [
+          {
+            name: 'bar',
+            isList: true,
+            schema: [
+              {
+                name: 'baz',
+                info: 'info',
+                detail: 'detail'
+              }
+            ]
+          }
+        ]
+      } ]);
+
+      // when
+      const autoCompletion = pathExpressions(context);
+
+      // then
+      expect(autoCompletion).to.exist;
+      expect(autoCompletion.from).to.eql(11);
+      expect(autoCompletion.options).to.have.length(1);
+      expect(autoCompletion.options[0]).to.eql({
+        label: 'baz',
+        type: 'variable',
+        info: 'info',
+        detail: 'detail'
+      });
+
+    });
+
   });
 
 });
