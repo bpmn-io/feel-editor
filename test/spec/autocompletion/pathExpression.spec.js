@@ -13,7 +13,7 @@ describe('autocompletion - pathExpressions', function() {
       // given
       const context = createContext('foo.', [ {
         name: 'foo',
-        schema: [
+        entries: [
           {
             name: 'bar',
             info: 'info',
@@ -43,7 +43,7 @@ describe('autocompletion - pathExpressions', function() {
       // given
       const context = createContext('foo.ba', [ {
         name: 'foo',
-        schema: [
+        entries: [
           {
             name: 'bar',
             info: 'info',
@@ -79,7 +79,7 @@ describe('autocompletion - pathExpressions', function() {
       const context = createContext('foo[0].', [ {
         name: 'foo',
         isList: true,
-        schema: [
+        entries: [
           {
             name: 'bar',
             info: 'info',
@@ -111,7 +111,7 @@ describe('autocompletion - pathExpressions', function() {
       const context = createContext('foo[0].ba', [ {
         name: 'foo',
         isList: true,
-        schema: [
+        entries: [
           {
             name: 'bar',
             info: 'info',
@@ -142,11 +142,11 @@ describe('autocompletion - pathExpressions', function() {
       // given
       const context = createContext('foo.bar[0].ba', [ {
         name: 'foo',
-        schema: [
+        entries: [
           {
             name: 'bar',
             isList: true,
-            schema: [
+            entries: [
               {
                 name: 'baz',
                 info: 'info',

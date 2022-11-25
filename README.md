@@ -40,7 +40,7 @@ const editor = new FeelEditor({
       name: 'variablename to match',
       detail: 'optional inline info',
       info: 'optional pop-out info',
-      schema: [
+      entries: [
         {
           name: 'nested variable',
           ...
