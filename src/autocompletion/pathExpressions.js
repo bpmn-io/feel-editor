@@ -84,6 +84,14 @@ function getPath(node, context) {
 function getFilter(node, context) {
   const list = node.firstChild;
 
+  if (list.name === 'PathExpression') {
+    const path = getPath(list, context);
+    const last = path[path.length - 1];
+    last.isList = true;
+
+    return path;
+  }
+
   return [ {
     name: getNodeContent(list, context),
     isList: true
