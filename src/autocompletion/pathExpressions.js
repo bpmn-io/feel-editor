@@ -30,7 +30,7 @@ export default context => {
       return;
     }
 
-    options = childVar.schema;
+    options = childVar.entries;
   }
 
   if (!options) return;
