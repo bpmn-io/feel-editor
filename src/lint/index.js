@@ -1,3 +1,4 @@
-import syntaxLinter from './syntax';
+import { cmFeelLinter } from '@bpmn-io/feel-lint';
+import { linter } from '@codemirror/lint';
 
-export default [ syntaxLinter ];
+export default [ linter(cmFeelLinter()) ];
