@@ -26,7 +26,10 @@ export default context => {
     }
 
     // only suggest if variable type matches
-    if (!!childVar.isList !== path[i].isList) {
+    if (
+      childVar.isList !== 'optional' &&
+      !!childVar.isList !== path[i].isList
+    ) {
       return;
     }
 
