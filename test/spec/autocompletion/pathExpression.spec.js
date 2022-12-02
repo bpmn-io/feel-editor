@@ -6,7 +6,7 @@ import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
 
 describe('autocompletion - pathExpressions', function() {
 
-  describe('paths', function() {
+  describe('context', function() {
 
     it('should suggest on empty path', function() {
 
@@ -68,10 +68,77 @@ describe('autocompletion - pathExpressions', function() {
 
     });
 
+
+    describe('list optional', function() {
+
+      it('should suggest on empty path', function() {
+
+        // given
+        const context = createContext('foo.', [ {
+          name: 'foo',
+          isList: 'optional',
+          entries: [
+            {
+              name: 'bar',
+              info: 'info',
+              detail: 'detail'
+            }
+          ]
+        } ]);
+
+        // when
+        const autoCompletion = pathExpressions(context);
+
+        // then
+        expect(autoCompletion).to.exist;
+        expect(autoCompletion.from).to.eql(4);
+        expect(autoCompletion.options).to.have.length(1);
+        expect(autoCompletion.options[0]).to.eql({
+          label: 'bar',
+          type: 'variable',
+          info: 'info',
+          detail: 'detail'
+        });
+      });
+
+
+      it('should suggest while typing', function() {
+
+        // given
+        const context = createContext('foo.ba', [ {
+          name: 'foo',
+          isList: 'optional',
+          entries: [
+            {
+              name: 'bar',
+              info: 'info',
+              detail: 'detail'
+            }
+          ]
+        } ]);
+
+        // when
+        const autoCompletion = pathExpressions(context);
+
+        // then
+        expect(autoCompletion).to.exist;
+        expect(autoCompletion.from).to.eql(4);
+        expect(autoCompletion.options).to.have.length(1);
+        expect(autoCompletion.options[0]).to.eql({
+          label: 'bar',
+          type: 'variable',
+          info: 'info',
+          detail: 'detail'
+        });
+
+      });
+
+    });
+
   });
 
 
-  describe('lists', function() {
+  describe('list', function() {
 
     it('should suggest on empty path', function() {
 
@@ -169,6 +236,111 @@ describe('autocompletion - pathExpressions', function() {
         type: 'variable',
         info: 'info',
         detail: 'detail'
+      });
+
+    });
+
+
+    describe('list optional', function() {
+
+      it('should suggest on empty path', function() {
+
+        // given
+        const context = createContext('foo[0].', [ {
+          name: 'foo',
+          isList: 'optional',
+          entries: [
+            {
+              name: 'bar',
+              info: 'info',
+              detail: 'detail'
+            }
+          ]
+        } ]);
+
+        // when
+        const autoCompletion = pathExpressions(context);
+
+        // then
+        expect(autoCompletion).to.exist;
+        expect(autoCompletion.from).to.eql(7);
+        expect(autoCompletion.options).to.have.length(1);
+
+        expect(autoCompletion.options[0]).to.eql({
+          label: 'bar',
+          type: 'variable',
+          info: 'info',
+          detail: 'detail'
+        });
+      });
+
+
+      it('should suggest while typing', function() {
+
+        // given
+        const context = createContext('foo[0].ba', [ {
+          name: 'foo',
+          isList: 'optional',
+          entries: [
+            {
+              name: 'bar',
+              info: 'info',
+              detail: 'detail'
+            }
+          ]
+        } ]);
+
+        // when
+        const autoCompletion = pathExpressions(context);
+
+        // then
+        expect(autoCompletion).to.exist;
+        expect(autoCompletion.from).to.eql(7);
+        expect(autoCompletion.options).to.have.length(1);
+        expect(autoCompletion.options[0]).to.eql({
+          label: 'bar',
+          type: 'variable',
+          info: 'info',
+          detail: 'detail'
+        });
+
+      });
+
+
+      it('should suggest when list is part of path', function() {
+
+        // given
+        const context = createContext('foo.bar[0].ba', [ {
+          name: 'foo',
+          entries: [
+            {
+              name: 'bar',
+              isList: 'optional',
+              entries: [
+                {
+                  name: 'baz',
+                  info: 'info',
+                  detail: 'detail'
+                }
+              ]
+            }
+          ]
+        } ]);
+
+        // when
+        const autoCompletion = pathExpressions(context);
+
+        // then
+        expect(autoCompletion).to.exist;
+        expect(autoCompletion.from).to.eql(11);
+        expect(autoCompletion.options).to.have.length(1);
+        expect(autoCompletion.options[0]).to.eql({
+          label: 'baz',
+          type: 'variable',
+          info: 'info',
+          detail: 'detail'
+        });
+
       });
 
     });
