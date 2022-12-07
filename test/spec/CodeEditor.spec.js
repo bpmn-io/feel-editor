@@ -43,12 +43,12 @@ return
           name: 'ContextVariable',
           info: 'This is a Context Variable',
           detail: 'Context',
-          schema: [
+          entries: [
             {
               name: 'child',
               info: 'This is a child variable',
               detail: 'Context',
-              schema: [
+              entries: [
                 {
                   name: 'level2',
                   info: 'This is a level 2 variable',
@@ -63,12 +63,12 @@ return
           info: 'This is a Context Variable',
           detail: 'List',
           isList: true,
-          schema: [
+          entries: [
             {
               name: 'child',
               info: 'This is a child variable',
               detail: 'Context',
-              schema: [
+              entries: [
                 {
                   name: 'level2',
                   info: 'This is a level 2 variable',
