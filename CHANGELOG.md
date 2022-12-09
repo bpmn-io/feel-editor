@@ -6,6 +6,11 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.7.0
+
+* `FEAT`: support nested variables ([#34](https://github.com/bpmn-io/feel-editor/pull/34))
+* `DEPS`: use `@bpmn-io/feel-lint` for syntax validation ([#35](https://github.com/bpmn-io/feel-editor/pull/35))
+
 ## 0.6.0
 
 * `FEAT`: allow to set variables dynamically ([#33](https://github.com/bpmn-io/feel-editor/pull/33))
