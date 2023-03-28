@@ -45,6 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.20.2",
+    "@bpmn-io/cm-theme": "^0.1.0-alpha.2",
     "@bpmn-io/feel-lint": "^0.1.1",
     "@codemirror/autocomplete": "^6.3.2",
     "@codemirror/commands": "^6.1.2",

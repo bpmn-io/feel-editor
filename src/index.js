@@ -4,12 +4,12 @@ import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, tooltips } from '@codemirror/view';
+import { darkTheme, lightTheme } from '@bpmn-io/cm-theme';
 
 import autocompletion from './autocompletion';
 import { variablesFacet } from './autocompletion/VariableFacet';
 import { language } from './language';
 import linter from './lint';
-import theme from './theme';
 
 /**
  * @typedef {object} Variable
@@ -44,6 +44,7 @@ export default function FeelEditor({
   onKeyDown = () => {},
   onLint = () => {},
   readOnly = false,
+  darkMode = false,
   value = '',
   variables = []
 }) {
@@ -99,7 +100,7 @@ export default function FeelEditor({
     linter,
     lintHandler,
     tooltipLayout,
-    theme
+    (darkMode ? darkTheme : lightTheme)
   ];
 
   if (readOnly) {
