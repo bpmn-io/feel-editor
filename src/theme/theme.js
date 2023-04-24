@@ -12,6 +12,16 @@ export const baseTheme = EditorView.theme({
   '&.cm-editor.cm-focused': {
     outline: 'none',
   },
+  '& .cm-completionInfo': {
+    whiteSpace: 'pre-wrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+
+  // Don't wrap whitespace for custom HTML
+  '& .cm-completionInfo > *': {
+    whiteSpace: 'normal'
+  },
   '& .cm-completionInfo ul': {
     margin: 0,
     paddingLeft: '15px'

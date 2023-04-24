@@ -40,6 +40,16 @@ return
           detail: 'Process_1'
         },
         {
+          name: 'MultiLineVariableDetail',
+          info: 'Full Name\n123 Fake St.\nSpringfield\nUSA',
+          detail: 'String'
+        },
+        {
+          name: 'LongVariableDetail',
+          info: '{\n  "normal": "helloWorld"\n  "long": "f92598d75e3d450389b2391a8fc34d1ff92598d75e3d450389b2391a8fc34d1f"\n}',
+          detail: 'String'
+        },
+        {
           name: 'ContextVariable',
           info: 'This is a Context Variable',
           detail: 'Context',
