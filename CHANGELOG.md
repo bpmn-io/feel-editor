@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.7.1
+
+* `FIX`: keep line breaks and hide overflow in info box ([#37](https://github.com/bpmn-io/feel-editor/issues/37))
+
 ## 0.7.0
 
 * `FEAT`: support nested variables ([#34](https://github.com/bpmn-io/feel-editor/pull/34))
