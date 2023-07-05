@@ -6,6 +6,15 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.8.0
+
+* `DEPS`: update to `lang-feel@1.0.0`
+* `DEPS`: update to `feel-lint@0.2.0`
+
+### Breaking Changes
+
+* We now support single expressions per input only, not a list of expressions. This more closely aligns with the DMN FEEL spec.
+
 ## 0.7.1
 
 * `FIX`: keep line breaks and hide overflow in info box ([#37](https://github.com/bpmn-io/feel-editor/issues/37))
