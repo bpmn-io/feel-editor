@@ -128,7 +128,7 @@ describe('feel language', function() {
       const callback = debounce(function(newValue) {
 
         // expect
-        expect(newValue).to.equal('foo(\n   bar\n)');
+        expect(newValue).to.equal('foo(\n  bar\n)');
         done();
       });
 
