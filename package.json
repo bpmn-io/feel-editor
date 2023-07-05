@@ -45,17 +45,17 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.20.2",
-    "@bpmn-io/feel-lint": "^0.1.1",
+    "@bpmn-io/feel-lint": "^0.2.0",
     "@codemirror/autocomplete": "^6.3.2",
-    "@codemirror/commands": "^6.1.2",
+    "@codemirror/commands": "^6.2.4",
     "@codemirror/language": "^6.3.1",
-    "@codemirror/lint": "^6.1.0",
+    "@codemirror/lint": "^6.4.0",
     "@codemirror/state": "^6.1.4",
     "@codemirror/view": "^6.5.1",
-    "@lezer/highlight": "^1.1.2",
+    "@lezer/highlight": "^1.1.6",
     "babel-loader": "^9.1.0",
     "babel-plugin-istanbul": "^6.1.1",
-    "lang-feel": "^0.1.0",
+    "lang-feel": "^1.0.0",
     "min-dom": "^4.1.0"
   },
   "devDependencies": {
