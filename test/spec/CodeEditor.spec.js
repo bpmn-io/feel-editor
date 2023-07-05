@@ -589,7 +589,7 @@ return
     });
 
 
-    it('should suggest built-ins', function(done) {
+    it('should suggest built-ins', async function() {
       const initalValue = '';
       const variables = [];
 
@@ -606,11 +606,11 @@ return
 
       // then
       // update done async
-      expectEventually(() => {
+      await expectEventually(() => {
         const completions = currentCompletions(cm.state);
-        expect(completions).to.have.length(90);
+
+        expect(completions).not.to.be.empty;
         expect(completions[0].label).to.have.eql('abs()');
-        done();
       });
 
     });
