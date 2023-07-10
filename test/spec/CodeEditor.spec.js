@@ -1,6 +1,7 @@
 import FeelEditor from '../../src';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
+import { lineNumbers } from '@codemirror/view';
 import { diagnosticCount, forceLinting } from '@codemirror/lint';
 import { currentCompletions, startCompletion } from '@codemirror/autocomplete';
 import { domify } from 'min-dom';
@@ -109,6 +110,24 @@ return
     // then
     expect(editor).to.exist;
     expect(editor._cmEditor.state.doc.toString()).to.equal('Hello World!');
+  });
+
+
+  it('should allow for extensions', async function() {
+
+    // when
+    const initialValue = 'Hello World!';
+    const editor = new FeelEditor({
+      container,
+      extensions: [
+        lineNumbers()
+      ],
+      value: initialValue
+    });
+
+    // then
+    expect(editor).to.exist;
+    expect(container.querySelector('.cm-gutters')).to.exist;
   });
 
 

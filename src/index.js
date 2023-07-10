@@ -13,6 +13,7 @@ import theme from './theme';
 
 /**
  * @typedef {object} Variable
+ * @typedef {import('@codemirror/state').Extension} Extension
  * @property {string} name name or key of the variable
  * @property {string} [info] short information about the variable, e.g. type
  * @property {string} [detail] longer description of the variable content
@@ -27,6 +28,7 @@ const autocompletionConf = new Compartment();
  *
  * @param {Object} config
  * @param {DOMNode} config.container
+ * @param {Extension[]} [config.extensions]
  * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
@@ -38,6 +40,7 @@ const autocompletionConf = new Compartment();
  * @returns {Object} editor
  */
 export default function FeelEditor({
+  extensions: editorExtensions = [],
   container,
   tooltipContainer,
   onChange = () => {},
@@ -99,7 +102,8 @@ export default function FeelEditor({
     linter,
     lintHandler,
     tooltipLayout,
-    theme
+    theme,
+    ...editorExtensions
   ];
 
   if (readOnly) {
