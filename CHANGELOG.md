@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.8.1
+
+* `FIX`: correctly flag dev dependencies
+
 ## 0.8.0
 
 * `DEPS`: update to `lang-feel@1.0.0`
