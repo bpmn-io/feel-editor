@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.9.0
+
+* `FEAT`: allow extensions to be passed to the editor ([#41](https://github.com/bpmn-io/feel-editor/issues/41))
+
 ## 0.8.1
 
 * `FIX`: correctly flag dev dependencies
