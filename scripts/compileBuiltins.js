@@ -19,7 +19,7 @@ glob(MARKDOWN_SRC, function(err, files) {
         const name = string.split('\n')[0];
         let description = marked.parse(string.split('\n').slice(1).join('\n'));
 
-        description = description.replace('<MarkerCamundaExtension></MarkerCamundaExtension>', '<b>Camunda Extension</b>');
+        description = description.replace('<MarkerCamundaExtension></MarkerCamundaExtension>', '<em>Camunda Extension</em>');
 
         // e.g. "and() / all()"
         if (name.includes('/')) {
