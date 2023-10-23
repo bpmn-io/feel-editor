@@ -629,7 +629,7 @@ return
         const completions = currentCompletions(cm.state);
 
         expect(completions).not.to.be.empty;
-        expect(completions[0].label).to.have.eql('abs()');
+        expect(completions[0].label).to.have.eql('abs(n)');
       });
 
     });
