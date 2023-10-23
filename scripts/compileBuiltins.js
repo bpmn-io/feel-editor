@@ -3,7 +3,7 @@ const { marked } = require('marked');
 const fs = require('node:fs/promises');
 
 // paths relative to CWD
-const MARKDOWN_SRC = './camunda-platform-docs/versioned_docs/version-8.0/components/modeler/feel/builtin-functions/*.md';
+const MARKDOWN_SRC = './camunda-platform-docs/docs/components/modeler/feel/builtin-functions/*.md';
 const JSON_DEST = './src/autocompletion/builtins.json';
 
 glob(MARKDOWN_SRC, function(err, files) {
@@ -17,7 +17,9 @@ glob(MARKDOWN_SRC, function(err, files) {
 
       return rawDescriptors.flatMap(string => {
         const name = string.split('\n')[0];
-        const description = marked.parse(string.split('\n').slice(1).join('\n'));
+        let description = marked.parse(string.split('\n').slice(1).join('\n'));
+
+        description = description.replace('<MarkerCamundaExtension></MarkerCamundaExtension>', '<b>Camunda Extension</b>');
 
         // e.g. "and() / all()"
         if (name.includes('/')) {
