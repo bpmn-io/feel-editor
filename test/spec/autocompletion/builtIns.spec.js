@@ -14,7 +14,7 @@ describe('autocompletion - builtIns', function() {
 
     // then
     expect(autoCompletion).to.exist;
-    expect(autoCompletion.options).to.have.length(84);
+    expect(autoCompletion.options).to.have.length(120);
 
     const firstOption = autoCompletion.options[0];
 
@@ -42,7 +42,7 @@ describe('autocompletion - builtIns', function() {
       expect(info).to.exist;
 
       // contains parameter list
-      expect(info.textContent.toLowerCase()).to.have.include('parameters');
+      expect(info.textContent.toLowerCase()).to.have.include('function signature');
 
       // contains example
       expect(info.querySelector('pre')).to.exist;
