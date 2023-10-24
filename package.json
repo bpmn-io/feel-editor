@@ -1,6 +1,6 @@
 {
   "name": "@bpmn-io/feel-editor",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "Editor for FEEL expressions.",
   "files": [
     "dist"
