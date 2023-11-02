@@ -5,18 +5,29 @@ import { domify } from 'min-dom';
 import { isNodeEmpty, isPathExpression } from './autocompletionUtil';
 import tags from './builtins.json';
 
-const options = tags.map(tag => snippetCompletion(
-  tag.name.replace('()', '(#{1})'),
-  {
-    label: tag.name,
-    type: 'function',
-    info: () => {
-      const html = domify(`<div class="description">${tag.description}<div>`);
-      return html;
-    },
-    boost: -1
-  }
-));
+const options = tags.map(tag => {
+  const match = tag.name.match(/^([\w\s]+)\((.*)\)$/);
+  const functionName = match[1];
+  const functionArguments = match[2];
+
+  const placeHolders = functionArguments
+    .split(', ')
+    .map((arg) => `\${${arg}}`)
+    .join(', ');
+
+  return snippetCompletion(
+    `${functionName}(${placeHolders})`,
+    {
+      label: tag.name,
+      type: 'function',
+      info: () => {
+        const html = domify(`<div class="description">${tag.description}<div>`);
+        return html;
+      },
+      boost: -1
+    }
+  );
+});
 
 export default context => {
 
