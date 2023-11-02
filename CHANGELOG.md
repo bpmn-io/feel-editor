@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.0.1
+
+* `FIX`: fix keyboard navigation for builtin functions ([#46](https://github.com/bpmn-io/feel-editor/pull/46))
+
 ## 1.0.0
 
 * `FEAT`: update list of builtin functions ([#45](https://github.com/bpmn-io/feel-editor/pull/45))
