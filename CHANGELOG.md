@@ -6,6 +6,16 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.1.0
+
+* `FEAT`: add contextual keyword completion
+* `FIX`: correct parsing of nested lists
+* `FIX`: correct parsing of incomplete `QuantifiedExpression`
+* `DEPS`: update to `feel-lint@1.1.0`
+* `DEPS`: update to `lang-feel@2.0.0`
+* `DEPS`: update to `lezer-feel@1.2.3`
+* `DEPS`: update `codemirror` dependencies
+
 ## 1.0.1
 
 * `FIX`: fix keyboard navigation for builtin functions ([#46](https://github.com/bpmn-io/feel-editor/pull/46))
