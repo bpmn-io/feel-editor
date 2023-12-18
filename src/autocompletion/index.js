@@ -1,5 +1,5 @@
 import { autocompletion, completeFromList } from '@codemirror/autocomplete';
-import { snippets } from 'lang-feel';
+import { snippets, keywordCompletions } from 'lang-feel';
 import builtins from './builtins';
 import pathExpression from './pathExpressions';
 
@@ -12,7 +12,8 @@ export default function() {
         variables,
         builtins,
         completeFromList(snippets.map(s => ({ ...s, boost: -1 }))),
-        pathExpression
+        pathExpression,
+        ...keywordCompletions
       ]
     })
   ];
