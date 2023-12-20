@@ -11,9 +11,10 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: add contextual keyword completion
 * `FIX`: correct parsing of nested lists
 * `FIX`: correct parsing of incomplete `QuantifiedExpression`
+* `FIX`: only allow legal `Name` start characters
 * `DEPS`: update to `feel-lint@1.1.0`
 * `DEPS`: update to `lang-feel@2.0.0`
-* `DEPS`: update to `lezer-feel@1.2.3`
+* `DEPS`: update to `lezer-feel@1.2.4`
 * `DEPS`: update `codemirror` dependencies
 
 ## 1.0.1
