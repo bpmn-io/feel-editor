@@ -6,6 +6,12 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.2.0
+
+* `FEAT`: make error messages contextual
+* `DEPS`: update to `feel-lint@1.2.0`
+* `DEPS`: update `codemirror` dependencies
+
 ## 1.1.0
 
 * `FEAT`: add contextual keyword completion
