@@ -48,12 +48,12 @@
   "license": "MIT",
   "dependencies": {
     "@bpmn-io/feel-lint": "^1.2.0",
-    "@codemirror/autocomplete": "^6.3.2",
-    "@codemirror/commands": "^6.3.2",
-    "@codemirror/language": "^6.3.1",
+    "@codemirror/autocomplete": "^6.12.0",
+    "@codemirror/commands": "^6.3.3",
+    "@codemirror/language": "^6.10.0",
     "@codemirror/lint": "^6.4.2",
-    "@codemirror/state": "^6.3.3",
-    "@codemirror/view": "^6.5.1",
+    "@codemirror/state": "^6.4.0",
+    "@codemirror/view": "^6.23.0",
     "@lezer/highlight": "^1.2.0",
     "lang-feel": "^2.0.0",
     "min-dom": "^4.1.0"
