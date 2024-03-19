@@ -42,6 +42,7 @@ const autocompletionConf = new Compartment();
 export default function FeelEditor({
   extensions: editorExtensions = [],
   container,
+  contentAttributes = {},
   tooltipContainer,
   onChange = () => {},
   onKeyDown = () => {},
@@ -93,6 +94,7 @@ export default function FeelEditor({
     bracketMatching(),
     changeHandler,
     closeBrackets(),
+    EditorView.contentAttributes.of(contentAttributes),
     indentOnInput(),
     keyHandler,
     keymap.of([

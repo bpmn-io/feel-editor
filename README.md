@@ -28,8 +28,8 @@ const editor = new FeelEditor({
 
 ### Variables
 
-You can provide a variables array that will be used for auto completion. Nested 
-structures are supported.  
+You can provide a variables array that will be used for auto completion. Nested
+structures are supported.
 The Variables need to be in the following format:
 
 ```JavaScript
@@ -61,6 +61,19 @@ editor.setVariables([
     info: 'new pop-out info'
   }
 ]);
+```
+
+### Content attributes
+
+You can provide attributes which will be set on the content editable div:
+
+```javascript
+const editor = new FeelEditor({
+  container,
+  contentAttributes: {
+    'aria-label': 'Expression editor'
+  }
+});
 ```
 
 ## Hacking the Project
