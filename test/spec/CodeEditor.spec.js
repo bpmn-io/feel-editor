@@ -794,6 +794,27 @@ return
 
   });
 
+
+  describe('content attributes', function() {
+
+    it('should allow to pass aria-label', function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        contentAttributes: {
+          'aria-label': 'foo'
+        }
+      });
+
+      // then
+      const content = container.querySelector('.cm-content');
+
+      expect(editor).to.exist;
+      expect(content.getAttribute('aria-label')).to.eql('foo');
+    });
+  });
+
 });
 
 
