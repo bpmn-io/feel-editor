@@ -73,7 +73,7 @@ function createFunctionVariable(variable) {
   } = variable;
 
   const paramsWithNames = params.map(({ name, type }, index) => ({
-    name: name || `param_${index + 1}`,
+    name: name || `param ${index + 1}`,
     type
   }));
 
