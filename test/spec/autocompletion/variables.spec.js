@@ -99,6 +99,40 @@ describe('autocompletion - variables', function() {
     expect(autoCompletion.from).to.eql(0);
   });
 
+
+  it('should return function suggestions in correct format', function() {
+
+    // given
+    const context = createContext('foo', [ {
+      type: 'function',
+      name: 'foobar',
+      info: 'info',
+      detail: 'string',
+      params: [
+        {
+          name: 'param1',
+          type: 'string',
+        },
+        {
+          name: 'param1'
+        }
+      ]
+    } ]);
+
+    // when
+    const autoCompletion = variables(context);
+
+    // then
+    expect(autoCompletion).to.exist;
+    expect(autoCompletion.from).to.eql(0);
+    expect(autoCompletion.options).to.have.length(1);
+
+    const firstOption = autoCompletion.options[0];
+    expect(firstOption.type).to.eql('function');
+    expect(firstOption.info).to.eql('info');
+    expect(firstOption.detail).to.eql('string');
+    expect(typeof firstOption.apply).to.eql('function');
+  });
 });
 
 

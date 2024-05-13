@@ -88,6 +88,26 @@ return
               ]
             }
           ]
+        },
+        {
+          name: 'FunctionVariable',
+          type: 'function',
+          info: 'This is a Function Variable',
+          detail: 'Any',
+          params: [
+            {
+              name: 'text',
+              type: 'string'
+            },
+            {
+              name: 'number',
+              type: 'number'
+            },
+            {
+              name: 'untyped'
+            },
+            {} // unnamed
+          ]
         }
       ]
     });

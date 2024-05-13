@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.4.0
+
+* `FEAT`: allow to provide functions with snippet autocompletion as variables ([#50](https://github.com/bpmn-io/feel-editor/issues/50))
+
 ## 1.3.0
 
 * `FEAT`: allow to pass content attributes
