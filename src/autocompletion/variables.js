@@ -1,4 +1,5 @@
 import { syntaxTree } from '@codemirror/language';
+import { snippetCompletion } from '@codemirror/autocomplete';
 import { isNodeEmpty, isPathExpression } from './autocompletionUtil';
 import { variablesFacet } from './VariableFacet';
 
@@ -9,12 +10,7 @@ export default context => {
 
   const variables = context.state.facet(variablesFacet)[0];
 
-  const options = variables.map(v => ({
-    label: v.name,
-    type: 'variable',
-    info: v.info,
-    detail: v.detail
-  }));
+  const options = variables.map(v => createVariableSuggestion(v));
 
   // In most cases, use what is typed before the cursor
   let nodeBefore = syntaxTree(context.state).resolve(context.pos, -1);
@@ -46,3 +42,52 @@ export default context => {
 
   return result;
 };
+
+/**
+ * @param {import('..').Variable} variable
+ * @returns {import('@codemirror/autocomplete').Completion}
+ */
+function createVariableSuggestion(variable) {
+  if (variable.type === 'function') {
+    return createFunctionVariable(variable);
+  }
+
+  return {
+    label: variable.name,
+    type: 'variable',
+    info: variable.info,
+    detail: variable.detail
+  };
+}
+
+/**
+ * @param {import('..').Variable} variable
+ * @returns {import('@codemirror/autocomplete').Completion}
+ */
+function createFunctionVariable(variable) {
+  const {
+    name,
+    info,
+    detail,
+    params = []
+  } = variable;
+
+  const paramsWithNames = params.map(({ name, type }, index) => ({
+    name: name || `param ${index + 1}`,
+    type
+  }));
+
+  const template = `${name}(${paramsWithNames.map(p => '${' + p.name + '}').join(', ')})`;
+
+  const paramsSignature = paramsWithNames.map(({ name, type }) => (
+    type ? `${name}: ${type}` : name
+  )).join(', ');
+  const label = `${name}(${paramsSignature})`;
+
+  return snippetCompletion(template, {
+    label,
+    type: 'function',
+    info,
+    detail
+  });
+}
