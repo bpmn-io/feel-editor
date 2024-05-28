@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.5.0
+
+* `FEAT`: support placeholder configuration ([#52](https://github.com/bpmn-io/feel-editor/pull/52))
+
 ## 1.4.0
 
 * `FEAT`: allow to provide functions with snippet autocompletion as variables ([#50](https://github.com/bpmn-io/feel-editor/issues/50))
