@@ -3,7 +3,7 @@ import { defaultKeymap } from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
-import { EditorView, keymap, tooltips } from '@codemirror/view';
+import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
 import autocompletion from './autocompletion';
 import { variablesFacet } from './autocompletion/VariableFacet';
@@ -23,6 +23,8 @@ import theme from './theme';
  */
 
 const autocompletionConf = new Compartment();
+const placeholderConf = new Compartment();
+
 
 /**
  * Creates a FEEL editor in the supplied container
@@ -48,6 +50,7 @@ export default function FeelEditor({
   onChange = () => {},
   onKeyDown = () => {},
   onLint = () => {},
+  placeholder = '',
   readOnly = false,
   value = '',
   variables = []
@@ -104,6 +107,7 @@ export default function FeelEditor({
     language(),
     linter,
     lintHandler,
+    placeholderConf.of(placeholderExt(placeholder)),
     tooltipLayout,
     theme,
     ...editorExtensions
@@ -175,5 +179,16 @@ FeelEditor.prototype.getSelection = function() {
 FeelEditor.prototype.setVariables = function(variables) {
   this._cmEditor.dispatch({
     effects: autocompletionConf.reconfigure(variablesFacet.of(variables))
+  });
+};
+
+/**
+ * Update placeholder text.
+ * @param {string} placeholder
+ * @returns {void}
+ */
+FeelEditor.prototype.setPlaceholder = function(placeholder) {
+  this._cmEditor.dispatch({
+    effects: placeholderConf.reconfigure(placeholderExt(placeholder))
   });
 };
