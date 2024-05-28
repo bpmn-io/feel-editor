@@ -415,6 +415,39 @@ return
   });
 
 
+  describe('placeholder', function() {
+
+    it('should display placeholder', function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        placeholder: 'Enter your expression here'
+      });
+
+      // then
+      expect(editor).to.exist;
+      expect(container.textContent).to.eql('Enter your expression here');
+    });
+
+
+    it('should update placeholder via `setPlaceholder`', function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        placeholder: 'Enter your expression here'
+      });
+
+      // when
+      editor.setPlaceholder('New placeholder');
+
+      // then
+      expect(container.textContent).to.eql('New placeholder');
+    });
+  });
+
+
   describe('callbacks', function() {
 
     it('should call onChange', async function() {
