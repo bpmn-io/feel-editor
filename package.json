@@ -56,7 +56,7 @@
     "@codemirror/view": "^6.23.0",
     "@lezer/highlight": "^1.2.0",
     "lang-feel": "^2.0.0",
-    "min-dom": "^4.1.0"
+    "min-dom": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.8",
