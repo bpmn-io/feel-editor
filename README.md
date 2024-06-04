@@ -14,7 +14,16 @@ const editor = new FeelEditor({
 });
 ```
 
-Optionally, you can provide a starting document and listen for changes:
+Configure the FEEL dialect (expression or unary tests):
+
+```JavaScript
+const editor = new FeelEditor({
+  container,
+  dialect: 'unaryTests' // defaults to 'expression'
+});
+```
+
+You can provide a starting document and listen for changes:
 
 ```JavaScript
 const editor = new FeelEditor({

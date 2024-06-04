@@ -133,6 +133,22 @@ return
   });
 
 
+  it('should configure <unaryTests> dialect', async function() {
+
+    // when
+    const initialValue = '"Hello", "World"';
+    const editor = new FeelEditor({
+      container,
+      value: initialValue,
+      dialect: 'unaryTests'
+    });
+
+    // then
+    expect(editor).to.exist;
+    expect(editor._cmEditor.state.doc.toString()).to.equal('"Hello", "World"');
+  });
+
+
   it('should allow for extensions', async function() {
 
     // when
@@ -516,6 +532,40 @@ return
         expect(diagnosticCount(cm.state)).to.eql(0);
         done();
       }, 0);
+
+    });
+
+
+    describe('should not highlight valid', function() {
+
+      [
+        { dialect: 'expression', value: 'Mike < 10' },
+        { dialect: 'unaryTests', value: '12, now(), "STRING"' }
+      ].forEach(({ dialect, value }) => {
+
+        it(`<${dialect}>`, function(done) {
+
+          // given
+          const editor = new FeelEditor({
+            container,
+            value,
+            dialect
+          });
+
+          const cm = getCm(editor);
+
+          // when
+          forceLinting(cm);
+
+          // then
+          // update done async
+          setTimeout(() => {
+            expect(diagnosticCount(cm.state)).to.eql(0);
+            done();
+          }, 0);
+        });
+
+      });
 
     });
 

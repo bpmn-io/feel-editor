@@ -32,6 +32,7 @@ const placeholderConf = new Compartment();
  * @param {Object} config
  * @param {DOMNode} config.container
  * @param {Extension[]} [config.extensions]
+ * @param {'expression' | 'unaryTests'} [config.dialect='expression']
  * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
@@ -44,6 +45,7 @@ const placeholderConf = new Compartment();
  */
 export default function FeelEditor({
   extensions: editorExtensions = [],
+  dialect = 'expression',
   container,
   contentAttributes = {},
   tooltipContainer,
@@ -104,7 +106,9 @@ export default function FeelEditor({
     keymap.of([
       ...defaultKeymap,
     ]),
-    language(),
+    language({
+      dialect
+    }),
     linter,
     lintHandler,
     placeholderConf.of(placeholderExt(placeholder)),
