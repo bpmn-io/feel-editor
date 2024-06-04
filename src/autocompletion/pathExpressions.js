@@ -2,7 +2,7 @@ import { syntaxTree } from '@codemirror/language';
 import { isPathExpression } from './autocompletionUtil';
 import { variablesFacet } from './VariableFacet';
 
-export default context => {
+export function completions(context) {
   const variables = context.state.facet(variablesFacet)[0];
   const nodeBefore = syntaxTree(context.state).resolve(context.pos, -1);
 
@@ -51,7 +51,7 @@ export default context => {
   };
 
   return result;
-};
+}
 
 
 function findPathExpression(node) {
