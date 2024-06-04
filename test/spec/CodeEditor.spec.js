@@ -513,7 +513,7 @@ return
 
   describe('lint', function() {
 
-    it('should not highlight empty document', function(done) {
+    it('should not highlight empty document', async function() {
       const initalValue = '';
 
       const editor = new FeelEditor({
@@ -521,18 +521,11 @@ return
         value: initalValue
       });
 
-      const cm = getCm(editor);
-
       // when
-      forceLinting(cm);
+      const diagnostics = await lint(editor);
 
       // then
-      // update done async
-      setTimeout(() => {
-        expect(diagnosticCount(cm.state)).to.eql(0);
-        done();
-      }, 0);
-
+      expect(diagnostics).to.eql(0);
     });
 
 
@@ -543,7 +536,7 @@ return
         { dialect: 'unaryTests', value: '12, now(), "STRING"' }
       ].forEach(({ dialect, value }) => {
 
-        it(`<${dialect}>`, function(done) {
+        it(`<${dialect}>`, async function() {
 
           // given
           const editor = new FeelEditor({
@@ -552,17 +545,11 @@ return
             dialect
           });
 
-          const cm = getCm(editor);
-
           // when
-          forceLinting(cm);
+          const diagnostics = await lint(editor);
 
           // then
-          // update done async
-          setTimeout(() => {
-            expect(diagnosticCount(cm.state)).to.eql(0);
-            done();
-          }, 0);
+          expect(diagnostics).to.eql(0);
         });
 
       });
@@ -570,7 +557,7 @@ return
     });
 
 
-    it('should highlight unexpected operations', function(done) {
+    it('should highlight unexpected operations', async function() {
       const initalValue = '= 15';
 
       const editor = new FeelEditor({
@@ -578,22 +565,15 @@ return
         value: initalValue
       });
 
-      const cm = getCm(editor);
-
       // when
-      forceLinting(cm);
+      const diagnostics = await lint(editor);
 
       // then
-      // update done async
-      setTimeout(() => {
-        expect(diagnosticCount(cm.state)).to.eql(1);
-        done();
-      }, 0);
-
+      expect(diagnostics).to.eql(1);
     });
 
 
-    it('should highlight missing operations', function(done) {
+    it('should highlight missing operations', async function() {
       const initalValue = '15 == 15';
 
       const editor = new FeelEditor({
@@ -601,75 +581,56 @@ return
         value: initalValue
       });
 
-      const cm = getCm(editor);
-
       // when
-      forceLinting(cm);
+      const diagnostics = await lint(editor);
 
       // then
-      // update done async
-      setTimeout(() => {
-        expect(diagnosticCount(cm.state)).to.eql(1);
-        done();
-      }, 0);
-
+      expect(diagnostics).to.eql(1);
     });
 
 
-    it('should call onLint with errors', function(done) {
-      const initalValue = '= 15';
-      const onLint = sinon.spy();
+    describe('should call onLint', function() {
 
-      const editor = new FeelEditor({
-        container,
-        value: initalValue,
-        onLint
-      });
+      it('with errors', async function() {
 
-      const cm = getCm(editor);
+        const initalValue = '= 15';
+        const onLint = sinon.spy();
 
-      // when
-      forceLinting(cm);
+        const editor = new FeelEditor({
+          container,
+          value: initalValue,
+          onLint
+        });
 
-      // then
-      // update done async
-      setTimeout(() => {
+        // when
+        await lint(editor);
 
+        // then
         expect(onLint).to.have.been.calledOnce;
         expect(onLint).to.have.been.calledWith(sinon.match.array);
         expect(onLint.args[0][0]).to.have.length(1);
-
-        done();
-      }, 0);
-
-    });
-
-
-    it('should call onLint without errors', function(done) {
-      const initalValue = '15';
-      const onLint = sinon.spy();
-
-      const editor = new FeelEditor({
-        container,
-        value: initalValue,
-        onLint
       });
 
-      const cm = getCm(editor);
 
-      // when
-      forceLinting(cm);
+      it('without errors', async function() {
+        const initalValue = '15';
+        const onLint = sinon.spy();
 
-      // then
-      // update done async
-      setTimeout(() => {
+        const editor = new FeelEditor({
+          container,
+          value: initalValue,
+          onLint
+        });
 
+        // when
+        await lint(editor);
+
+        // then
+        // update done async
         expect(onLint).to.have.been.calledOnce;
         expect(onLint).to.have.been.calledWith(sinon.match.array);
         expect(onLint.args[0][0]).to.have.length(0);
-
-        done();
-      }, 0);
+      });
 
     });
 
@@ -934,6 +895,11 @@ function select(editor, anchor, head = anchor) {
   });
 }
 
+/**
+ * @param {FeelEditor} editor
+ *
+ * @return {import('@codemirror/view').EditorView}
+ */
 function getCm(editor) {
   return editor._cmEditor || editor;
 }
@@ -955,4 +921,24 @@ async function expectEventually(fn) {
   } while (i--);
 
   throw e;
+}
+
+function wait(ms = 0) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * @param {FeelEditor} editor
+ *
+ * @return {Promise<number>}
+ */
+async function lint(editor) {
+  const cm = getCm(editor);
+
+  // when
+  forceLinting(cm);
+
+  await wait();
+
+  return diagnosticCount(cm.state);
 }
