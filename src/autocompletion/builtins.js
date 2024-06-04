@@ -29,7 +29,7 @@ const options = tags.map(tag => {
   );
 });
 
-export default context => {
+export function completions(context) {
 
   let nodeBefore = syntaxTree(context.state).resolve(context.pos, -1);
 
@@ -57,4 +57,4 @@ export default context => {
     from: nodeBefore.from,
     options: options
   };
-};
+}

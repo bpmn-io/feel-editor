@@ -1,6 +1,6 @@
 import { language } from '../../../src/language';
 import { EditorState } from '@codemirror/state';
-import variables from '../../../src/autocompletion/variables';
+import { completions } from '../../../src/autocompletion/variables';
 import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
 
 
@@ -16,7 +16,7 @@ describe('autocompletion - variables', function() {
     } ]);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -37,7 +37,7 @@ describe('autocompletion - variables', function() {
     const context = createContext('15 + foo', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -52,7 +52,7 @@ describe('autocompletion - variables', function() {
     const context = createContext('myObject.fo', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).not.to.exist;
@@ -65,7 +65,7 @@ describe('autocompletion - variables', function() {
     const context = createContext('', [ { name: 'foobar' } ]);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).not.to.exist;
@@ -78,7 +78,7 @@ describe('autocompletion - variables', function() {
     const context = createContext('', [ { name: 'foobar' } ], true);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -92,7 +92,7 @@ describe('autocompletion - variables', function() {
     const context = createContext('', [ { name: 'foobar' } ], true);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -120,7 +120,7 @@ describe('autocompletion - variables', function() {
     } ]);
 
     // when
-    const autoCompletion = variables(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;

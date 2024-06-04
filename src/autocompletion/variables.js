@@ -6,7 +6,7 @@ import { variablesFacet } from './VariableFacet';
 /**
  * @type {import('@codemirror/autocomplete').CompletionSource}
  */
-export default context => {
+export function completions(context) {
 
   const variables = context.state.facet(variablesFacet)[0];
 
@@ -41,7 +41,7 @@ export default context => {
   }
 
   return result;
-};
+}
 
 /**
  * @param {import('..').Variable} variable

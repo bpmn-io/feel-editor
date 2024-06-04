@@ -1,8 +1,9 @@
 import { language } from '../../../src/language';
 import { EditorState } from '@codemirror/state';
-import builtins from '../../../src/autocompletion/builtins';
+import { completions } from '../../../src/autocompletion/builtins';
 
-describe('autocompletion - builtIns', function() {
+
+describe('autocompletion - builtins', function() {
 
   it('should return variable suggestions in correct format', function() {
 
@@ -10,7 +11,7 @@ describe('autocompletion - builtIns', function() {
     const context = createContext('Foo');
 
     // when
-    const autoCompletion = builtins(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
@@ -29,7 +30,7 @@ describe('autocompletion - builtIns', function() {
 
     // given
     const context = createContext('Foo');
-    const autoCompletion = builtins(context);
+    const autoCompletion = completions(context);
 
     // assume
     expect(autoCompletion.options).to.exist;
@@ -57,7 +58,7 @@ describe('autocompletion - builtIns', function() {
     const context = createContext('');
 
     // when
-    const autoCompletion = builtins(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.not.exist;
@@ -70,7 +71,7 @@ describe('autocompletion - builtIns', function() {
     const context = createContext('', true);
 
     // when
-    const autoCompletion = builtins(context);
+    const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;

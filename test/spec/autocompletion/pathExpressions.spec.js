@@ -1,6 +1,6 @@
 import { language } from '../../../src/language';
 import { EditorState } from '@codemirror/state';
-import pathExpressions from '../../../src/autocompletion/pathExpressions';
+import { completions } from '../../../src/autocompletion/pathExpressions';
 import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
 
 
@@ -23,7 +23,7 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = pathExpressions(context);
+      const autoCompletion = completions(context);
 
       // then
       expect(autoCompletion).to.exist;
@@ -53,7 +53,7 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = pathExpressions(context);
+      const autoCompletion = completions(context);
 
       // then
       expect(autoCompletion).to.exist;
@@ -87,7 +87,7 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = pathExpressions(context);
+        const autoCompletion = completions(context);
 
         // then
         expect(autoCompletion).to.exist;
@@ -118,7 +118,7 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = pathExpressions(context);
+        const autoCompletion = completions(context);
 
         // then
         expect(autoCompletion).to.exist;
@@ -156,7 +156,7 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = pathExpressions(context);
+      const autoCompletion = completions(context);
 
       // then
       expect(autoCompletion).to.exist;
@@ -188,7 +188,7 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = pathExpressions(context);
+      const autoCompletion = completions(context);
 
       // then
       expect(autoCompletion).to.exist;
@@ -225,7 +225,7 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = pathExpressions(context);
+      const autoCompletion = completions(context);
 
       // then
       expect(autoCompletion).to.exist;
@@ -259,7 +259,7 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = pathExpressions(context);
+        const autoCompletion = completions(context);
 
         // then
         expect(autoCompletion).to.exist;
@@ -291,7 +291,7 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = pathExpressions(context);
+        const autoCompletion = completions(context);
 
         // then
         expect(autoCompletion).to.exist;
@@ -328,7 +328,7 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = pathExpressions(context);
+        const autoCompletion = completions(context);
 
         // then
         expect(autoCompletion).to.exist;

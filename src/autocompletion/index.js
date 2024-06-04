@@ -1,18 +1,18 @@
 import { autocompletion, completeFromList } from '@codemirror/autocomplete';
 import { snippets, keywordCompletions } from 'lang-feel';
-import builtins from './builtins';
-import pathExpression from './pathExpressions';
+import { completions as builtinCompletions } from './builtins';
+import { completions as pathExpressionCompletions } from './pathExpressions';
 
-import variables from './variables';
+import { completions as variableCompletions } from './variables';
 
 export default function() {
   return [
     autocompletion({
       override: [
-        variables,
-        builtins,
+        variableCompletions,
+        builtinCompletions,
         completeFromList(snippets.map(s => ({ ...s, boost: -1 }))),
-        pathExpression,
+        pathExpressionCompletions,
         ...keywordCompletions
       ]
     })
