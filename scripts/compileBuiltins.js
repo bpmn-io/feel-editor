@@ -1,4 +1,4 @@
-const glob = require('glob');
+const { glob } = require('glob');
 const { marked } = require('marked');
 const fs = require('node:fs/promises');
 
@@ -6,9 +6,9 @@ const fs = require('node:fs/promises');
 const MARKDOWN_SRC = './camunda-platform-docs/docs/components/modeler/feel/builtin-functions/*.md';
 const JSON_DEST = './src/autocompletion/builtins.json';
 
-glob(MARKDOWN_SRC, function(err, files) {
+glob(MARKDOWN_SRC).then(files => {
 
-  const descriptorsByFile = files.map(fileName => (
+  const descriptorsByFile = files.sort().map(fileName => (
     fs.readFile(fileName, 'utf-8').then(content => {
       const rawDescriptors = content.split('## ');
 
