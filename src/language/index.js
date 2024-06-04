@@ -1,6 +1,10 @@
-import { LanguageSupport } from '@codemirror/language';
-import { feelLanguage } from 'lang-feel';
+import { feel } from 'lang-feel';
 
-export function language() {
-  return new LanguageSupport(feelLanguage, [ ]);
+/**
+ * @param {'expression' | 'unaryTests'} dialect
+ *
+ * @return {LanguageSupport}
+ */
+export function language(dialect) {
+  return feel(dialect);
 }
