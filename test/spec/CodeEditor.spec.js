@@ -672,14 +672,26 @@ return
     });
 
 
-    it('should suggest built-ins', async function() {
+    it('should suggest built-ins (with lower priority)', async function() {
       const initalValue = '';
-      const variables = [];
+      const variables = [ {
+        name: 'ab',
+        info: '10'
+      } ];
 
       const editor = new FeelEditor({
         container,
         value: initalValue,
-        variables
+        variables,
+        builtins: [
+          {
+            name: 'abs',
+            type: 'function',
+            params: [
+              { name: 'n' }
+            ]
+          }
+        ]
       });
 
       const cm = getCm(editor);
@@ -692,8 +704,13 @@ return
       await expectEventually(() => {
         const completions = currentCompletions(cm.state);
 
-        expect(completions).not.to.be.empty;
-        expect(completions[0].label).to.have.eql('abs(n)');
+        expect(completions).to.have.length.gte(2);
+
+        // variable completions offered
+        expect(completions[0].label).to.have.eql('ab');
+
+        // followed by function completions
+        expect(completions[1].label).to.have.eql('abs(n)');
       });
 
     });
