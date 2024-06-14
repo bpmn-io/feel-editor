@@ -4,7 +4,7 @@ import {
 } from '../../../src/language';
 import { EditorState } from '@codemirror/state';
 import { completions } from '../../../src/autocompletion/variables';
-import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
+import { variablesFacet } from '../../../src/facets';
 
 
 describe('autocompletion - variables', function() {
@@ -37,7 +37,10 @@ describe('autocompletion - variables', function() {
   it('should suggest for current variable', function() {
 
     // given
-    const context = createContext('15 + foo', [ { name: 'foobar' } ]);
+    const context = createContext('15 + foo', [
+      { name: 'foobar' },
+      { name: 'other' }
+    ]);
 
     // when
     const autoCompletion = completions(context);
