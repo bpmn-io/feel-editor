@@ -9,32 +9,73 @@ import { variablesFacet } from '../../../src/facets';
 
 describe('autocompletion - variables', function() {
 
-  it('should return variable suggestions in correct format', function() {
+  describe('should complete', function() {
 
-    // given
-    const context = createContext('foo', [ {
-      name: 'foobar',
-      info: 'info',
-      detail: 'detail'
-    } ]);
+    it('variable', function() {
 
-    // when
-    const autoCompletion = completions(context);
+      // given
+      const context = createContext('foo', [ {
+        name: 'foobar',
+        info: 'info',
+        detail: 'detail'
+      } ]);
 
-    // then
-    expect(autoCompletion).to.exist;
-    expect(autoCompletion.from).to.eql(0);
-    expect(autoCompletion.options).to.have.length(1);
-    expect(autoCompletion.options[0]).to.eql({
-      label: 'foobar',
-      type: 'variable',
-      info: 'info',
-      detail: 'detail'
+      // when
+      const autoCompletion = completions(context);
+
+      // then
+      expect(autoCompletion).to.exist;
+      expect(autoCompletion.from).to.eql(0);
+      expect(autoCompletion.options).to.have.length(1);
+
+      expect(autoCompletion.options[0]).to.eql({
+        label: 'foobar',
+        type: 'variable',
+        info: 'info',
+        detail: 'detail',
+        boost: 5
+      });
     });
+
+
+    it('function', function() {
+
+      // given
+      const context = createContext('foo', [ {
+        type: 'function',
+        name: 'foobar',
+        info: 'info',
+        detail: 'string',
+        params: [
+          {
+            name: 'param1',
+            type: 'string',
+          },
+          {
+            name: 'param1'
+          }
+        ]
+      } ]);
+
+      // when
+      const autoCompletion = completions(context);
+
+      // then
+      expect(autoCompletion).to.exist;
+      expect(autoCompletion.from).to.eql(0);
+      expect(autoCompletion.options).to.have.length(1);
+
+      const firstOption = autoCompletion.options[0];
+      expect(firstOption.type).to.eql('function');
+      expect(firstOption.info).to.eql('info');
+      expect(firstOption.detail).to.eql('string');
+      expect(typeof firstOption.apply).to.eql('function');
+    });
+
   });
 
 
-  it('should suggest for current variable', function() {
+  it('should complete current', function() {
 
     // given
     const context = createContext('15 + foo', [
@@ -52,7 +93,7 @@ describe('autocompletion - variables', function() {
   });
 
 
-  it('should not suggest on path expressions', function() {
+  it('should not complete path expression', function() {
 
     // given
     const context = createContext('myObject.fo', [ { name: 'foobar' } ]);
@@ -65,7 +106,7 @@ describe('autocompletion - variables', function() {
   });
 
 
-  it('should not suggest on empty expression', function() {
+  it('should not complete empty expression', function() {
 
     // given
     const context = createContext('', [ { name: 'foobar' } ]);
@@ -78,7 +119,7 @@ describe('autocompletion - variables', function() {
   });
 
 
-  it('should suggest on empty expression when explicitly requested', function() {
+  it('should complete empty expression (explicitly requested)', function() {
 
     // given
     const context = createContext('', [ { name: 'foobar' } ], true);
@@ -92,53 +133,20 @@ describe('autocompletion - variables', function() {
   });
 
 
-  it('should suggest on empty expression when explicitly requested', function() {
+  it('should complete partial expression', function() {
 
     // given
-    const context = createContext('', [ { name: 'foobar' } ], true);
+    const context = createContext('abs(', [ { name: 'a' } ], true);
 
     // when
     const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
-    expect(autoCompletion.from).to.eql(0);
-  });
-
-
-  it('should return function suggestions in correct format', function() {
-
-    // given
-    const context = createContext('foo', [ {
-      type: 'function',
-      name: 'foobar',
-      info: 'info',
-      detail: 'string',
-      params: [
-        {
-          name: 'param1',
-          type: 'string',
-        },
-        {
-          name: 'param1'
-        }
-      ]
-    } ]);
-
-    // when
-    const autoCompletion = completions(context);
-
-    // then
-    expect(autoCompletion).to.exist;
-    expect(autoCompletion.from).to.eql(0);
+    expect(autoCompletion.from).to.eql(4);
     expect(autoCompletion.options).to.have.length(1);
-
-    const firstOption = autoCompletion.options[0];
-    expect(firstOption.type).to.eql('function');
-    expect(firstOption.info).to.eql('info');
-    expect(firstOption.detail).to.eql('string');
-    expect(typeof firstOption.apply).to.eql('function');
   });
+
 });
 
 
