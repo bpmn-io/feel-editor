@@ -59,6 +59,28 @@ describe('autocompletion - builtins', function() {
       expect(info.querySelector('pre')).to.exist;
 
     });
+
+  });
+
+
+  it('should complete with space (<get or else>)', function() {
+
+    const context = createContext('get', [
+      {
+        name: 'get or else',
+        type: 'function',
+        params: [
+          { name: 'value' },
+          { name: 'default' }
+        ]
+      }
+    ]);
+
+    // when
+    const autoCompletion = completions(context);
+
+    // then
+    expect(autoCompletion).to.exist;
   });
 
 
