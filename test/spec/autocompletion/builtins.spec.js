@@ -11,14 +11,14 @@ describe('autocompletion - builtins', function() {
   it('should complete in correct format', function() {
 
     // given
-    const context = createContext('Foo');
+    const context = createContext('get');
 
     // when
     const autoCompletion = completions(context);
 
     // then
     expect(autoCompletion).to.exist;
-    expect(autoCompletion.options).to.have.length(120);
+    expect(autoCompletion.options).to.have.length(4);
 
     const firstOption = autoCompletion.options[0];
 
@@ -26,6 +26,13 @@ describe('autocompletion - builtins', function() {
     expect(typeof firstOption.type).to.eql('string');
     expect(typeof firstOption.info).to.eql('function');
     expect(typeof firstOption.apply).to.eql('function');
+
+    expect(autoCompletion.options.map(o => o.label)).to.eql([
+      'get or else(value, default)',
+      'get value(context, key)',
+      'get value(context, keys)',
+      'get entries(context)'
+    ]);
   });
 
 
