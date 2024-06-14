@@ -51,6 +51,11 @@ return
           detail: 'String'
         },
         {
+          name: 'Variable or a Space',
+          info: 'Good stuff!!',
+          detail: 'String'
+        },
+        {
           name: 'ContextVariable',
           info: 'This is a Context Variable',
           detail: 'Context',
