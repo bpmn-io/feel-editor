@@ -167,7 +167,7 @@ return
   });
 
 
-  describe('getter', function() {
+  describe('#getSelection', function() {
 
     it('should return selection state', function() {
 
@@ -358,76 +358,6 @@ return
       }).not.to.throw();
     });
 
-
-    it('should suggest updated variables', async function() {
-
-      const initalValue = 'fooba';
-
-      const editor = new FeelEditor({
-        container,
-        value: initalValue
-      });
-
-      const cm = getCm(editor);
-
-      // move cursor to the end
-      select(cm, 5);
-
-      // when
-      editor.setVariables([
-        { name: 'foobar' },
-        { name: 'baz' }
-      ]);
-      startCompletion(cm);
-
-      // then
-      await expectEventually(() => {
-        const completions = currentCompletions(cm.state);
-        expect(completions).to.have.length(1);
-        expect(completions[0].label).to.have.eql('foobar');
-      });
-    });
-
-
-    it('should change suggestion when variables are updated', async function() {
-
-      const initalValue = 'fooba';
-
-      const editor = new FeelEditor({
-        container,
-        value: initalValue,
-        variables: [
-          { name: 'foobar' },
-          { name: 'baz' }
-        ]
-      });
-
-      const cm = getCm(editor);
-
-      // move cursor to the end
-      select(cm, 5);
-
-      // assume
-      startCompletion(cm);
-      await expectEventually(() => {
-        const completions = currentCompletions(cm.state);
-        expect(completions).to.have.length(1);
-        expect(completions[0].label).to.eql('foobar');
-      });
-
-      // when
-      editor.setVariables([
-        { name: 'foobaz' }
-      ]);
-      startCompletion(cm);
-
-      // then
-      await expectEventually(() => {
-        const completions = currentCompletions(cm.state);
-        expect(completions).to.have.length(1);
-        expect(completions[0].label).to.eql('foobaz');
-      });
-    });
   });
 
 
@@ -639,7 +569,7 @@ return
 
   describe('autocompletion', function() {
 
-    it('should suggest applicable variables', function(done) {
+    it('should complete variables', function(done) {
       const initalValue = 'fooba';
       const variables = [
         { name: 'foobar' },
@@ -672,7 +602,7 @@ return
     });
 
 
-    it('should suggest built-ins (with lower priority)', async function() {
+    it('should complete built-ins (with lower priority)', async function() {
       const initalValue = '';
       const variables = [ {
         name: 'ab',
@@ -716,7 +646,7 @@ return
     });
 
 
-    it('should suggest snippets', function(done) {
+    it('should complete snippets', function(done) {
       const initalValue = 'fo';
       const variables = [];
 
@@ -745,7 +675,78 @@ return
     });
 
 
-    describe('position tooltips inside container', function() {
+    it('should complete variables (after set)', async function() {
+
+      const initalValue = 'fooba';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 5);
+
+      // when
+      editor.setVariables([
+        { name: 'foobar' },
+        { name: 'baz' }
+      ]);
+      startCompletion(cm);
+
+      // then
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.have.eql('foobar');
+      });
+    });
+
+
+    it('should complete variables (after update)', async function() {
+
+      const initalValue = 'fooba';
+
+      const editor = new FeelEditor({
+        container,
+        value: initalValue,
+        variables: [
+          { name: 'foobar' },
+          { name: 'baz' }
+        ]
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 5);
+
+      // assume
+      startCompletion(cm);
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.eql('foobar');
+      });
+
+      // when
+      editor.setVariables([
+        { name: 'foobaz' }
+      ]);
+      startCompletion(cm);
+
+      // then
+      await expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.eql('foobaz');
+      });
+    });
+
+
+    describe('tooltip position', function() {
 
       const initalValue = 'fooba';
       const variables = [

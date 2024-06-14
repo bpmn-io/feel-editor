@@ -11,7 +11,7 @@ describe('autocompletion - pathExpressions', function() {
 
   describe('context', function() {
 
-    it('should suggest on empty path', function() {
+    it('should complete on empty path', function() {
 
       // given
       const context = createContext('foo.', [ {
@@ -41,7 +41,7 @@ describe('autocompletion - pathExpressions', function() {
     });
 
 
-    it('should suggest while typing', function() {
+    it('should complete while typing', function() {
 
       // given
       const context = createContext('foo.ba', [ {
@@ -74,7 +74,7 @@ describe('autocompletion - pathExpressions', function() {
 
     describe('list optional', function() {
 
-      it('should suggest on empty path', function() {
+      it('should complete on empty path', function() {
 
         // given
         const context = createContext('foo.', [ {
@@ -105,7 +105,7 @@ describe('autocompletion - pathExpressions', function() {
       });
 
 
-      it('should suggest while typing', function() {
+      it('should complete while typing', function() {
 
         // given
         const context = createContext('foo.ba', [ {
@@ -143,7 +143,7 @@ describe('autocompletion - pathExpressions', function() {
 
   describe('list', function() {
 
-    it('should suggest on empty path', function() {
+    it('should complete on empty path', function() {
 
       // given
       const context = createContext('foo[0].', [ {
@@ -175,7 +175,7 @@ describe('autocompletion - pathExpressions', function() {
     });
 
 
-    it('should suggest while typing', function() {
+    it('should complete while typing', function() {
 
       // given
       const context = createContext('foo[0].ba', [ {
@@ -207,7 +207,7 @@ describe('autocompletion - pathExpressions', function() {
     });
 
 
-    it('should suggest when list is part of path', function() {
+    it('should complete when list is part of path', function() {
 
       // given
       const context = createContext('foo.bar[0].ba', [ {
@@ -246,7 +246,7 @@ describe('autocompletion - pathExpressions', function() {
 
     describe('list optional', function() {
 
-      it('should suggest on empty path', function() {
+      it('should complete on empty path', function() {
 
         // given
         const context = createContext('foo[0].', [ {
@@ -278,7 +278,7 @@ describe('autocompletion - pathExpressions', function() {
       });
 
 
-      it('should suggest while typing', function() {
+      it('should complete while typing', function() {
 
         // given
         const context = createContext('foo[0].ba', [ {
@@ -310,7 +310,7 @@ describe('autocompletion - pathExpressions', function() {
       });
 
 
-      it('should suggest when list is part of path', function() {
+      it('should complete when list is part of path', function() {
 
         // given
         const context = createContext('foo.bar[0].ba', [ {

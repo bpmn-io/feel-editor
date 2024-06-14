@@ -8,7 +8,7 @@ import { completions } from '../../../src/autocompletion/builtins';
 
 describe('autocompletion - builtins', function() {
 
-  it('should return variable suggestions in correct format', function() {
+  it('should complete in correct format', function() {
 
     // given
     const context = createContext('Foo');
@@ -55,7 +55,7 @@ describe('autocompletion - builtins', function() {
   });
 
 
-  it('should not return suggestions for empty context', function() {
+  it('should not complete for empty context', function() {
 
     // given
     const context = createContext('');
@@ -68,7 +68,7 @@ describe('autocompletion - builtins', function() {
   });
 
 
-  it('should return suggestions when explicitly requested', function() {
+  it('should complete when explicitly requested', function() {
 
     // given
     const context = createContext('', true);
