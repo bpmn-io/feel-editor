@@ -1,4 +1,7 @@
-import { language } from '../../../src/language';
+import {
+  language,
+  createContext as createLanguageContext
+} from '../../../src/language';
 import { EditorState } from '@codemirror/state';
 import { completions } from '../../../src/autocompletion/pathExpressions';
 import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
@@ -352,18 +355,20 @@ describe('autocompletion - pathExpressions', function() {
 
 // helpers /////////////////////////////
 
-function createContext(doc, variables = [], explicit = false) {
+function createContext(doc, variables = [], explicit = false, pos = doc.length) {
   const state = EditorState.create({
     doc,
     extensions: [
       variablesFacet.of(variables),
-      language()
+      language({
+        context: createLanguageContext(variables)
+      })
     ]
   });
 
   return {
     state,
-    pos:  doc.length,
+    pos,
     explicit
   };
 }

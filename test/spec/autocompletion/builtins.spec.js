@@ -1,4 +1,7 @@
-import { language } from '../../../src/language';
+import {
+  language,
+  createContext as createLanguageContext
+} from '../../../src/language';
 import { EditorState } from '@codemirror/state';
 import { completions } from '../../../src/autocompletion/builtins';
 
@@ -82,15 +85,20 @@ describe('autocompletion - builtins', function() {
 
 // helpers /////////////////////////////
 
-function createContext(doc, explicit = false) {
+function createContext(doc, builtins = [], explicit = false, pos = doc.length) {
   const state = EditorState.create({
     doc,
-    extensions: [ language() ]
+    extensions: [
+      builtinsFacet.of(builtins),
+      language({
+        context: createLanguageContext(builtins)
+      })
+    ]
   });
 
   return {
     state,
-    pos:  doc.length,
+    pos,
     explicit
   };
 }
