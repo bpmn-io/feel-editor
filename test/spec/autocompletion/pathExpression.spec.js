@@ -1,20 +1,19 @@
 import {
-  language,
-  createContext as createLanguageContext
-} from '../../../src/language';
+  configure as feelCore
+} from '../../../src/core';
+
 import { EditorState } from '@codemirror/state';
-import { completions } from '../../../src/autocompletion/pathExpressions';
-import { variablesFacet } from '../../../src/autocompletion/VariableFacet';
+import { pathExpressionCompletion } from '../../../src/autocompletion/pathExpression';
 
 
-describe('autocompletion - pathExpressions', function() {
+describe('autocompletion - pathExpression', function() {
 
   describe('context', function() {
 
     it('should complete on empty path', function() {
 
       // given
-      const context = createContext('foo.', [ {
+      const triggerCompletion = setup('foo.', [ {
         name: 'foo',
         entries: [
           {
@@ -26,13 +25,13 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = completions(context);
+      const completion = triggerCompletion();
 
       // then
-      expect(autoCompletion).to.exist;
-      expect(autoCompletion.from).to.eql(4);
-      expect(autoCompletion.options).to.have.length(1);
-      expect(autoCompletion.options[0]).to.eql({
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(4);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
         label: 'bar',
         type: 'variable',
         info: 'info',
@@ -44,7 +43,7 @@ describe('autocompletion - pathExpressions', function() {
     it('should complete while typing', function() {
 
       // given
-      const context = createContext('foo.ba', [ {
+      const triggerCompletion = setup('foo.ba', [ {
         name: 'foo',
         entries: [
           {
@@ -56,19 +55,18 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = completions(context);
+      const completion = triggerCompletion();
 
       // then
-      expect(autoCompletion).to.exist;
-      expect(autoCompletion.from).to.eql(4);
-      expect(autoCompletion.options).to.have.length(1);
-      expect(autoCompletion.options[0]).to.eql({
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(4);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
         label: 'bar',
         type: 'variable',
         info: 'info',
         detail: 'detail'
       });
-
     });
 
 
@@ -77,7 +75,7 @@ describe('autocompletion - pathExpressions', function() {
       it('should complete on empty path', function() {
 
         // given
-        const context = createContext('foo.', [ {
+        const triggerCompletion = setup('foo.', [ {
           name: 'foo',
           isList: 'optional',
           entries: [
@@ -90,13 +88,13 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = completions(context);
+        const completion = triggerCompletion();
 
         // then
-        expect(autoCompletion).to.exist;
-        expect(autoCompletion.from).to.eql(4);
-        expect(autoCompletion.options).to.have.length(1);
-        expect(autoCompletion.options[0]).to.eql({
+        expect(completion).to.exist;
+        expect(completion.from).to.eql(4);
+        expect(completion.options).to.have.length(1);
+        expect(completion.options[0]).to.eql({
           label: 'bar',
           type: 'variable',
           info: 'info',
@@ -108,7 +106,7 @@ describe('autocompletion - pathExpressions', function() {
       it('should complete while typing', function() {
 
         // given
-        const context = createContext('foo.ba', [ {
+        const triggerCompletion = setup('foo.ba', [ {
           name: 'foo',
           isList: 'optional',
           entries: [
@@ -121,13 +119,13 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = completions(context);
+        const completion = triggerCompletion();
 
         // then
-        expect(autoCompletion).to.exist;
-        expect(autoCompletion.from).to.eql(4);
-        expect(autoCompletion.options).to.have.length(1);
-        expect(autoCompletion.options[0]).to.eql({
+        expect(completion).to.exist;
+        expect(completion.from).to.eql(4);
+        expect(completion.options).to.have.length(1);
+        expect(completion.options[0]).to.eql({
           label: 'bar',
           type: 'variable',
           info: 'info',
@@ -146,7 +144,7 @@ describe('autocompletion - pathExpressions', function() {
     it('should complete on empty path', function() {
 
       // given
-      const context = createContext('foo[0].', [ {
+      const triggerCompletion = setup('foo[0].', [ {
         name: 'foo',
         isList: true,
         entries: [
@@ -159,14 +157,14 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = completions(context);
+      const completion = triggerCompletion();
 
       // then
-      expect(autoCompletion).to.exist;
-      expect(autoCompletion.from).to.eql(7);
-      expect(autoCompletion.options).to.have.length(1);
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(7);
+      expect(completion.options).to.have.length(1);
 
-      expect(autoCompletion.options[0]).to.eql({
+      expect(completion.options[0]).to.eql({
         label: 'bar',
         type: 'variable',
         info: 'info',
@@ -178,7 +176,7 @@ describe('autocompletion - pathExpressions', function() {
     it('should complete while typing', function() {
 
       // given
-      const context = createContext('foo[0].ba', [ {
+      const triggerCompletion = setup('foo[0].ba', [ {
         name: 'foo',
         isList: true,
         entries: [
@@ -191,13 +189,13 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = completions(context);
+      const completion = triggerCompletion();
 
       // then
-      expect(autoCompletion).to.exist;
-      expect(autoCompletion.from).to.eql(7);
-      expect(autoCompletion.options).to.have.length(1);
-      expect(autoCompletion.options[0]).to.eql({
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(7);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
         label: 'bar',
         type: 'variable',
         info: 'info',
@@ -210,7 +208,7 @@ describe('autocompletion - pathExpressions', function() {
     it('should complete when list is part of path', function() {
 
       // given
-      const context = createContext('foo.bar[0].ba', [ {
+      const triggerCompletion = setup('foo.bar[0].ba', [ {
         name: 'foo',
         entries: [
           {
@@ -228,13 +226,13 @@ describe('autocompletion - pathExpressions', function() {
       } ]);
 
       // when
-      const autoCompletion = completions(context);
+      const completion = triggerCompletion();
 
       // then
-      expect(autoCompletion).to.exist;
-      expect(autoCompletion.from).to.eql(11);
-      expect(autoCompletion.options).to.have.length(1);
-      expect(autoCompletion.options[0]).to.eql({
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(11);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
         label: 'baz',
         type: 'variable',
         info: 'info',
@@ -249,7 +247,7 @@ describe('autocompletion - pathExpressions', function() {
       it('should complete on empty path', function() {
 
         // given
-        const context = createContext('foo[0].', [ {
+        const triggerCompletion = setup('foo[0].', [ {
           name: 'foo',
           isList: 'optional',
           entries: [
@@ -262,14 +260,14 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = completions(context);
+        const completion = triggerCompletion();
 
         // then
-        expect(autoCompletion).to.exist;
-        expect(autoCompletion.from).to.eql(7);
-        expect(autoCompletion.options).to.have.length(1);
+        expect(completion).to.exist;
+        expect(completion.from).to.eql(7);
+        expect(completion.options).to.have.length(1);
 
-        expect(autoCompletion.options[0]).to.eql({
+        expect(completion.options[0]).to.eql({
           label: 'bar',
           type: 'variable',
           info: 'info',
@@ -281,7 +279,7 @@ describe('autocompletion - pathExpressions', function() {
       it('should complete while typing', function() {
 
         // given
-        const context = createContext('foo[0].ba', [ {
+        const triggerCompletion = setup('foo[0].ba', [ {
           name: 'foo',
           isList: 'optional',
           entries: [
@@ -294,13 +292,13 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = completions(context);
+        const completion = triggerCompletion();
 
         // then
-        expect(autoCompletion).to.exist;
-        expect(autoCompletion.from).to.eql(7);
-        expect(autoCompletion.options).to.have.length(1);
-        expect(autoCompletion.options[0]).to.eql({
+        expect(completion).to.exist;
+        expect(completion.from).to.eql(7);
+        expect(completion.options).to.have.length(1);
+        expect(completion.options[0]).to.eql({
           label: 'bar',
           type: 'variable',
           info: 'info',
@@ -313,7 +311,7 @@ describe('autocompletion - pathExpressions', function() {
       it('should complete when list is part of path', function() {
 
         // given
-        const context = createContext('foo.bar[0].ba', [ {
+        const triggerCompletion = setup('foo.bar[0].ba', [ {
           name: 'foo',
           entries: [
             {
@@ -331,13 +329,13 @@ describe('autocompletion - pathExpressions', function() {
         } ]);
 
         // when
-        const autoCompletion = completions(context);
+        const completion = triggerCompletion();
 
         // then
-        expect(autoCompletion).to.exist;
-        expect(autoCompletion.from).to.eql(11);
-        expect(autoCompletion.options).to.have.length(1);
-        expect(autoCompletion.options[0]).to.eql({
+        expect(completion).to.exist;
+        expect(completion.from).to.eql(11);
+        expect(completion.options).to.have.length(1);
+        expect(completion.options[0]).to.eql({
           label: 'baz',
           type: 'variable',
           info: 'info',
@@ -355,20 +353,41 @@ describe('autocompletion - pathExpressions', function() {
 
 // helpers /////////////////////////////
 
-function createContext(doc, variables = [], explicit = false, pos = doc.length) {
+/**
+ * @typedef { import('@codemirror/autocomplete').CompletionResult | null } CompletionResult
+ *
+ * @typedef { (options?: { pos?: number, explicit?: boolean }) => CompletionResult } CompleteFn
+ */
+
+/**
+ * @param {string} doc
+ * @param {import('../../../src/core').Variable[]} variables
+ *
+ * @return { CompleteFn }
+ */
+function setup(doc, variables = []) {
+
+  const completion = pathExpressionCompletion({
+    variables
+  });
+
   const state = EditorState.create({
     doc,
     extensions: [
-      variablesFacet.of(variables),
-      language({
-        context: createLanguageContext(variables)
+      feelCore({
+        variables,
+        completions: [
+          completion
+        ]
       })
     ]
   });
 
-  return {
-    state,
-    pos,
-    explicit
+  return ({ pos = doc.length, explicit = false } = { }) => {
+    return completion({
+      state,
+      pos,
+      explicit
+    });
   };
 }

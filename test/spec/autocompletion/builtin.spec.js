@@ -1,20 +1,24 @@
 import {
-  language,
-  createContext as createLanguageContext
-} from '../../../src/language';
+  configure as feelCore
+} from '../../../src/core';
+
 import { EditorState } from '@codemirror/state';
-import { completions } from '../../../src/autocompletion/builtins';
+import { variableCompletion } from '../../../src/autocompletion/variable';
+
+import {
+  camunda as camundaBuiltins
+} from '../../../src/builtins';
 
 
-describe('autocompletion - builtins', function() {
+describe('autocompletion - built-ins', function() {
 
   it('should complete in correct format', function() {
 
     // given
-    const context = createContext('get');
+    const triggerCompletion = setup('get');
 
     // when
-    const autoCompletion = completions(context);
+    const autoCompletion = triggerCompletion();
 
     // then
     expect(autoCompletion).to.exist;
@@ -39,8 +43,8 @@ describe('autocompletion - builtins', function() {
   it('should render info', function() {
 
     // given
-    const context = createContext('Foo');
-    const autoCompletion = completions(context);
+    const triggerCompletion = setup('Foo');
+    const autoCompletion = triggerCompletion();
 
     // assume
     expect(autoCompletion.options).to.exist;
@@ -65,7 +69,7 @@ describe('autocompletion - builtins', function() {
 
   it('should complete with space (<get or else>)', function() {
 
-    const context = createContext('get', [
+    const triggerCompletion = setup('get', [
       {
         name: 'get or else',
         type: 'function',
@@ -77,36 +81,36 @@ describe('autocompletion - builtins', function() {
     ]);
 
     // when
-    const autoCompletion = completions(context);
+    const completion = triggerCompletion();
 
     // then
-    expect(autoCompletion).to.exist;
+    expect(completion).to.exist;
   });
 
 
   it('should not complete for empty context', function() {
 
     // given
-    const context = createContext('');
+    const triggerCompletion = setup('');
 
     // when
-    const autoCompletion = completions(context);
+    const completion = triggerCompletion();
 
     // then
-    expect(autoCompletion).to.not.exist;
+    expect(completion).to.not.exist;
   });
 
 
   it('should complete when explicitly requested', function() {
 
     // given
-    const context = createContext('', true);
+    const triggerCompletion = setup('');
 
     // when
-    const autoCompletion = completions(context);
+    const completion = triggerCompletion({ explicit: true });
 
     // then
-    expect(autoCompletion).to.exist;
+    expect(completion).to.exist;
   });
 
 });
@@ -114,20 +118,41 @@ describe('autocompletion - builtins', function() {
 
 // helpers /////////////////////////////
 
-function createContext(doc, builtins = [], explicit = false, pos = doc.length) {
+/**
+ * @typedef { import('@codemirror/autocomplete').CompletionResult | null } CompletionResult
+ *
+ * @typedef { (options?: { pos?: number, explicit?: boolean }) => CompletionResult } CompleteFn
+ */
+
+/**
+ * @param {string} doc
+ * @param {import('../../../src/core').Variable[]} builtins
+ *
+ * @return { CompleteFn }
+ */
+function setup(doc, builtins = camundaBuiltins) {
+
+  const completion = variableCompletion({
+    builtins
+  });
+
   const state = EditorState.create({
     doc,
     extensions: [
-      builtinsFacet.of(builtins),
-      language({
-        context: createLanguageContext(builtins)
+      feelCore({
+        builtins,
+        completions: [
+          completion
+        ]
       })
     ]
   });
 
-  return {
-    state,
-    pos,
-    explicit
+  return ({ pos = doc.length, explicit = false } = { }) => {
+    return completion({
+      state,
+      pos,
+      explicit
+    });
   };
 }
