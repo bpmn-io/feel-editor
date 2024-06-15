@@ -1,20 +1,27 @@
-import { autocompletion, completeFromList } from '@codemirror/autocomplete';
-import { snippets, keywordCompletions } from 'lang-feel';
-import { completions as builtinCompletions } from './builtins';
-import { completions as pathExpressionCompletions } from './pathExpressions';
+import { snippets, keywordCompletions, snippetCompletion } from 'lang-feel';
 
-import { completions as variableCompletions } from './variables';
+import { pathExpressionCompletion } from './pathExpression';
+import { variableCompletion } from './variable';
 
-export default function() {
+/**
+ * @typedef { import('../core').Variable } Variable
+ * @typedef { import('@codemirror/autocomplete').CompletionSource } CompletionSource
+ */
+
+/**
+ * @param { {
+ *   variables?: Variable[],
+ *   builtins?: Variable[]
+ * } } options
+ *
+ * @return { CompletionSource[] }
+ */
+export function completions({ variables = [], builtins = [] }) {
+
   return [
-    autocompletion({
-      override: [
-        variableCompletions,
-        builtinCompletions,
-        completeFromList(snippets.map(s => ({ ...s, boost: -1 }))),
-        pathExpressionCompletions,
-        ...keywordCompletions
-      ]
-    })
+    pathExpressionCompletion({ variables }),
+    variableCompletion({ variables, builtins }),
+    snippetCompletion(snippets.map(snippet => ({ ...snippet, boost: -1 }))),
+    ...keywordCompletions
   ];
 }

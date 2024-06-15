@@ -1,28 +1,28 @@
-import { closeBrackets } from '@codemirror/autocomplete';
+import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
 import { defaultKeymap } from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
-import autocompletion from './autocompletion';
-import { variablesFacet } from './autocompletion/VariableFacet';
-import { language } from './language';
 import linter from './lint';
 import theme from './theme';
 
+import * as Core from './core';
+
+import { camunda as camundaBuiltins } from './builtins';
+
 /**
- * @typedef {object} Variable
- * @property {string} name name or key of the variable
- * @property {string} [info] short information about the variable, e.g. type
- * @property {string} [detail] longer description of the variable content
- * @property {boolean} [isList] whether the variable is a list
- * @property {Array<Variable>} [schema] array of child variables if the variable is a context or list
- * @property {'function'|'variable'} [type] type of the variable
- * @property {Array<{name: string, type: string}>} [params] function parameters
+ * @typedef { import('./core').Variable } Variable
  */
 
-const autocompletionConf = new Compartment();
+/**
+ * @typedef {object} Builtin
+ * @property {string} name
+ * @property {string} description
+ */
+
+const coreConf = new Compartment();
 const placeholderConf = new Compartment();
 
 
@@ -32,7 +32,7 @@ const placeholderConf = new Compartment();
  * @param {Object} config
  * @param {DOMNode} config.container
  * @param {Extension[]} [config.extensions]
- * @param {'expression' | 'unaryTests'} [config.dialect='expression']
+ * @param {Dialect} [config.dialect='expression']
  * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
@@ -40,6 +40,7 @@ const placeholderConf = new Compartment();
  * @param {Boolean} [config.readOnly]
  * @param {String} [config.value]
  * @param {Variable[]} [config.variables]
+ * @param {Variable[]} [config.builtins]
  *
  * @returns {Object} editor
  */
@@ -55,6 +56,7 @@ export default function FeelEditor({
   placeholder = '',
   readOnly = false,
   value = '',
+  builtins = camundaBuiltins,
   variables = []
 }) {
 
@@ -95,24 +97,25 @@ export default function FeelEditor({
   }) : [];
 
   const extensions = [
-    autocompletionConf.of(variablesFacet.of(variables)),
     autocompletion(),
+    coreConf.of(Core.configure({
+      dialect,
+      builtins,
+      variables
+    })),
     bracketMatching(),
-    changeHandler,
+    indentOnInput(),
     closeBrackets(),
     EditorView.contentAttributes.of(contentAttributes),
-    indentOnInput(),
+    changeHandler,
     keyHandler,
     keymap.of([
       ...defaultKeymap,
     ]),
-    language({
-      dialect
-    }),
     linter,
     lintHandler,
-    placeholderConf.of(placeholderExt(placeholder)),
     tooltipLayout,
+    placeholderConf.of(placeholderExt(placeholder)),
     theme,
     ...editorExtensions
   ];
@@ -124,7 +127,7 @@ export default function FeelEditor({
   this._cmEditor = new EditorView({
     state: EditorState.create({
       doc: value,
-      extensions: extensions
+      extensions
     }),
     parent: container
   });
@@ -177,19 +180,31 @@ FeelEditor.prototype.getSelection = function() {
 
 /**
  * Set variables to be used for autocompletion.
+ *
  * @param {Variable[]} variables
- * @returns {void}
  */
 FeelEditor.prototype.setVariables = function(variables) {
+
+  const {
+    dialect,
+    builtins
+  } = Core.get(this._cmEditor.state);
+
   this._cmEditor.dispatch({
-    effects: autocompletionConf.reconfigure(variablesFacet.of(variables))
+    effects: [
+      coreConf.reconfigure(Core.configure({
+        dialect,
+        builtins,
+        variables
+      }))
+    ]
   });
 };
 
 /**
  * Update placeholder text.
+ *
  * @param {string} placeholder
- * @returns {void}
  */
 FeelEditor.prototype.setPlaceholder = function(placeholder) {
   this._cmEditor.dispatch({
