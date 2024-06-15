@@ -9,6 +9,7 @@ import { domify } from 'min-dom';
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
 
+
 describe('CodeEditor', function() {
 
   let container;
@@ -574,7 +575,7 @@ return
 
   describe('autocompletion', function() {
 
-    it('should complete variables', function(done) {
+    it('should complete variables', function() {
       const initalValue = 'fooba';
       const variables = [
         { name: 'foobar' },
@@ -597,13 +598,11 @@ return
 
       // then
       // update done async
-      expectEventually(() => {
+      return expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(1);
         expect(completions[0].label).to.have.eql('foobar');
-        done();
       });
-
     });
 
 
@@ -636,7 +635,7 @@ return
 
       // then
       // update done async
-      await expectEventually(() => {
+      return expectEventually(() => {
         const completions = currentCompletions(cm.state);
 
         expect(completions).to.have.length.gte(2);
@@ -651,8 +650,8 @@ return
     });
 
 
-    it('should complete snippets', function(done) {
-      const initalValue = 'fo';
+    it('should complete snippets', function() {
+      const initalValue = 'for';
       const variables = [];
 
       const editor = new FeelEditor({
@@ -671,10 +670,9 @@ return
 
       // then
       // update done async
-      expectEventually(() => {
+      return expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions[0].label).to.have.eql('for');
-        done();
       });
 
     });
@@ -778,7 +776,7 @@ return
       });
 
 
-      it('should position tooltips inside container', function(done) {
+      it('should position tooltips inside container', function() {
         const editor = new FeelEditor({
           container: feelContainer,
 
@@ -797,7 +795,7 @@ return
 
         // then
         // update done async
-        setTimeout(() => {
+        return expectEventually(() => {
           const tooltip = container.querySelector('#oversizedDescription');
 
           const tooltipBB = tooltip.getBoundingClientRect();
@@ -805,14 +803,11 @@ return
 
           expect(tooltip).to.exist;
           expect(tooltipBB.bottom).to.be.below(containerBB.bottom);
-
-          done();
-        }, 100);
-
+        });
       });
 
 
-      it('should position tooltips inside container defined by CSS selector', function(done) {
+      it('should position tooltips inside container defined by CSS selector', function() {
         const editor = new FeelEditor({
           container: feelContainer,
 
@@ -831,7 +826,7 @@ return
 
         // then
         // update done async
-        setTimeout(() => {
+        return expectEventually(() => {
           const tooltip = container.querySelector('#oversizedDescription');
 
           const tooltipBB = tooltip.getBoundingClientRect();
@@ -839,14 +834,11 @@ return
 
           expect(tooltip).to.exist;
           expect(tooltipBB.bottom).to.be.below(containerBB.bottom);
-
-          done();
-        }, 100);
-
+        });
       });
 
 
-      it('should use window by default', function(done) {
+      it('should use window by default', function() {
         const editor = new FeelEditor({
           container: feelContainer,
           value: initalValue,
@@ -863,7 +855,7 @@ return
 
         // then
         // update done async
-        setTimeout(() => {
+        return expectEventually(() => {
           const tooltip = container.querySelector('#oversizedDescription');
 
           const tooltipBB = tooltip.getBoundingClientRect();
@@ -871,10 +863,7 @@ return
 
           expect(tooltip).to.exist;
           expect(tooltipBB.bottom).to.be.above(containerBB.bottom);
-
-          done();
-        }, 100);
-
+        });
       });
 
     });
