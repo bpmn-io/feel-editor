@@ -348,6 +348,48 @@ describe('autocompletion - pathExpression', function() {
 
   });
 
+
+  describe('should complete locally derived', function() {
+
+    it('context key', function() {
+
+      // given
+      const triggerCompletion = setup('{ foo + bar: 1 }.foo');
+
+      // when
+      const completion = triggerCompletion();
+
+      // then
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(17);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
+        label: 'foo + bar',
+        type: 'variable'
+      });
+    });
+
+
+    it('nested context key', function() {
+
+      // given
+      const triggerCompletion = setup('{ foo + bar: { a: 1 } }.foo+bar.');
+
+      // when
+      const completion = triggerCompletion();
+
+      // then
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(33);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
+        label: '1',
+        type: 'variable'
+      });
+    });
+
+  });
+
 });
 
 
