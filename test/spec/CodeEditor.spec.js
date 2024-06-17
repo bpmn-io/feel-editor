@@ -601,7 +601,7 @@ return
       return expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(1);
-        expect(completions[0].label).to.have.eql('foobar');
+        expect(completions[0].label).to.eql('foobar');
       });
     });
 
@@ -641,10 +641,10 @@ return
         expect(completions).to.have.length.gte(2);
 
         // variable completions offered
-        expect(completions[0].label).to.have.eql('ab');
+        expect(completions[0].label).to.eql('ab');
 
         // followed by function completions
-        expect(completions[1].label).to.have.eql('abs(n)');
+        expect(completions[1].label).to.eql('abs(n)');
       });
 
     });
@@ -672,7 +672,7 @@ return
       // update done async
       return expectEventually(() => {
         const completions = currentCompletions(cm.state);
-        expect(completions[0].label).to.have.eql('for');
+        expect(completions[0].label).to.eql('for');
       });
 
     });
@@ -703,7 +703,7 @@ return
       await expectEventually(() => {
         const completions = currentCompletions(cm.state);
         expect(completions).to.have.length(1);
-        expect(completions[0].label).to.have.eql('foobar');
+        expect(completions[0].label).to.eql('foobar');
       });
     });
 
