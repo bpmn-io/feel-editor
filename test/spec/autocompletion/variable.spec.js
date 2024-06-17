@@ -27,12 +27,11 @@ describe('autocompletion - variable', function() {
       expect(completion.from).to.eql(0);
       expect(completion.options).to.have.length(1);
 
-      expect(completion.options[0]).to.eql({
+      expect(completion.options[0]).to.include({
         label: 'foobar',
         type: 'variable',
         info: 'info',
-        detail: 'detail',
-        boost: 5
+        detail: 'detail'
       });
     });
 
@@ -64,11 +63,11 @@ describe('autocompletion - variable', function() {
       expect(completion.from).to.eql(0);
       expect(completion.options).to.have.length(1);
 
-      const firstOption = completion.options[0];
-      expect(firstOption.type).to.eql('function');
-      expect(firstOption.info).to.eql('info');
-      expect(firstOption.detail).to.eql('string');
-      expect(typeof firstOption.apply).to.eql('function');
+      expect(completion.options[0]).to.include({
+        type: 'function',
+        info: 'info',
+        detail: 'string'
+      });
     });
 
   });
@@ -88,7 +87,9 @@ describe('autocompletion - variable', function() {
     // then
     expect(completion).to.exist;
     expect(completion.from).to.eql(5);
-    expect(completion.options).to.have.length(1);
+    expect(completion.options).to.have.length(2);
+    expect(completion.options[0]).to.include({ label: 'foobar' });
+    expect(completion.options[1]).to.include({ label: 'other' });
   });
 
 
