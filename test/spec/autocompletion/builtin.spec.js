@@ -15,28 +15,26 @@ describe('autocompletion - built-ins', function() {
   it('should complete in correct format', function() {
 
     // given
-    const triggerCompletion = setup('get');
+    const triggerCompletion = setup('get', [
+      {
+        name: 'name',
+        type: 'variable',
+        info: 'info'
+      }
+    ]);
 
     // when
-    const autoCompletion = triggerCompletion();
+    const completion = triggerCompletion();
 
     // then
-    expect(autoCompletion).to.exist;
-    expect(autoCompletion.options).to.have.length(4);
+    expect(completion).to.exist;
+    expect(completion.options).to.have.length(1);
 
-    const firstOption = autoCompletion.options[0];
-
-    expect(typeof firstOption.label).to.eql('string');
-    expect(typeof firstOption.type).to.eql('string');
-    expect(typeof firstOption.info).to.eql('function');
-    expect(typeof firstOption.apply).to.eql('function');
-
-    expect(autoCompletion.options.map(o => o.label)).to.eql([
-      'get or else(value, default)',
-      'get value(context, key)',
-      'get value(context, keys)',
-      'get entries(context)'
-    ]);
+    expect(completion.options[0]).to.include({
+      label: 'name',
+      type: 'variable',
+      info: 'info'
+    });
   });
 
 
@@ -44,13 +42,13 @@ describe('autocompletion - built-ins', function() {
 
     // given
     const triggerCompletion = setup('Foo');
-    const autoCompletion = triggerCompletion();
+    const completion = triggerCompletion();
 
     // assume
-    expect(autoCompletion.options).to.exist;
+    expect(completion.options).to.exist;
 
     // when
-    const infoHtml = autoCompletion.options.map(option => option.info());
+    const infoHtml = completion.options.map(option => option.info());
 
     // then
     infoHtml.forEach(info => {

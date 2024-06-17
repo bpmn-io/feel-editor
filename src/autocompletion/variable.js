@@ -45,37 +45,11 @@ export function variableCompletion({ variables = [], builtins = [] }) {
       return null;
     }
 
-    const start = context.state.sliceDoc(nodeBefore.from, pos);
-
     return {
       from: nodeBefore.from,
-      options: options.map(option => {
-
-        return {
-          ...option,
-          boost: getBoost(option, start)
-        };
-      }).filter(option => option.boost > -10)
+      options
     };
   };
-}
-
-function getBoost(option, match) {
-
-  const {
-    label,
-    boost
-  } = option;
-
-  if (!label.includes(match)) {
-    return -100;
-  }
-
-  if (label.startsWith(match)) {
-    return 5;
-  }
-
-  return boost;
 }
 
 /**
@@ -86,8 +60,8 @@ function getBoost(option, match) {
  */
 function getVariableSuggestions(variables, builtins) {
   return [].concat(
-    variables.map(v => createVariableSuggestion(v, 2)),
-    builtins.map(b => createVariableSuggestion(b, 1))
+    variables.map(v => createVariableSuggestion(v)),
+    builtins.map(b => createVariableSuggestion(b))
   );
 }
 
