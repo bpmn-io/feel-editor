@@ -55,7 +55,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.28.1",
     "@lezer/highlight": "^1.2.0",
-    "lang-feel": "^2.0.0",
+    "lang-feel": "^2.1.1",
     "min-dom": "^4.2.1"
   },
   "devDependencies": {
