@@ -6,6 +6,19 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.6.0
+
+* `FEAT`: allow to provide custom built-ins ([`293d1ae`](https://github.com/bpmn-io/feel-editor/commit/293d1aeb1da931d3b1f6d063966850d0b42b2d0d))
+* `FEAT`: allow to configure `dialect` ([`c0aaf53`](https://github.com/bpmn-io/feel-editor/commit/c0aaf5351c7ab444a28372680556fffbd1de6415))
+* `FEAT`: attach `aria-language` to editor
+* `FIX`: recognize built-ins and global variables with spaces
+* `FIX`: do not complete snippets in `PathExpression`
+* `FIX`: correct completion inside positional arguments
+* `CHORE`: update built-ins ([`8bc2194`](https://github.com/bpmn-io/feel-editor/commit/8bc21948f3f9ecfb24753b432678966e78f67f76))
+* `DEPS`: update `@codemirror/*`
+* `DEPS`: update to `lezer-feel@1.2.9`
+* `DEPS`: update to `lang-feel@2.1.1`
+
 ## 1.5.0
 
 * `FEAT`: support placeholder configuration ([#52](https://github.com/bpmn-io/feel-editor/pull/52))
