@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.6.1
+
+* `FIX`: ensure editor can be used without `unsafe-eval` ([#59](https://github.com/bpmn-io/feel-editor/pull/59))
+
 ## 1.6.0
 
 * `FEAT`: allow to provide custom built-ins ([`293d1ae`](https://github.com/bpmn-io/feel-editor/commit/293d1aeb1da931d3b1f6d063966850d0b42b2d0d))
