@@ -24,7 +24,7 @@ export function language(options) {
  */
 export function createContext(variables, builtins) {
   return variables.slice().reverse().reduce((context, builtin) => {
-    context[builtin.name] = new Function();
+    context[builtin.name] = () => {};
 
     return context;
   }, {});
