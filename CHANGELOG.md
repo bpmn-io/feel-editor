@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.7.0
+
+* `FEAT`: lint first item access ([feel-lint#25](https://github.com/bpmn-io/feel-lint/issues/25))
+
 ## 1.6.1
 
 * `FIX`: ensure editor can be used without `unsafe-eval` ([#59](https://github.com/bpmn-io/feel-editor/pull/59))
