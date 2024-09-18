@@ -173,6 +173,18 @@ return
   });
 
 
+  it('should use full container height', async function() {
+
+    // given
+    const editor = new FeelEditor({
+      container
+    });
+
+    // then
+    expect(editor._cmEditor.contentDOM.clientHeight).to.be.eq(container.clientHeight);
+  });
+
+
   describe('#getSelection', function() {
 
     it('should return selection state', function() {

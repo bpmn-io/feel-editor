@@ -17,6 +17,9 @@ export const baseTheme = EditorView.theme({
     overflow: 'hidden',
     textOverflow: 'ellipsis'
   },
+  '&.cm-editor': {
+    height: '100%',
+  },
 
   // Don't wrap whitespace for custom HTML
   '& .cm-completionInfo > *': {
