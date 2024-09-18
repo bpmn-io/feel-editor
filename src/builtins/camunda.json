@@ -478,5 +478,21 @@
   {
     "name": "last day of month(date)",
     "description": "<p><em>Camunda Extension</em></p>\n<p>Takes the month of the given date or date-time value and returns the last day of this month.</p>\n<p><strong>Function signature</strong></p>\n<pre><code class=\"language-feel\">last day of month(date: date): date\n</code></pre>\n<pre><code class=\"language-feel\">last day of month(date: date and time): date\n</code></pre>\n<p><strong>Examples</strong></p>\n<pre><code class=\"language-feel\">last day of month(date(&quot;2022-10-01&quot;))\n// date(&quot;2022-10-31&quot;))\n\nlast day of month(date and time(&quot;2022-10-16T12:00:00&quot;))\n// date(&quot;2022-10-31&quot;))\n</code></pre>\n"
+  },
+  {
+    "name": "is empty(list)",
+    "description": "<p><em>Camunda Extension</em></p>\n<p>Returns true if the given list is empty. Otherwise, returns false.</p>\n<p><strong>Function signature</strong></p>\n<pre><code class=\"language-feel\">is empty(list: list): boolean</code></pre>\n<p><strong>Examples</strong></p>\n<pre><code class=\"language-feel\">is empty([])\n// true\n\nis empty([1,2,3])\n// false\n</code></pre>"
+  },
+  {
+    "name": "trim(string)",
+    "description": "<p><em>Camunda Extension</em></p>\n<p>Returns the given string without leading and trailing spaces.</p>\n<p><strong>Function signature</strong></p>\n<pre><code class=\"language-feel\">trim(string: string): string</code></pre>\n<p><strong>Examples</strong></p>\n<pre><code class=\"language-feel\">trim(\"  hello world  \")\n// \"hello world\"\n\ntrim(\"hello   world \")\n// \"hello   world\"\n</code></pre>"
+  },
+  {
+    "name": "uuid()",
+    "description": "<p><em>Camunda Extension</em></p>\n<p>Returns a UUID (Universally Unique Identifier) with 36 characters.</p>\n<p><strong>Function signature</strong></p>\n<pre><code class=\"language-feel\">uuid(): string</code></pre>\n<p><strong>Examples</strong></p>\n<pre><code class=\"language-feel\">uuid()\n// \"7793aab1-d761-4d38-916b-b7270e309894\"\n</code></pre>"
+  },
+  {
+    "name": "to base64(string)",
+    "description": "<p><em>Camunda Extension</em></p>\n<p>Returns the given string encoded in Base64 format.</p>\n<p><strong>Function signature</strong></p>\n<pre><code class=\"language-feel\">to base64(value: string): string</code></pre>\n<p><strong>Examples</strong></p>\n<pre><code class=\"language-feel\">to base64(\"FEEL\")\n// \"RkVFTA==\"\n</code></pre>"
   }
 ]
