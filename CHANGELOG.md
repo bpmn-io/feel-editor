@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.9.0
+
+* `FEAT`: offer Camunda 8.6 built-ins for completion ([#62](https://github.com/bpmn-io/feel-editor/pull/62))
+
 ## 1.8.0
 
 * `FEAT`: make editor use full container height ([#61](https://github.com/bpmn-io/feel-editor/pull/61))
