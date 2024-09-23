@@ -25,7 +25,8 @@ export function parseBuiltin(builtin) {
   const functionName = match[1];
   const functionArguments = match[2];
 
-  const params = functionArguments.split(', ').map(name => ({ name }));
+  // parameterless function matches as empty string
+  const params = functionArguments ? functionArguments.split(', ').map(name => ({ name })) : [];
 
   return {
     name: functionName,
