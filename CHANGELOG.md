@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.9.1
+
+* `FIX`: correct completion of parameterless built-ins ([#63](https://github.com/bpmn-io/feel-editor/pull/63))
+
 ## 1.9.0
 
 * `FEAT`: offer Camunda 8.6 built-ins for completion ([#62](https://github.com/bpmn-io/feel-editor/pull/62))
