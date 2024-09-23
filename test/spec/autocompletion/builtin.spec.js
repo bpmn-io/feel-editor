@@ -38,6 +38,25 @@ describe('autocompletion - built-ins', function() {
   });
 
 
+  it('should complete parameterless builtin <now>', function() {
+
+    // given
+    const triggerCompletion = setup('now');
+
+    // when
+    const completion = triggerCompletion({ pos: 3, explicit: true });
+
+    // then
+    expect(completion).to.exist;
+
+    const nowSuggestion = completion.options.find(option => option.label.startsWith('now'));
+    expect(nowSuggestion).to.exist;
+    expect(nowSuggestion).to.include({
+      label: 'now()'
+    });
+  });
+
+
   it('should render info', function() {
 
     // given
