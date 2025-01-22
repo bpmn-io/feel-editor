@@ -506,7 +506,7 @@ return
 
 
     it('should highlight unexpected operations', async function() {
-      const initalValue = '= 15';
+      const initalValue = '^15';
 
       const editor = new FeelEditor({
         container,
@@ -522,7 +522,7 @@ return
 
 
     it('should highlight missing operations', async function() {
-      const initalValue = '15 == 15';
+      const initalValue = '15 =^15';
 
       const editor = new FeelEditor({
         container,
@@ -541,8 +541,10 @@ return
 
       it('with errors', async function() {
 
-        const initalValue = '= 15';
-        const onLint = sinon.spy();
+        const initalValue = '^15';
+        const onLint = sinon.spy((diagnostics) => {
+          expect(diagnostics).to.have.length(1);
+        });
 
         const editor = new FeelEditor({
           container,
@@ -555,8 +557,6 @@ return
 
         // then
         expect(onLint).to.have.been.calledOnce;
-        expect(onLint).to.have.been.calledWith(sinon.match.array);
-        expect(onLint.args[0][0]).to.have.length(1);
       });
 
 
