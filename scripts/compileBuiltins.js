@@ -1,6 +1,6 @@
 const { glob } = require('glob');
 const { marked } = require('marked');
-const fs = require('node:fs/promises');
+const { readFile, writeFile } = require('node:fs/promises');
 
 // paths relative to CWD
 const MARKDOWN_SRC = './camunda-platform-docs/docs/components/modeler/feel/builtin-functions/*.md';
@@ -9,7 +9,7 @@ const JSON_DEST = './src/builtins/camunda.json';
 glob(MARKDOWN_SRC).then(files => {
 
   const descriptorsByFile = files.sort().map(fileName => (
-    fs.readFile(fileName, 'utf-8').then(content => {
+    readFile(fileName, 'utf-8').then(content => {
       const rawDescriptors = content.split('## ');
 
       // remove header
@@ -32,9 +32,13 @@ glob(MARKDOWN_SRC).then(files => {
     })
   ));
 
-  Promise.all(descriptorsByFile).then(values => {
+  return Promise.all(descriptorsByFile).then(values => {
     const allDescriptors = values.flat();
 
-    fs.writeFile(JSON_DEST, JSON.stringify(allDescriptors, null, 2));
+    return writeFile(JSON_DEST, JSON.stringify(allDescriptors, null, 2));
   });
+}).catch(err => {
+  console.error('Failed to compile built-ins', err);
+
+  process.exit(1);
 });
