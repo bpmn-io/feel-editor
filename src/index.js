@@ -17,6 +17,11 @@ import { camunda as camundaBuiltins } from './builtins';
  */
 
 /**
+ * @typedef { import('./language').Dialect } Dialect
+ * @typedef { import('./language').ParserDialect } ParserDialect
+ */
+
+/**
  * @typedef {object} Builtin
  * @property {string} name
  * @property {string} description
@@ -33,6 +38,7 @@ const placeholderConf = new Compartment();
  * @param {DOMNode} config.container
  * @param {Extension[]} [config.extensions]
  * @param {Dialect} [config.dialect='expression']
+ * @param {ParserDialect} [config.parserDialect]
  * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
  * @param {Function} [config.onKeyDown]
@@ -41,12 +47,11 @@ const placeholderConf = new Compartment();
  * @param {String} [config.value]
  * @param {Variable[]} [config.variables]
  * @param {Variable[]} [config.builtins]
- *
- * @returns {Object} editor
  */
 export default function FeelEditor({
   extensions: editorExtensions = [],
   dialect = 'expression',
+  parserDialect,
   container,
   contentAttributes = {},
   tooltipContainer,
@@ -101,7 +106,8 @@ export default function FeelEditor({
     coreConf.of(Core.configure({
       dialect,
       builtins,
-      variables
+      variables,
+      parserDialect
     })),
     bracketMatching(),
     indentOnInput(),
@@ -185,16 +191,12 @@ FeelEditor.prototype.getSelection = function() {
  */
 FeelEditor.prototype.setVariables = function(variables) {
 
-  const {
-    dialect,
-    builtins
-  } = Core.get(this._cmEditor.state);
+  const config = Core.get(this._cmEditor.state);
 
   this._cmEditor.dispatch({
     effects: [
       coreConf.reconfigure(Core.configure({
-        dialect,
-        builtins,
+        ...config,
         variables
       }))
     ]

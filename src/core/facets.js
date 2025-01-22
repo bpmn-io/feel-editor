@@ -1,7 +1,8 @@
 import { Facet } from '@codemirror/state';
 
 /**
- * @typedef { 'expression' | 'unaryTests' } Dialect
+ * @typedef { import('../language').Dialect } Dialect
+ * @typedef { import('../language').ParserDialect } ParserDialect
  * @typedef { import('..').Variable } Variable
  */
 
@@ -16,6 +17,12 @@ export const builtinsFacet = Facet.define();
 export const variablesFacet = Facet.define();
 
 /**
- * @type {Facet<dialect>}
+ * @type {Facet<Dialect>}
  */
 export const dialectFacet = Facet.define();
+
+/**
+ * @type {Facet<ParserDialect>}
+ */
+export const parserDialectFacet = Facet.define();
+

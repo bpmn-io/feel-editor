@@ -481,8 +481,9 @@ return
 
       [
         { dialect: 'expression', value: 'Mike < 10' },
-        { dialect: 'unaryTests', value: '12, now(), "STRING"' }
-      ].forEach(({ dialect, value }) => {
+        { dialect: 'unaryTests', value: '12, now(), "STRING"' },
+        { dialect: 'expression', value: '`a + 1`', parserDialect: 'camunda' }
+      ].forEach(({ dialect, parserDialect, value }) => {
 
         it(`<${dialect}>`, async function() {
 
@@ -490,7 +491,8 @@ return
           const editor = new FeelEditor({
             container,
             value,
-            dialect
+            dialect,
+            parserDialect
           });
 
           // when

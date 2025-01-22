@@ -5,8 +5,13 @@ import { feel } from 'lang-feel';
  */
 
 /**
+ * @typedef { 'camunda' | undefined } ParserDialect
+ */
+
+/**
  * @param { {
  *   dialect?: Dialect,
+ *   parserDialect?: ParserDialect,
  *   context?: Record<string, any>,
  *   completions?: import('@codemirror/autocomplete').CompletionSource[]
  * } } options
