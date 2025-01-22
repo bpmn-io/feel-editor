@@ -5,6 +5,7 @@ import { createContext, language } from '../language';
 import {
   variablesFacet,
   builtinsFacet,
+  parserDialectFacet,
   dialectFacet
 } from './facets';
 
@@ -23,6 +24,7 @@ import {
 /**
  * @typedef { {
  *   dialect?: import('../language').Dialect,
+ *   parserDialect?: import('../language').ParserDialect,
  *   variables?: Variable[],
  *   builtins?: Variable[]
  * } } CoreConfig
@@ -38,6 +40,7 @@ import {
  */
 export function configure({
   dialect = 'expression',
+  parserDialect,
   variables = [],
   builtins = [],
   completions = feelCompletions({ builtins, variables })
@@ -49,8 +52,10 @@ export function configure({
     dialectFacet.of(dialect),
     builtinsFacet.of(builtins),
     variablesFacet.of(variables),
+    parserDialectFacet.of(parserDialect),
     language({
       dialect,
+      parserDialect,
       context,
       completions
     })
@@ -67,10 +72,12 @@ export function get(state) {
   const builtins = state.facet(builtinsFacet)[0];
   const variables = state.facet(variablesFacet)[0];
   const dialect = state.facet(dialectFacet)[0];
+  const parserDialect = state.facet(parserDialectFacet)[0];
 
   return {
     builtins,
     variables,
-    dialect
+    dialect,
+    parserDialect
   };
 }
