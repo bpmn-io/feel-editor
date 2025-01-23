@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "pull:platform-docs": "git -C camunda-platform-docs pull || git clone git@github.com:camunda/camunda-platform-docs.git camunda-platform-docs",
     "start": "cross-env SINGLE_START=true npm run dev",
+    "start:camunda": "cross-env SINGLE_START=camunda npm run dev",
     "dev": "npm test -- --auto-watch --no-single-run",
     "prepare": "run-s build"
   },
