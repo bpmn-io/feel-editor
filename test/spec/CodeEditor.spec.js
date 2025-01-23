@@ -19,7 +19,7 @@ describe('CodeEditor', function() {
   });
 
 
-  (singleStart ? it.only : it)('should render', async function() {
+  (singleStart && singleStart !== 'camunda' ? it.only : it)('should render', async function() {
 
     // when
     const initialValue = `for
@@ -114,6 +114,30 @@ return
             },
             {} // unnamed
           ]
+        }
+      ]
+    });
+
+    // then
+    expect(editor).to.exist;
+
+  });
+
+
+  (singleStart === 'camunda' ? it.only : it)('should render with camunda dialect', async function() {
+
+    // when
+    const initialValue = '"At Camunda, you can" + escape.`variables with backticks`';
+
+    const editor = new FeelEditor({
+      container,
+      value: initialValue,
+      parserDialect: 'camunda',
+      variables: [
+        {
+          name: 'variable with space',
+          info: 'Needs to be escaped',
+          detail: 'Process_1'
         }
       ]
     });
