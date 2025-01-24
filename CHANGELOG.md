@@ -6,6 +6,17 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.10.0
+
+* `FEAT`: update `camunda` built-is ([#65](https://github.com/bpmn-io/feel-editor/pull/65))
+* `FEAT`: support configuration of `parserDialect` ([#68](https://github.com/bpmn-io/feel-editor/pull/68), [nikku/lezer-feel#37](https://github.com/nikku/lezer-feel/pull/37))
+* `FEAT`: support backtick identifies in `camunda` mode ([#68](https://github.com/bpmn-io/feel-editor/pull/68))
+* `DEPS`: update to `@bpmn-io/feel-lint@1.4.0`
+* `DEPS`: update to `lang-feel@2.3.0`
+* `DEPS`: update to `lezer-feel@1.7.0`
+* `DEPS`: update `codemirror*`
+* `DEPS`: update to `lezer*`
+
 ## 1.9.1
 
 * `FIX`: correct completion of parameterless built-ins ([#63](https://github.com/bpmn-io/feel-editor/pull/63))
