@@ -1,4 +1,4 @@
-import { snippets, keywordCompletions, snippetCompletion } from 'lang-feel';
+import { snippets, keywordCompletions } from 'lang-feel';
 
 import { pathExpressionCompletion } from './pathExpression';
 import { variableCompletion } from './variable';
@@ -21,7 +21,7 @@ export function completions({ variables = [], builtins = [] }) {
   return [
     pathExpressionCompletion({ variables }),
     variableCompletion({ variables, builtins }),
-    snippetCompletion(snippets.map(snippet => ({ ...snippet, boost: -1 }))),
+    snippets,
     ...keywordCompletions
   ];
 }

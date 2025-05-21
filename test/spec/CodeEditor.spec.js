@@ -486,11 +486,11 @@ return
   describe('lint', function() {
 
     it('should not highlight empty document', async function() {
-      const initalValue = '';
+      const initialValue = '';
 
       const editor = new FeelEditor({
         container,
-        value: initalValue
+        value: initialValue
       });
 
       // when
@@ -532,11 +532,11 @@ return
 
 
     it('should highlight unexpected operations', async function() {
-      const initalValue = '^15';
+      const initialValue = '^15';
 
       const editor = new FeelEditor({
         container,
-        value: initalValue
+        value: initialValue
       });
 
       // when
@@ -548,11 +548,11 @@ return
 
 
     it('should highlight missing operations', async function() {
-      const initalValue = '15 =^15';
+      const initialValue = '15 =^15';
 
       const editor = new FeelEditor({
         container,
-        value: initalValue
+        value: initialValue
       });
 
       // when
@@ -567,14 +567,14 @@ return
 
       it('with errors', async function() {
 
-        const initalValue = '^15';
+        const initialValue = '^15';
         const onLint = sinon.spy((diagnostics) => {
           expect(diagnostics).to.have.length(1);
         });
 
         const editor = new FeelEditor({
           container,
-          value: initalValue,
+          value: initialValue,
           onLint
         });
 
@@ -587,12 +587,12 @@ return
 
 
       it('without errors', async function() {
-        const initalValue = '15';
+        const initialValue = '15';
         const onLint = sinon.spy();
 
         const editor = new FeelEditor({
           container,
-          value: initalValue,
+          value: initialValue,
           onLint
         });
 
@@ -614,7 +614,7 @@ return
   describe('autocompletion', function() {
 
     it('should complete variables', function() {
-      const initalValue = 'fooba';
+      const initialValue = 'fooba';
       const variables = [
         { name: 'foobar' },
         { name: 'baz' }
@@ -622,7 +622,7 @@ return
 
       const editor = new FeelEditor({
         container,
-        value: initalValue,
+        value: initialValue,
         variables
       });
 
@@ -645,7 +645,7 @@ return
 
 
     it('should complete built-ins (with lower priority)', async function() {
-      const initalValue = '';
+      const initialValue = '';
       const variables = [ {
         name: 'ab',
         info: '10'
@@ -653,7 +653,7 @@ return
 
       const editor = new FeelEditor({
         container,
-        value: initalValue,
+        value: initialValue,
         variables,
         builtins: [
           {
@@ -689,12 +689,12 @@ return
 
 
     it('should complete snippets', function() {
-      const initalValue = 'for';
+      const initialValue = 'for';
       const variables = [];
 
       const editor = new FeelEditor({
         container,
-        value: initalValue,
+        value: initialValue,
         variables
       });
 
@@ -715,14 +715,44 @@ return
 
     });
 
-
-    it('should complete variables (after set)', async function() {
-
-      const initalValue = 'fooba';
+    it('should complete literals', function() {
+      const initialValue = 'tr';
+      const variables = [];
 
       const editor = new FeelEditor({
         container,
-        value: initalValue
+        value: initialValue,
+        variables
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 2);
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      return expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+
+        // true should at least be shown, not necessarily first
+        expect(completions.find(c=>c.label === 'true')).to.exist;
+
+      });
+
+    });
+
+
+    it('should complete variables (after set)', async function() {
+
+      const initialValue = 'fooba';
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
       });
 
       const cm = getCm(editor);
@@ -748,11 +778,11 @@ return
 
     it('should complete variables (after update)', async function() {
 
-      const initalValue = 'fooba';
+      const initialValue = 'fooba';
 
       const editor = new FeelEditor({
         container,
-        value: initalValue,
+        value: initialValue,
         variables: [
           { name: 'foobar' },
           { name: 'baz' }
@@ -789,7 +819,7 @@ return
 
     describe('tooltip position', function() {
 
-      const initalValue = 'fooba';
+      const initialValue = 'fooba';
       const variables = [
         { name: 'foobar',
           info: () => {
@@ -819,7 +849,7 @@ return
           container: feelContainer,
 
           tooltipContainer: tooltipContainer,
-          value: initalValue,
+          value: initialValue,
           variables
         });
 
@@ -850,7 +880,7 @@ return
           container: feelContainer,
 
           tooltipContainer: '#tooltipContainer',
-          value: initalValue,
+          value: initialValue,
           variables
         });
 
@@ -879,7 +909,7 @@ return
       it('should use window by default', function() {
         const editor = new FeelEditor({
           container: feelContainer,
-          value: initalValue,
+          value: initialValue,
           variables
         });
 
