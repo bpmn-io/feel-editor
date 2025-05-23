@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.10.1
+
+* `FIX`: correct completion of lang-feel snippets ([#70](https://github.com/bpmn-io/feel-editor/pull/70))
+
 ## 1.10.0
 
 * `FEAT`: update `camunda` built-is ([#65](https://github.com/bpmn-io/feel-editor/pull/65))
