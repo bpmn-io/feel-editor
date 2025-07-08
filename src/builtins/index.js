@@ -1,5 +1,7 @@
-import camundaTags from './camunda.json';
+import { domify } from 'min-dom';
+import { camundaBuiltins } from '@camunda/feel-builtins';
 
-import { parseBuiltins } from './util';
-
-export const camunda = parseBuiltins(camundaTags);
+export const domifiedBuiltins = camundaBuiltins.map(builtin => ({
+  ...builtin,
+  info: () => domify(builtin.info),
+}));
