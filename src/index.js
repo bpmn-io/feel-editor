@@ -10,7 +10,7 @@ import theme from './theme';
 
 import * as Core from './core';
 
-import { camunda as camundaBuiltins } from './builtins';
+import { domifiedBuiltins } from './builtins';
 
 /**
  * @typedef { import('./core').Variable } Variable
@@ -19,12 +19,6 @@ import { camunda as camundaBuiltins } from './builtins';
 /**
  * @typedef { import('./language').Dialect } Dialect
  * @typedef { import('./language').ParserDialect } ParserDialect
- */
-
-/**
- * @typedef {object} Builtin
- * @property {string} name
- * @property {string} description
  */
 
 const coreConf = new Compartment();
@@ -61,7 +55,7 @@ export default function FeelEditor({
   placeholder = '',
   readOnly = false,
   value = '',
-  builtins = camundaBuiltins,
+  builtins = domifiedBuiltins,
   variables = []
 }) {
 

@@ -4,10 +4,7 @@ import {
 
 import { EditorState } from '@codemirror/state';
 import { variableCompletion } from '../../../src/autocompletion/variable';
-
-import {
-  camunda as camundaBuiltins
-} from '../../../src/builtins';
+import { domifiedBuiltins } from '../../../src/builtins';
 
 
 describe('autocompletion - built-ins', function() {
@@ -147,7 +144,7 @@ describe('autocompletion - built-ins', function() {
  *
  * @return { CompleteFn }
  */
-function setup(doc, builtins = camundaBuiltins) {
+function setup(doc, builtins = domifiedBuiltins) {
 
   const completion = variableCompletion({
     builtins
