@@ -6,13 +6,19 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.11.0
+
+* `FEAT`: update camunda built-ins (added `fromAi`) ([@camunda/feel-builtins#1](https://github.com/camunda/feel-builtins/pull/1))
+* `CHORE`: camunda built-ins are now provided by the dependency `@camunda/feel-builtins` ([#71](https://github.com/bpmn-io/feel-editor/pull/71))
+* `DEPS`: add `@camunda/feel-builtins@0.2.0` ([#71](https://github.com/bpmn-io/feel-editor/pull/71))
+
 ## 1.10.1
 
 * `FIX`: correct completion of lang-feel snippets ([#70](https://github.com/bpmn-io/feel-editor/pull/70))
 
 ## 1.10.0
 
-* `FEAT`: update `camunda` built-is ([#65](https://github.com/bpmn-io/feel-editor/pull/65))
+* `FEAT`: update `camunda` built-ins ([#65](https://github.com/bpmn-io/feel-editor/pull/65))
 * `FEAT`: support configuration of `parserDialect` ([#68](https://github.com/bpmn-io/feel-editor/pull/68), [nikku/lezer-feel#37](https://github.com/nikku/lezer-feel/pull/37))
 * `FEAT`: support backtick identifies in `camunda` mode ([#68](https://github.com/bpmn-io/feel-editor/pull/68))
 * `DEPS`: update to `@bpmn-io/feel-lint@1.4.0`
