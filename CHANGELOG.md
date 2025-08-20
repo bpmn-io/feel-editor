@@ -6,6 +6,9 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: recognize unclosed string literal as syntax error ([nikku/lezer-feel#52](https://github.com/nikku/lezer-feel/pull/52))
+* `DEPS`: update to `@bpmn-io/feel-lint@2.0.1`
+
 ## 1.11.0
 
 * `FEAT`: update camunda built-ins (added `fromAi`) ([@camunda/feel-builtins#1](https://github.com/camunda/feel-builtins/pull/1))
