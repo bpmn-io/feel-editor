@@ -563,6 +563,22 @@ return
     });
 
 
+    it('should highlight unclosed string literal', async function() {
+      const initialValue = '"unclosed string';
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
+      });
+
+      // when
+      const diagnostics = await lint(editor);
+
+      // then
+      expect(diagnostics).to.eql(1);
+    });
+
+
     describe('should call onLint', function() {
 
       it('with errors', async function() {

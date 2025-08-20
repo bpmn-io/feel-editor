@@ -45,7 +45,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@bpmn-io/feel-lint": "^1.4.0",
+    "@bpmn-io/feel-lint": "^2.0.1",
     "@camunda/feel-builtins": "^0.2.0",
     "@codemirror/autocomplete": "^6.16.2",
     "@codemirror/commands": "^6.8.0",
