@@ -1,4 +1,4 @@
-import { feel } from 'lang-feel';
+import { feel } from '@bpmn-io/lang-feel';
 
 /**
  * @typedef { 'expression' | 'unaryTests' } Dialect
