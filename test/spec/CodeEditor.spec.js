@@ -506,7 +506,9 @@ return
       [
         { dialect: 'expression', value: 'Mike < 10' },
         { dialect: 'unaryTests', value: '12, now(), "STRING"' },
-        { dialect: 'expression', value: '`a + 1`', parserDialect: 'camunda' }
+        { dialect: 'expression', value: '`a + 1`', parserDialect: 'camunda' },
+        { dialect: 'expression', value: '"multiline\nstring"', parserDialect: 'camunda' },
+        { dialect: 'expression', value: '`multiline\nstring`', parserDialect: 'camunda' }
       ].forEach(({ dialect, parserDialect, value }) => {
 
         it(`<${dialect}>`, async function() {

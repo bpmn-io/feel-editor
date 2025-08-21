@@ -1,4 +1,4 @@
-import { snippets, keywordCompletions } from 'lang-feel';
+import { snippets, keywordCompletions } from '@bpmn-io/lang-feel';
 
 import { pathExpressionCompletion } from './pathExpression';
 import { variableCompletion } from './variable';
