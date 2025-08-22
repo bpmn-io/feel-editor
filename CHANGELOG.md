@@ -6,8 +6,12 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.12.0
+
+* `FEAT`: support multiline strings in `camunda` dialect ([@bpmn-io/lezer-feel#2](https://github.com/bpmn-io/lezer-feel/pull/2))
 * `FIX`: recognize unclosed string literal as syntax error ([nikku/lezer-feel#52](https://github.com/nikku/lezer-feel/pull/52))
-* `DEPS`: update to `@bpmn-io/feel-lint@2.0.1`
+* `DEPS`: update to `@bpmn-io/lang-feel@2.4.0`, switch to fork of `lang-feel`
+* `DEPS`: update to `@bpmn-io/feel-lint@2.1.0`
 
 ## 1.11.0
 
