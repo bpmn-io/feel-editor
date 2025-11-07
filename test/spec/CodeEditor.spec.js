@@ -112,6 +112,8 @@ return
             {
               name: 'untyped'
             },
+
+            // @ts-ignore we want to verify behavior with unnamed
             {} // unnamed
           ]
         }
@@ -308,7 +310,7 @@ return
       container.appendChild(scrollContainer);
 
       const editor = new FeelEditor({
-        container: editorContainer
+        container: /** @type {HTMLElement} */ (editorContainer)
       });
 
       // assume
@@ -517,8 +519,8 @@ return
           const editor = new FeelEditor({
             container,
             value,
-            dialect,
-            parserDialect
+            dialect: /** @type {'expression'|'unaryTests'} */ (dialect),
+            parserDialect: /** @type {'camunda'} */ (parserDialect)
           });
 
           // when
@@ -995,11 +997,9 @@ function select(editor, anchor, head = anchor) {
 
 /**
  * @param {FeelEditor} editor
- *
- * @return {import('@codemirror/view').EditorView}
  */
 function getCm(editor) {
-  return editor._cmEditor || editor;
+  return /** @type {import('@codemirror/view').EditorView} */ (editor._cmEditor || editor);
 }
 
 async function expectEventually(fn) {

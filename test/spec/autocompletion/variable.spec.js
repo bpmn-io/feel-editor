@@ -20,7 +20,7 @@ describe('autocompletion - variable', function() {
       } ]);
 
       // when
-      const completion = triggerCompletion(context);
+      const completion = triggerCompletion();
 
       // then
       expect(completion).to.exist;
@@ -99,7 +99,7 @@ describe('autocompletion - variable', function() {
     const triggerCompletion = setup('myObject.fo', [ { name: 'foobar' } ]);
 
     // when
-    const completion = triggerCompletion(context);
+    const completion = triggerCompletion();
 
     // then
     expect(completion).not.to.exist;
@@ -183,10 +183,14 @@ function setup(doc, variables = []) {
   });
 
   return ({ pos = doc.length, explicit = false } = { }) => {
-    return completion({
+    return /** @type {import('@codemirror/autocomplete').CompletionResult} */ (completion(/** @type {import('@codemirror/autocomplete').CompletionContext} */ ({
       state,
       pos,
-      explicit
-    });
+      explicit,
+      tokenBefore: null,
+      matchBefore: null,
+      aborted: false,
+      addEventListener: () => {}
+    })));
   };
 }

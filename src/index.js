@@ -35,12 +35,14 @@ const placeholderConf = new Compartment();
  * @param {ParserDialect} [config.parserDialect]
  * @param {DOMNode|String} [config.tooltipContainer]
  * @param {Function} [config.onChange]
- * @param {Function} [config.onKeyDown]
+ * @param {(event: KeyboardEvent, view: import('@codemirror/view').EditorView) => boolean | void} [config.onKeyDown]
  * @param {Function} [config.onLint]
  * @param {Boolean} [config.readOnly]
  * @param {String} [config.value]
  * @param {Variable[]} [config.variables]
  * @param {Variable[]} [config.builtins]
+ * @param {Object} [config.contentAttributes]
+ * @param {String} [config.placeholder]
  */
 export default function FeelEditor({
   extensions: editorExtensions = [],
@@ -86,12 +88,12 @@ export default function FeelEditor({
   );
 
   if (typeof tooltipContainer === 'string') {
-    tooltipContainer = document.querySelector(tooltipContainer);
+    tooltipContainer = /** @type {HTMLElement} */ (document.querySelector(tooltipContainer));
   }
 
   const tooltipLayout = tooltipContainer ? tooltips({
     tooltipSpace: function() {
-      return tooltipContainer.getBoundingClientRect();
+      return /** @type {HTMLElement} */ (tooltipContainer).getBoundingClientRect();
     }
   }) : [];
 
@@ -171,8 +173,7 @@ FeelEditor.prototype.focus = function(position) {
  * Returns the current selection ranges. If no text is selected, a single
  * range with the start and end index at the cursor position will be returned.
  *
- * @returns {Object} selection
- * @returns {Array} selection.ranges
+ * @returns {import('@codemirror/state').EditorSelection} selection - Selection object with ranges array
  */
 FeelEditor.prototype.getSelection = function() {
   return this._cmEditor.state.selection;
