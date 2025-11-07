@@ -8,11 +8,14 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "all": "run-s lint test build",
+    "all": "run-s lint check-types test build",
     "test": "karma start",
     "build": "rollup -c --bundleConfigAsCjs",
     "build:watch": "npm run build -- -w",
     "lint": "eslint .",
+    "check-types": "run-s check-types:*",
+    "check-types:src": "tsc",
+    "check-types:test": "tsc -p test",
     "start": "cross-env SINGLE_START=true npm run dev",
     "start:camunda": "cross-env SINGLE_START=camunda npm run dev",
     "dev": "npm test -- --auto-watch --no-single-run",
@@ -46,6 +49,7 @@
   "license": "MIT",
   "dependencies": {
     "@bpmn-io/feel-lint": "^2.1.0",
+    "@bpmn-io/lang-feel": "^2.4.0",
     "@camunda/feel-builtins": "^0.2.0",
     "@codemirror/autocomplete": "^6.16.2",
     "@codemirror/commands": "^6.8.0",
@@ -54,7 +58,6 @@
     "@codemirror/state": "^6.5.1",
     "@codemirror/view": "^6.36.2",
     "@lezer/highlight": "^1.2.1",
-    "@bpmn-io/lang-feel": "^2.4.0",
     "min-dom": "^4.2.1"
   },
   "devDependencies": {
@@ -63,6 +66,10 @@
     "@rollup/plugin-json": "^6.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.6.1",
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
+    "@types/sinon-chai": "^4.0.0",
     "babel-loader": "^9.2.1",
     "babel-plugin-istanbul": "^7.0.0",
     "chai": "^4.5.0",
@@ -85,6 +92,7 @@
     "rollup": "^4.31.0",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0",
+    "typescript": "^5.9.3",
     "webpack": "^5.97.1"
   }
 }
