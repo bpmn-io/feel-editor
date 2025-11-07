@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    // Target and module settings
+    "target": "ES2019",
+    "lib": [
+      "ES2019",
+      "DOM"
+    ],
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+
+    // Type checking for JavaScript
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+
+    // Module resolution
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+
+    // Strict type checking with selective overrides for JS compatibility
+    "strict": true,
+    // Override specific strict rules that are too strict for JS codebase
+    "noImplicitAny": false, // Too many changes needed for JS files
+    "strictNullChecks": false, // Would require extensive null checks
+    "noImplicitThis": false, // 'this' usage in JS is complex
+    "useUnknownInCatchVariables": false, // JS compatibility
+
+    // Emit settings
+    "declaration": false,
+    "sourceMap": false,
+
+    // Compatibility and legacy support
+    "allowUmdGlobalAccess": true,
+    "allowArbitraryExtensions": true
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "include": [
+    "src",
+    "src/globals.d.ts"
+  ]
+}

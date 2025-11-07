@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "../tsconfig.json"
+  ],
+  "compilerOptions": {
+    "types": [
+      "mocha",
+      "chai",
+      "sinon",
+      "sinon-chai"
+    ]
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "include": [
+    ".",
+    "./globals.test.d.ts"
+  ],
+  "exclude": [
+    // Exclude test bundle files - they have complex require.context usage
+    "*Bundle.js"
+  ]
+}
