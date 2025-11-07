@@ -384,10 +384,14 @@ function setup(doc, variables = []) {
   });
 
   return ({ pos = doc.length, explicit = false } = { }) => {
-    return completion({
+    return /** @type {import('@codemirror/autocomplete').CompletionResult} */ (completion(/** @type {import('@codemirror/autocomplete').CompletionContext} */ ({
       state,
       pos,
-      explicit
-    });
+      explicit,
+      tokenBefore: null,
+      matchBefore: null,
+      aborted: false,
+      addEventListener: () => {}
+    })));
   };
 }

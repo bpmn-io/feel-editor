@@ -67,8 +67,8 @@ function getVariableSuggestions(variables, builtins) {
 
 /**
  * @param {import('..').Variable} variable
- * @param {number} boost
-
+ * @param {number} [boost]
+ *
  * @returns {import('@codemirror/autocomplete').Completion}
  */
 function createVariableSuggestion(variable, boost) {

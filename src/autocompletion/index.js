@@ -1,4 +1,5 @@
 import { snippets, keywordCompletions } from '@bpmn-io/lang-feel';
+import { completeFromList } from '@codemirror/autocomplete';
 
 import { pathExpressionCompletion } from './pathExpression';
 import { variableCompletion } from './variable';
@@ -21,7 +22,7 @@ export function completions({ variables = [], builtins = [] }) {
   return [
     pathExpressionCompletion({ variables }),
     variableCompletion({ variables, builtins }),
-    snippets,
+    completeFromList(snippets),
     ...keywordCompletions
   ];
 }

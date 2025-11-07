@@ -64,17 +64,19 @@ describe('autocompletion - built-ins', function() {
     expect(completion.options).to.exist;
 
     // when
-    const infoHtml = completion.options.map(option => option.info());
+    const infoHtml = completion.options.map(option =>
+      typeof option.info === 'function' ? option.info(option) : option.info
+    );
 
     // then
     infoHtml.forEach(info => {
       expect(info).to.exist;
 
       // contains parameter list
-      expect(info.textContent.toLowerCase()).to.have.include('function signature');
+      expect(/** @type {HTMLElement} */ (info).textContent.toLowerCase()).to.have.include('function signature');
 
       // contains example
-      expect(info.querySelector('pre')).to.exist;
+      expect(/** @type {HTMLElement} */ (info).querySelector('pre')).to.exist;
 
     });
 
@@ -163,10 +165,14 @@ function setup(doc, builtins = domifiedBuiltins) {
   });
 
   return ({ pos = doc.length, explicit = false } = { }) => {
-    return completion({
+    return /** @type {import('@codemirror/autocomplete').CompletionResult} */ (completion(/** @type {import('@codemirror/autocomplete').CompletionContext} */ ({
       state,
       pos,
-      explicit
-    });
+      explicit,
+      tokenBefore: null,
+      matchBefore: null,
+      aborted: false,
+      addEventListener: () => {}
+    })));
   };
 }

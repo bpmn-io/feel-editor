@@ -20,7 +20,7 @@ export function pathExpressionCompletion({ variables }) {
     const nodeBefore = syntaxTree(context.state).resolve(context.pos, -1);
 
     if (!isPathExpression(nodeBefore)) {
-      return;
+      return null;
     }
 
     const expression = findPathExpression(nodeBefore);
@@ -41,26 +41,27 @@ export function pathExpressionCompletion({ variables }) {
       // only suggest if variable type matches
       if (
         childVar.isList !== 'optional' &&
-        !!childVar.isList !== path[i].isList
+         !!childVar.isList !== path[i].isList
       ) {
-        return;
+        return null;
       }
 
       options = childVar.entries;
     }
 
-    if (!options) return;
+    if (!options) return null;
 
-    options = options.map(v => ({
-      label: v.name,
-      type: 'variable',
-      info: v.info,
-      detail: v.detail
-    }));
+    const completionOptions = options.map(option => (
+      {
+        label: option.name,
+        type: 'variable',
+        info: option.info,
+        detail: option.detail
+      }));
 
     const result = {
       from: from,
-      options: options
+      options: completionOptions
     };
 
     return result;
