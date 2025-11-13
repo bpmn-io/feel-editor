@@ -41,7 +41,7 @@ export function pathExpressionCompletion({ variables }) {
       // only suggest if variable type matches
       if (
         childVar.isList !== 'optional' &&
-         !!childVar.isList !== path[i].isList
+        !!childVar.isList !== path[i].isList
       ) {
         return null;
       }
