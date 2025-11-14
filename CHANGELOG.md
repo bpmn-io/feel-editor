@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.12.1
+
+* `FIX`: update jsDoc to reflect actual implementation ([#74](https://github.com/bpmn-io/feel-editor/pull/74))
+
 ## 1.12.0
 
 * `FEAT`: support multiline strings in `camunda` dialect ([@bpmn-io/lezer-feel#2](https://github.com/bpmn-io/lezer-feel/pull/2))
