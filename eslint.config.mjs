@@ -31,15 +31,5 @@ export default [
         'test/**/*.js'
       ]
     };
-  }),
-  {
-    files: [
-      'test/**/*.js'
-    ],
-    languageOptions: {
-      globals: {
-        require: false
-      }
-    }
-  }
+  })
 ];
