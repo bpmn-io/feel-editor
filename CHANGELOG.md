@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update `codemirror` dependencies
+
 ## 1.12.1
 
 * `FIX`: update jsDoc to reflect actual implementation ([#74](https://github.com/bpmn-io/feel-editor/pull/74))
