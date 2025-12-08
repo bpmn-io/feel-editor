@@ -1,10 +1,10 @@
 import {
   configure as feelCore
-} from '../../../src/core';
+} from '../../../src/core/index.js';
 
 import { EditorState } from '@codemirror/state';
-import { variableCompletion } from '../../../src/autocompletion/variable';
-import { domifiedBuiltins } from '../../../src/builtins';
+import { variableCompletion } from '../../../src/autocompletion/variable.js';
+import { domifiedBuiltins } from '../../../src/builtins/index.js';
 
 import { expect } from 'chai';
 

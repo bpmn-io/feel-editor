@@ -1,4 +1,4 @@
-import FeelEditor from '../../src';
+import FeelEditor from '../../src/index.js';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
 import { lineNumbers } from '@codemirror/view';

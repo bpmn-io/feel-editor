@@ -1,6 +1,6 @@
 import { syntaxTree } from '@codemirror/language';
 import { snippetCompletion } from '@codemirror/autocomplete';
-import { isEmpty, isPathExpression, isVariableName } from './util';
+import { isEmpty, isPathExpression, isVariableName } from './util.js';
 
 /**
  * @typedef { import('../core').Variable } Variable

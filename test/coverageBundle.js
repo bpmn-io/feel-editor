@@ -1,4 +1,4 @@
-import('./globals');
+import('./globals.js');
 
 // @ts-ignore-next-line
 const allTests = import.meta.webpackContext('.', {
