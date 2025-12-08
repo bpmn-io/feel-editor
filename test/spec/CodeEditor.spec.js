@@ -862,7 +862,7 @@ return
         feelContainer = tooltipContainer.querySelector('[data-test="feel-editor"]');
         container.appendChild(tooltipContainer);
 
-        tooltipContainer.scrollIntoView();
+        feelContainer.scrollIntoView();
       });
 
 
