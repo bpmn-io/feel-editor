@@ -853,7 +853,7 @@ return
       let feelContainer;
 
 
-      beforeEach(() => {
+      beforeEach(function() {
         tooltipContainer = domify(`<div id="tooltipContainer" style="width: 500px; height: 500px; position: relative;">
                                     <div id="feelEditor" style="width: 50px; height: 20px; position: absolute; bottom: 0; right: 0;"></div>
                                   </div>`);
