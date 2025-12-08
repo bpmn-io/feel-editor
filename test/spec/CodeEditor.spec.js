@@ -845,7 +845,7 @@ return
       const variables = [
         { name: 'foobar',
           info: () => {
-            const html = domify('<div id="oversizedDescription" style="width: 100px; height: 100px"><div>');
+            const html = domify('<div data-test="oversized-description" style="width: 100px; height: 100px"><div>');
             return html;
           }
         }
@@ -856,10 +856,10 @@ return
 
 
       beforeEach(function() {
-        tooltipContainer = domify(`<div id="tooltipContainer" style="width: 500px; height: 500px; position: relative;">
-                                    <div id="feelEditor" style="width: 50px; height: 20px; position: absolute; bottom: 0; right: 0;"></div>
+        tooltipContainer = domify(`<div data-test="tooltip-container" style="width: 500px; height: 500px; position: relative;">
+                                    <div data-test="feel-editor" style="width: 50px; height: 20px; position: absolute; bottom: 0; right: 0;"></div>
                                   </div>`);
-        feelContainer = tooltipContainer.querySelector('#feelEditor');
+        feelContainer = tooltipContainer.querySelector('[data-test="feel-editor"]');
         container.appendChild(tooltipContainer);
 
         tooltipContainer.scrollIntoView();
@@ -869,8 +869,7 @@ return
       it('should position tooltips inside container', function() {
         const editor = new FeelEditor({
           container: feelContainer,
-
-          tooltipContainer: tooltipContainer,
+          tooltipContainer,
           value: initialValue,
           variables
         });
@@ -886,7 +885,7 @@ return
         // then
         // update done async
         return expectEventually(() => {
-          const tooltip = container.querySelector('#oversizedDescription');
+          const tooltip = container.querySelector('[data-test="oversized-description"]');
 
           const tooltipBB = tooltip.getBoundingClientRect();
           const containerBB = tooltipContainer.getBoundingClientRect();
@@ -901,7 +900,7 @@ return
         const editor = new FeelEditor({
           container: feelContainer,
 
-          tooltipContainer: '#tooltipContainer',
+          tooltipContainer: '[data-test="tooltip-container"]',
           value: initialValue,
           variables
         });
@@ -917,7 +916,7 @@ return
         // then
         // update done async
         return expectEventually(() => {
-          const tooltip = container.querySelector('#oversizedDescription');
+          const tooltip = container.querySelector('[data-test="oversized-description"]');
 
           const tooltipBB = tooltip.getBoundingClientRect();
           const containerBB = tooltipContainer.getBoundingClientRect();
@@ -946,7 +945,7 @@ return
         // then
         // update done async
         return expectEventually(() => {
-          const tooltip = container.querySelector('#oversizedDescription');
+          const tooltip = container.querySelector('[data-test="oversized-description"]');
 
           const tooltipBB = tooltip.getBoundingClientRect();
           const containerBB = tooltipContainer.getBoundingClientRect();
