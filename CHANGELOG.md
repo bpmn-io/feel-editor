@@ -7,6 +7,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 ___Note:__ Yet to be released changes appear here._
 
 * `DEPS`: update `codemirror` dependencies
+* `DEPS`: update to `@bpmn-io/lang-feel@3.0.0`
+* `DEPS`: update to `@lezer/highlight@1.2.3`
 
 ## 1.12.1
 
