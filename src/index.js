@@ -5,12 +5,12 @@ import { setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
-import linter from './lint';
-import theme from './theme';
+import linter from './lint/index.js';
+import theme from './theme/index.js';
 
-import * as Core from './core';
+import * as Core from './core/index.js';
 
-import { domifiedBuiltins } from './builtins';
+import { domifiedBuiltins } from './builtins/index.js';
 
 /**
  * @typedef { import('./core').Variable } Variable

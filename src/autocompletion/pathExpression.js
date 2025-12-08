@@ -1,5 +1,5 @@
 import { syntaxTree } from '@codemirror/language';
-import { isPathExpression } from './util';
+import { isPathExpression } from './util.js';
 
 /**
  * @typedef { import('../core').Variable } Variable

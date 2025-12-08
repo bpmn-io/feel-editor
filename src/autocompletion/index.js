@@ -1,8 +1,8 @@
 import { snippets, keywordCompletions } from '@bpmn-io/lang-feel';
 import { completeFromList } from '@codemirror/autocomplete';
 
-import { pathExpressionCompletion } from './pathExpression';
-import { variableCompletion } from './variable';
+import { pathExpressionCompletion } from './pathExpression.js';
+import { variableCompletion } from './variable.js';
 
 /**
  * @typedef { import('../core').Variable } Variable

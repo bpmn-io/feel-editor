@@ -1,9 +1,9 @@
 import {
   configure as feelCore
-} from '../../../src/core';
+} from '../../../src/core/index.js';
 
 import { EditorState } from '@codemirror/state';
-import { pathExpressionCompletion } from '../../../src/autocompletion/pathExpression';
+import { pathExpressionCompletion } from '../../../src/autocompletion/pathExpression.js';
 
 import { expect } from 'chai';
 

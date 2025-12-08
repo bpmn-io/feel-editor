@@ -1,5 +1,5 @@
 import TestContainer from 'mocha-test-container-support';
-import FeelEditor from '../../../src';
+import FeelEditor from '../../../src/index.js';
 
 import userEvent from '@testing-library/user-event';
 

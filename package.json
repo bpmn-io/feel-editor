@@ -2,14 +2,17 @@
   "name": "@bpmn-io/feel-editor",
   "version": "1.12.1",
   "description": "Editor for FEEL expressions.",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "source": "./src/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "all": "run-s lint check-types test build",
-    "test": "karma start",
+    "test": "karma start karma.conf.cjs",
     "build": "rollup -c --bundleConfigAsCjs",
     "build:watch": "npm run build -- -w",
     "lint": "eslint .",
@@ -31,6 +34,9 @@
   "engines": {
     "node": ">= 16"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "bpmn-io",
     "feel",

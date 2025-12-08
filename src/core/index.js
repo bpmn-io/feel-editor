@@ -1,13 +1,13 @@
-import { completions as feelCompletions } from '../autocompletion';
+import { completions as feelCompletions } from '../autocompletion/index.js';
 
-import { createContext, language } from '../language';
+import { createContext, language } from '../language/index.js';
 
 import {
   variablesFacet,
   builtinsFacet,
   parserDialectFacet,
   dialectFacet
-} from './facets';
+} from './facets.js';
 
 
 /**
