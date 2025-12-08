@@ -5,6 +5,8 @@ import {
 import { EditorState } from '@codemirror/state';
 import { variableCompletion } from '../../../src/autocompletion/variable';
 
+import { expect } from 'chai';
+
 
 describe('autocompletion - variable', function() {
 

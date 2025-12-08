@@ -38,8 +38,7 @@ export default [
     ],
     languageOptions: {
       globals: {
-        require: false,
-        sinon: false
+        require: false
       }
     }
   }
