@@ -3,6 +3,9 @@ import FeelEditor from '../../../src';
 
 import userEvent from '@testing-library/user-event';
 
+import { expect } from 'chai';
+
+
 describe('feel language', function() {
 
   let container;

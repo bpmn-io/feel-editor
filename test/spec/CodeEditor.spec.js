@@ -6,6 +6,8 @@ import { diagnosticCount, forceLinting } from '@codemirror/lint';
 import { currentCompletions, startCompletion } from '@codemirror/autocomplete';
 import { domify } from 'min-dom';
 
+import { expect } from 'chai';
+import { spy, match } from 'sinon';
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
 
@@ -443,7 +445,7 @@ return
     it('should call onChange', async function() {
 
       // given
-      const onChange = sinon.spy();
+      const onChange = spy();
       const editor = new FeelEditor({
         container,
         onChange
@@ -467,7 +469,7 @@ return
     it('should call onKeyDown', async function() {
 
       // given
-      const onKeyDown = sinon.spy();
+      const onKeyDown = spy();
       const editor = new FeelEditor({
         container,
         onKeyDown
@@ -588,7 +590,7 @@ return
       it('with errors', async function() {
 
         const initialValue = '^15';
-        const onLint = sinon.spy((diagnostics) => {
+        const onLint = spy((diagnostics) => {
           expect(diagnostics).to.have.length(1);
         });
 
@@ -608,7 +610,7 @@ return
 
       it('without errors', async function() {
         const initialValue = '15';
-        const onLint = sinon.spy();
+        const onLint = spy();
 
         const editor = new FeelEditor({
           container,
@@ -622,7 +624,7 @@ return
         // then
         // update done async
         expect(onLint).to.have.been.calledOnce;
-        expect(onLint).to.have.been.calledWith(sinon.match.array);
+        expect(onLint).to.have.been.calledWith(match.array);
         expect(onLint.args[0][0]).to.have.length(0);
       });
 

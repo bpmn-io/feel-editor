@@ -5,6 +5,8 @@ import {
 import { EditorState } from '@codemirror/state';
 import { pathExpressionCompletion } from '../../../src/autocompletion/pathExpression';
 
+import { expect } from 'chai';
+
 
 describe('autocompletion - pathExpression', function() {
 

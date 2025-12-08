@@ -6,6 +6,8 @@ import { EditorState } from '@codemirror/state';
 import { variableCompletion } from '../../../src/autocompletion/variable';
 import { domifiedBuiltins } from '../../../src/builtins';
 
+import { expect } from 'chai';
+
 
 describe('autocompletion - built-ins', function() {
 
