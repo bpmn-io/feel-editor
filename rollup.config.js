@@ -10,6 +10,7 @@ module.exports = {
   input: pkg.source,
   output: {
     file: pkg.exports['.'],
+    sourcemap: true,
     format: 'esm'
   },
   plugins: [
