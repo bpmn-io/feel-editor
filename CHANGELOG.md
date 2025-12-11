@@ -6,6 +6,19 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.0.0
+
+* `CHORE`: turn into ES module ([#80](https://github.com/bpmn-io/feel-editor/pull/80))
+* `CHORE`: drop CJS distribution ([#80](https://github.com/bpmn-io/feel-editor/pull/80))
+* `DEPS`: update `codemirror` dependencies
+* `DEPS`: update to `@bpmn-io/feel-lint@3.0.0`
+* `DEPS`: update to `@bpmn-io/lang-feel@3.0.0`
+* `DEPS`: update to `@lezer/highlight@1.2.3`
+
+### Breaking Changes
+
+* Drop CJS distribution. To require from CJS use `Node >= 20.12.0`
+
 ## 1.12.1
 
 * `FIX`: update jsDoc to reflect actual implementation ([#74](https://github.com/bpmn-io/feel-editor/pull/74))
