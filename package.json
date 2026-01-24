@@ -63,7 +63,7 @@
     "@codemirror/state": "^6.5.2",
     "@codemirror/view": "^6.38.8",
     "@lezer/highlight": "^1.2.3",
-    "min-dom": "^4.2.1"
+    "min-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
