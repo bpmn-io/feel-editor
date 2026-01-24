@@ -6,6 +6,11 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.1.0
+
+* `DEPS`: update to `@bpmn-io/lezer-feel@2.1.0`
+* `DEPS`: update to `min-dom@5.2.0`
+
 ## 2.0.0
 
 * `CHORE`: turn into ES module ([#80](https://github.com/bpmn-io/feel-editor/pull/80))
