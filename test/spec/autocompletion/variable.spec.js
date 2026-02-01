@@ -149,6 +149,39 @@ describe('autocompletion - variable', function() {
     expect(completion.options).to.have.length(1);
   });
 
+
+  describe('should complete locally derived', function() {
+
+    it('context entry', function() {
+
+      // given
+      const triggerCompletion = setup('{ foo + bar: 1, baz: f }.foo', [ {
+        name: 'foo',
+        info: 'info',
+        detail: 'detail'
+      } ]);
+
+      // when
+      const completion = triggerCompletion({ pos: 22 });
+
+      // then
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(21);
+      expect(completion.options).to.have.length(2);
+      expect(completion.options[0]).to.eql({
+        label: 'foo + bar',
+        type: 'variable'
+      });
+
+      expect(completion.options[1]).to.eql({
+        name: 'foo',
+        info: 'info',
+        detail: 'detail'
+      });
+    });
+
+  });
+
 });
 
 
