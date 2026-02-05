@@ -55,7 +55,7 @@
   "dependencies": {
     "@bpmn-io/feel-lint": "^3.1.0",
     "@bpmn-io/lang-feel": "^3.0.0",
-    "@camunda/feel-builtins": "^0.2.0",
+    "@camunda/feel-builtins": "^0.3.0",
     "@codemirror/autocomplete": "^6.20.0",
     "@codemirror/commands": "^6.10.0",
     "@codemirror/language": "^6.11.3",
