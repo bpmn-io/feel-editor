@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.2.0
+
+* `DEPS`: update to `@bpmn-io/feel-lint@3.1.0`
+
 ## 2.1.0
 
 * `DEPS`: update to `@bpmn-io/lezer-feel@2.1.0`
