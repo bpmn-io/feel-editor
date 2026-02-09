@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 2.3.0
 
-* `FEAT`: update builtins: include `number`, `from json`, `to json` functions ([@camunda/feel-builtins#9](https://github.com/camunda/feel-builtins/pull/9))
+* `FEAT`: update builtins: include `number`, `from json`, `to json` functions ([camunda/feel-builtins#9](https://github.com/camunda/feel-builtins/pull/9))
 * `DEPS`: update to `@camunda/feel-builtins@0.3.0`
 
 ## 2.2.0
