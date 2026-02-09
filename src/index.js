@@ -5,6 +5,8 @@ import { setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
+import mitt from 'mitt';
+
 import linter from './lint/index.js';
 import theme from './theme/index.js';
 
@@ -60,6 +62,8 @@ export default function FeelEditor({
   builtins = domifiedBuiltins,
   variables = []
 }) {
+
+  this._events = mitt();
 
   const changeHandler = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
@@ -167,6 +171,22 @@ FeelEditor.prototype.focus = function(position) {
     const end = cmEditor.state.doc.length;
     cmEditor.dispatch({ selection: { anchor: position <= end ? position : end } });
   }
+};
+
+/**
+ * @param {string} eventName
+ * @param {(event) => any} callback
+ */
+FeelEditor.prototype.on = function(eventName, callback) {
+  this._events.on(eventName, callback);
+};
+
+/**
+ * @param {string} eventName
+ * @param {(event) => any} [callback]
+ */
+FeelEditor.prototype.off = function(eventName, callback) {
+  this._events.off(eventName, callback);
 };
 
 /**
