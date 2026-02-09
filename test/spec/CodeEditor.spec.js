@@ -2,12 +2,12 @@ import FeelEditor from '../../src/index.js';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
 import { lineNumbers } from '@codemirror/view';
-import { diagnosticCount, forceLinting } from '@codemirror/lint';
+import { forceLinting, forEachDiagnostic } from '@codemirror/lint';
 import { currentCompletions, startCompletion } from '@codemirror/autocomplete';
 import { domify } from 'min-dom';
 
 import { expect } from 'chai';
-import { spy, match } from 'sinon';
+import { spy } from 'sinon';
 
 const singleStart = window.__env__ && window.__env__.SINGLE_START;
 
@@ -498,10 +498,10 @@ return
       });
 
       // when
-      const diagnostics = await lint(editor);
+      const diagnostics = await forceLint(editor);
 
       // then
-      expect(diagnostics).to.eql(0);
+      expect(diagnostics).to.be.empty;
     });
 
 
@@ -526,10 +526,10 @@ return
           });
 
           // when
-          const diagnostics = await lint(editor);
+          const diagnostics = await forceLint(editor);
 
           // then
-          expect(diagnostics).to.eql(0);
+          expect(diagnostics).to.be.empty;
         });
 
       });
@@ -546,10 +546,10 @@ return
       });
 
       // when
-      const diagnostics = await lint(editor);
+      const diagnostics = await forceLint(editor);
 
       // then
-      expect(diagnostics).to.eql(1);
+      expect(diagnostics).to.have.length(1);
     });
 
 
@@ -562,10 +562,10 @@ return
       });
 
       // when
-      const diagnostics = await lint(editor);
+      const diagnostics = await forceLint(editor);
 
       // then
-      expect(diagnostics).to.eql(1);
+      expect(diagnostics).to.have.length(1);
     });
 
 
@@ -578,10 +578,10 @@ return
       });
 
       // when
-      const diagnostics = await lint(editor);
+      const diagnostics = await forceLint(editor);
 
       // then
-      expect(diagnostics).to.eql(1);
+      expect(diagnostics).to.have.length(1);
     });
 
 
@@ -601,7 +601,7 @@ return
         });
 
         // when
-        await lint(editor);
+        await forceLint(editor);
 
         // then
         expect(onLint).to.have.been.calledOnce;
@@ -610,7 +610,9 @@ return
 
       it('without errors', async function() {
         const initialValue = '15';
-        const onLint = spy();
+        const onLint = spy((diagnostics) => {
+          expect(diagnostics).to.be.empty;
+        });
 
         const editor = new FeelEditor({
           container,
@@ -619,13 +621,99 @@ return
         });
 
         // when
-        await lint(editor);
+        await forceLint(editor);
 
         // then
-        // update done async
         expect(onLint).to.have.been.calledOnce;
-        expect(onLint).to.have.been.calledWith(match.array);
-        expect(onLint.args[0][0]).to.have.length(0);
+      });
+
+    });
+
+
+    it('should emit as <lint> event', async function() {
+      const initialValue = '"unclosed string';
+      const lintSpy = spy(({ diagnostics }) => {
+        expect(diagnostics).to.have.length(1);
+      });
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
+      });
+
+      editor.on('lint', lintSpy);
+
+      // when
+      await forceLint(editor);
+
+      // then
+      expect(lintSpy).to.have.been.calledOnce;
+    });
+
+
+    it('should trigger initially', async function() {
+
+      // given
+      const initialValue = '^15';
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
+      });
+
+      // when
+      const diagnostics = await lint(editor);
+
+      // then
+      expect(diagnostics).to.have.length(1);
+    });
+
+
+    describe('should trigger after update', function() {
+
+      it('recovering from errors', async function() {
+
+        // given
+        const initialValue = '^15';
+
+        const editor = new FeelEditor({
+          container,
+          value: initialValue
+        });
+
+        await forceLint(editor);
+
+        // when
+        editor.setValue('20');
+
+        const diagnostics = await lint(editor);
+
+        // then
+        // no more errors
+        expect(diagnostics).to.be.empty;
+      });
+
+
+      it('indicating new error', async function() {
+
+        // given
+        const initialValue = '15';
+
+        const editor = new FeelEditor({
+          container,
+          value: initialValue
+        });
+
+        await forceLint(editor);
+
+        // when
+        editor.setValue('^15');
+
+        const diagnostics = await lint(editor);
+
+        // then
+        // now there is errors
+        expect(diagnostics).to.have.length(1);
       });
 
     });
@@ -1026,18 +1114,53 @@ function wait(ms = 0) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function timeout(ms = 0) {
+  return new Promise((_resolve, reject) => setTimeout(reject, ms));
+}
+
 /**
+ * Awaits standard editor linting, returns diagnostics.
+ *
  * @param {FeelEditor} editor
  *
- * @return {Promise<number>}
+ * @return {Promise<import('@codemirror/lint').Diagnostic[]>}
  */
 async function lint(editor) {
+
+  const lintPromise = new Promise((resolve, reject) => {
+    const handleLinted = ({ diagnostics }) => {
+      editor.off('lint', handleLinted);
+
+      resolve(diagnostics);
+    };
+
+    editor.on('lint', handleLinted);
+  });
+
+  return Promise.race([
+    timeout(1000),
+    lintPromise
+  ]);
+}
+
+/**
+ * Forces editor linting, returns diagnostics.
+ *
+ * @param {FeelEditor} editor
+ *
+ * @return {Promise<import('@codemirror/lint').Diagnostic[]>}
+ */
+async function forceLint(editor) {
+
   const cm = getCm(editor);
 
-  // when
   forceLinting(cm);
 
   await wait();
 
-  return diagnosticCount(cm.state);
+  const diagnostics = [];
+
+  forEachDiagnostic(cm.state, d => diagnostics.push(d));
+
+  return diagnostics;
 }
