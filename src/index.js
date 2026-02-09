@@ -80,9 +80,9 @@ export default function FeelEditor({
       return;
     }
 
-    const messages = diagnosticEffects.flatMap(effect => effect.value);
+    const diagnostics = diagnosticEffects.flatMap(effect => effect.value);
 
-    onLint(messages);
+    this._events.emit('lint', { diagnostics });
   });
 
   const keyHandler = EditorView.domEventHandlers(
@@ -129,6 +129,8 @@ export default function FeelEditor({
   if (readOnly) {
     extensions.push(EditorView.editable.of(false));
   }
+
+  this.on('lint', ({ diagnostics }) => onLint(diagnostics));
 
   this._cmEditor = new EditorView({
     state: EditorState.create({
