@@ -6,6 +6,11 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.4.0
+
+* `FEAT`: turn editor into an event emitter ([#82](https://github.com/bpmn-io/feel-editor/pull/82))
+* `FEAT`: emit `lint` event ([#82](https://github.com/bpmn-io/feel-editor/pull/82))
+
 ## 2.3.0
 
 * `FEAT`: update builtins: include `number`, `from json`, `to json` functions ([camunda/feel-builtins#9](https://github.com/camunda/feel-builtins/pull/9))
