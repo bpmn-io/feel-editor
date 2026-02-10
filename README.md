@@ -85,6 +85,18 @@ const editor = new FeelEditor({
 });
 ```
 
+### Events
+
+You can listen to events fired by the editor:
+
+```javascript
+const editor = new FeelEditor({
+  container
+});
+
+editor.on('lint', ({ diagnostics }) => console.log(diagnostics));
+```
+
 ## Hacking the Project
 
 To get the development setup make sure to have [NodeJS](https://nodejs.org/en/download/) installed.
