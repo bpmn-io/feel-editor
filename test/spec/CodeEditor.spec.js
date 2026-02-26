@@ -484,6 +484,29 @@ return
       expect(onKeyDown).to.have.been.calledWith(event);
     });
 
+
+    it('should call onKeyDown for Backspace', async function() {
+
+      // given
+      const onKeyDown = spy();
+      const editor = new FeelEditor({
+        container,
+        value: 'foo',
+        onKeyDown
+      });
+
+      // when
+      const event = new KeyboardEvent('keydown', {
+        key: 'Backspace',
+        bubbles: true
+      });
+      editor._cmEditor.contentDOM.dispatchEvent(event);
+
+      // then
+      expect(onKeyDown).to.have.been.calledOnce;
+      expect(onKeyDown).to.have.been.calledWith(event);
+    });
+
   });
 
 

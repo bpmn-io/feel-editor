@@ -85,7 +85,7 @@ export default function FeelEditor({
     this._events.emit('lint', { diagnostics });
   });
 
-  const keyHandler = EditorView.domEventHandlers(
+  const keyHandler = EditorView.domEventObservers(
     {
       keydown: onKeyDown
     }
