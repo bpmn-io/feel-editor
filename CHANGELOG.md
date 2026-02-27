@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.5.1
+
+* `FIX`: allow keydown handling on all events ([#83](https://github.com/bpmn-io/feel-editor/pull/83))
+
 ## 2.5.0
 
 * `DEPS`: update to `@camunda/feel-builtins@1.0.0`
