@@ -106,6 +106,27 @@ describe('autocompletion - built-ins', function() {
   });
 
 
+  it('should complete multi-word prefix (<get o>)', function() {
+
+    const triggerCompletion = setup('get o', [
+      {
+        name: 'get or else',
+        type: 'function',
+        params: [
+          { name: 'value' },
+          { name: 'default' }
+        ]
+      }
+    ]);
+
+    // when
+    const completion = triggerCompletion();
+
+    // then
+    expect(completion).to.exist;
+  });
+
+
   it('should not complete for empty context', function() {
 
     // given
