@@ -108,6 +108,19 @@ describe('autocompletion - variable', function() {
   });
 
 
+  it('should complete variable with underscore and numbers', function() {
+
+    // given
+    const triggerCompletion = setup('test_', [ { name: 'test_123' } ]);
+
+    // when
+    const completion = triggerCompletion();
+
+    // then
+    expect(completion).to.exist;
+  });
+
+
   it('should not complete empty expression', function() {
 
     // given

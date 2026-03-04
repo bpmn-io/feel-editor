@@ -19,6 +19,9 @@ export function variableCompletion({ variables = [], builtins = [] }) {
 
   const options = getVariableSuggestions(variables, builtins);
 
+  // Allow spaces for autocomplete suggestions should be the same as feel variable/functions names (eg a-z, A-Z, _, 0-9, <space>)
+  const validFor = /^[\w ]*$/;
+
   if (!options.length) {
     return (context) => null;
   }
@@ -36,7 +39,8 @@ export function variableCompletion({ variables = [], builtins = [] }) {
     if (isEmpty(nodeBefore, pos)) {
       return context.explicit ? {
         from: pos,
-        options
+        options,
+        validFor
       } : null;
     }
 
@@ -45,9 +49,15 @@ export function variableCompletion({ variables = [], builtins = [] }) {
       return null;
     }
 
+    // find the full typed input, to continue auto-completion after separated names
+    const typedInput = typeof context.matchBefore === 'function'
+      ? context.matchBefore(/\w[\w ]*$/)
+      : null;
+
     return {
-      from: nodeBefore.from,
-      options
+      from: typedInput ? typedInput.from : nodeBefore.from,
+      options,
+      validFor
     };
   };
 }
