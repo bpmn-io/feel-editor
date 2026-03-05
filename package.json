@@ -1,6 +1,6 @@
 {
   "name": "@bpmn-io/feel-editor",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Editor for FEEL expressions.",
   "type": "module",
   "main": "./dist/index.js",
