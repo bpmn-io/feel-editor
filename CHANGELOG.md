@@ -8,7 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 2.5.2
 
-`FIX`: continue suggestions for autocompletion even after spaces ([#84](https://github.com/bpmn-io/feel-editor/pull/84))
+* `FIX`: continue suggestions for autocompletion even after spaces ([#84](https://github.com/bpmn-io/feel-editor/pull/84))
 
 ## 2.5.1
 
