@@ -80,7 +80,7 @@
     "babel-plugin-istanbul": "^8.0.0",
     "chai": "^6.2.1",
     "cross-env": "^10.0.0",
-    "eslint": "^9.39.1",
+    "eslint": "^10.0.0",
     "eslint-plugin-bpmn-io": "^2.2.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher-2": "^3.3.0",
