@@ -95,7 +95,7 @@
     "npm-run-all2": "^8.0.0",
     "puppeteer": "^24.32.1",
     "rollup": "^4.31.0",
-    "sinon": "^21.0.0",
+    "sinon": "^22.0.0",
     "sinon-chai": "^4.0.1",
     "typescript": "^5.9.3",
     "webpack": "^5.97.1"
