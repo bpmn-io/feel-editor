@@ -1,3 +1,5 @@
-import { baseTheme, highlightTheme, syntaxClasses } from './theme.js';
+import { feelLight } from '@bpmn-io/cm-theme';
 
-export default [ baseTheme, highlightTheme, syntaxClasses ];
+import { baseTheme } from './theme.js';
+
+export default [ baseTheme, feelLight ];
