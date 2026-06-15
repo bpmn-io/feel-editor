@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `@camunda/feel-builtins@1.2.0`
+
 ## 2.5.2
 
 * `FIX`: continue suggestions for autocompletion even after spaces ([#84](https://github.com/bpmn-io/feel-editor/pull/84))
