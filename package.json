@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-json": "^6.1.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.6.1",
@@ -94,7 +94,7 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^9.0.0",
     "puppeteer": "^25.0.0",
-    "rollup": "^4.31.0",
+    "rollup": "^4.62.0",
     "sinon": "^22.0.0",
     "sinon-chai": "^4.0.1",
     "typescript": "^5.9.3",
