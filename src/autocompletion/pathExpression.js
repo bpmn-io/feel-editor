@@ -26,7 +26,7 @@ export function pathExpressionCompletion({ variables }) {
     const expression = findPathExpression(nodeBefore);
 
     // if the cursor is directly after the `.`, variable starts at the cursor position
-    const from = nodeBefore === expression ? context.pos : nodeBefore.from;
+    const from = (nodeBefore === expression || nodeBefore.name === '.') ? context.pos : nodeBefore.from;
 
     const path = getPath(expression, context);
 
@@ -84,12 +84,15 @@ function getPath(node, context) {
   let path = [];
 
   for (let child = node.firstChild; child; child = child.nextSibling) {
+    if (child.name === '.') {
+      continue;
+    }
+
     if (child.name === 'PathExpression') {
       path.push(...getPath(child, context));
     } else if (child.name === 'FilterExpression') {
       path.push(...getFilter(child, context));
-    }
-    else {
+    } else {
       path.push({
         name: getNodeContent(child, context),
         isList: false
