@@ -7,6 +7,7 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 ___Note:__ Yet to be released changes appear here._
 
 * `DEPS`: update to `@camunda/feel-builtins@1.2.0`
+* `DEPS`: update to `min-dom@5.3.0`
 
 ## 2.5.2
 
