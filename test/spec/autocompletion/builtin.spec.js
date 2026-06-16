@@ -140,6 +140,49 @@ describe('autocompletion - built-ins', function() {
   });
 
 
+  it('should not complete path expression path name', function() {
+
+    // given
+    const triggerCompletion = setup('myObject.fo', [ { name: 'foobar' } ]);
+
+    // when
+    const completion = triggerCompletion();
+
+    // then
+    expect(completion).not.to.exist;
+  });
+
+
+  describe('should not complete path expression after dot', function() {
+
+    it('active', function() {
+
+      // given
+      const triggerCompletion = setup('myObject.foo.', [ { name: 'bar' } ]);
+
+      // when
+      const completion = triggerCompletion();
+
+      // then
+      expect(completion).not.to.exist;
+    });
+
+
+    it('explicit', function() {
+
+      // given
+      const triggerCompletion = setup('myObject.foo.', [ { name: 'bar' } ]);
+
+      // when
+      const completion = triggerCompletion({ explicit: true });
+
+      // then
+      expect(completion).not.to.exist;
+    });
+
+  });
+
+
   it('should complete when explicitly requested', function() {
 
     // given
