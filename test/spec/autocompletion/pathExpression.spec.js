@@ -42,6 +42,41 @@ describe('autocompletion - pathExpression', function() {
     });
 
 
+    it('should complete on nested empty path', function() {
+
+      // given
+      const triggerCompletion = setup('foo.bar.', [ {
+        name: 'foo',
+        entries: [
+          {
+            name: 'bar',
+            entries: [
+              {
+                name: 'other',
+                info: 'info',
+                detail: 'detail'
+              }
+            ]
+          }
+        ]
+      } ]);
+
+      // when
+      const completion = triggerCompletion();
+
+      // then
+      expect(completion).to.exist;
+      expect(completion.from).to.eql(8);
+      expect(completion.options).to.have.length(1);
+      expect(completion.options[0]).to.eql({
+        label: 'other',
+        type: 'variable',
+        info: 'info',
+        detail: 'detail'
+      });
+    });
+
+
     it('should complete while typing', function() {
 
       // given

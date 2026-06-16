@@ -37,6 +37,10 @@ export function variableCompletion({ variables = [], builtins = [] }) {
     const nodeBefore = syntaxTree(state).resolve(pos, -1);
 
     if (isEmpty(nodeBefore, pos)) {
+      if (isPathExpression(nodeBefore)) {
+        return null;
+      }
+
       return context.explicit ? {
         from: pos,
         options,
