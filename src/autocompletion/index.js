@@ -1,8 +1,7 @@
-import { snippets, keywordCompletions } from '@bpmn-io/lang-feel';
-import { completeFromList } from '@codemirror/autocomplete';
-
+import { keywordCompletions } from '@bpmn-io/lang-feel';
 import { pathExpressionCompletion } from './pathExpression.js';
 import { variableCompletion } from './variable.js';
+import { snippetCompletions } from './snippets.js';
 
 /**
  * @typedef { import('../core').Variable } Variable
@@ -22,7 +21,7 @@ export function completions({ variables = [], builtins = [] }) {
   return [
     pathExpressionCompletion({ variables }),
     variableCompletion({ variables, builtins }),
-    completeFromList(snippets),
+    snippetCompletions(),
     ...keywordCompletions
   ];
 }
