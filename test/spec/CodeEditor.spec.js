@@ -845,8 +845,58 @@ return
         const completions = currentCompletions(cm.state);
         expect(completions[0].label).to.eql('for');
       });
+    });
+
+
+    it('should complete property after pathname', function() {
+      const initialValue = 'ContextVariable.child.';
+      const variables = [
+        {
+          name: 'ContextVariable',
+          info: 'This is a Context Variable',
+          detail: 'Context',
+          entries: [
+            {
+              name: 'child',
+              info: 'This is a child variable',
+              detail: 'Context',
+              entries: [
+                {
+                  name: 'level2',
+                  info: 'This is a level 2 variable',
+                  detail: 'String'
+                }
+              ]
+            }
+          ]
+        }
+      ];
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue,
+        variables
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 22);
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      return expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+
+        expect(completions).to.have.length(1);
+        expect(completions[0].label).to.eql('level2');
+      });
 
     });
+
 
     it('should complete literals', function() {
       const initialValue = 'tr';
@@ -872,10 +922,37 @@ return
         const completions = currentCompletions(cm.state);
 
         // true should at least be shown, not necessarily first
-        expect(completions.find(c=>c.label === 'true')).to.exist;
+        expect(completions.find(c => c.label === 'true')).to.exist;
 
       });
 
+    });
+
+
+    it('should complete <function> snippet in expression context', function() {
+
+      // 'function' is a FEEL keyword parsed as FunctionDefinition (not Identifier),
+      // so ifExpression fires and structural snippets are offered
+      const initialValue = 'a + function';
+
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
+      });
+
+      const cm = getCm(editor);
+
+      // move cursor to the end
+      select(cm, 12);
+
+      // when
+      startCompletion(cm);
+
+      // then
+      return expectEventually(() => {
+        const completions = currentCompletions(cm.state);
+        expect(completions.find(c => c.label === 'function')).to.exist;
+      });
     });
 
 
