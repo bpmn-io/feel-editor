@@ -7,7 +7,9 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 ___Note:__ Yet to be released changes appear here._
 
 * `FEAT`: enhance FEEL syntax highlighting ([#100](https://github.com/bpmn-io/feel-editor/pull/100))
-* `DEPS`: bump `@bpmn-io/lang-feel` to v4 ([#100](https://github.com/bpmn-io/feel-editor/pull/100))
+* `FIX`: correct snippet completions in path segment ([#105](https://github.com/bpmn-io/feel-editor/pull/105))
+* `FIX`: correct snippet completions from prefix ([#105](https://github.com/bpmn-io/feel-editor/pull/105))
+* `DEPS`: update to `@bpmn-io/lang-feel@4.0.2`
 * `DEPS`: update to `@camunda/feel-builtins@1.2.0`
 * `DEPS`: update to `min-dom@5.3.0`
 * `DEPS`: update `codemirror*` dependencies
