@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.6.0
+
 * `FEAT`: enhance FEEL syntax highlighting ([#100](https://github.com/bpmn-io/feel-editor/pull/100))
 * `FIX`: correct snippet completions in path segment ([#105](https://github.com/bpmn-io/feel-editor/pull/105))
 * `FIX`: correct snippet completions from prefix ([#105](https://github.com/bpmn-io/feel-editor/pull/105))
