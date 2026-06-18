@@ -4,7 +4,7 @@ import json from '@rollup/plugin-json';
 import pkg from './package.json';
 
 
-const nonbundledDependencies = Object.keys({ ...pkg.dependencies });
+const nonbundledDependencies = Object.keys({ ...pkg.dependencies, ...pkg.peerDependencies });
 
 module.exports = {
   input: pkg.source,
