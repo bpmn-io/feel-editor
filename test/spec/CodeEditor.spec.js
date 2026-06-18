@@ -1193,7 +1193,7 @@ function getCm(editor) {
 
 async function expectEventually(fn) {
   const nextFrame = () => new Promise(resolve => {
-    requestAnimationFrame(resolve);
+    setTimeout(resolve, 0);
   });
 
   let e, i = 10;
