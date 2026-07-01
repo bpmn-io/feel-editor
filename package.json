@@ -53,6 +53,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@bpmn-io/cm-theme": "^0.2.2",
     "@bpmn-io/feel-lint": "^3.1.0",
     "@bpmn-io/lang-feel": "^4.0.2",
     "@camunda/feel-builtins": "^1.2.0",
@@ -68,7 +69,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
-    "@bpmn-io/cm-theme": "^0.2.0",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-json": "^6.1.0",
     "@testing-library/dom": "^10.4.0",
@@ -100,8 +100,5 @@
     "sinon-chai": "^4.0.1",
     "typescript": "^5.9.3",
     "webpack": "^5.107.2"
-  },
-  "peerDependencies": {
-    "@bpmn-io/cm-theme": "^0.2.0"
   }
 }
