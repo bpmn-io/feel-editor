@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: add `@bpmn-io/cm-theme` as direct dependency ([#109](https://github.com/bpmn-io/feel-editor/pull/109))
+
 ## 2.6.0
 
 * `FEAT`: enhance FEEL syntax highlighting ([#100](https://github.com/bpmn-io/feel-editor/pull/100))
