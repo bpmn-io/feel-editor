@@ -2,11 +2,14 @@ import { completions as feelCompletions } from '../autocompletion/index.js';
 
 import { createContext, language } from '../language/index.js';
 
+import lintExtension from '../lint/index.js';
+
 import {
   variablesFacet,
   builtinsFacet,
   parserDialectFacet,
-  dialectFacet
+  dialectFacet,
+  enginesFacet
 } from './facets.js';
 
 
@@ -26,7 +29,8 @@ import {
  *   dialect?: import('../language').Dialect,
  *   parserDialect?: import('../language').ParserDialect,
  *   variables?: Variable[],
- *   builtins?: Variable[]
+ *   builtins?: Variable[],
+ *   engines?: Record<string, string>
  * } } CoreConfig
  *
  * @typedef { import('@codemirror/autocomplete').CompletionSource } CompletionSource
@@ -43,6 +47,7 @@ export function configure({
   parserDialect,
   variables = [],
   builtins = [],
+  engines,
   completions = feelCompletions({ builtins, variables })
 }) {
 
@@ -53,11 +58,18 @@ export function configure({
     builtinsFacet.of(builtins),
     variablesFacet.of(variables),
     parserDialectFacet.of(parserDialect),
+    enginesFacet.of(engines),
     language({
       dialect,
       parserDialect,
       context,
       completions
+    }),
+    lintExtension({
+      builtins,
+      engines,
+      dialect,
+      parserDialect
     })
   ];
 }
@@ -73,11 +85,13 @@ export function get(state) {
   const variables = state.facet(variablesFacet)[0];
   const dialect = state.facet(dialectFacet)[0];
   const parserDialect = state.facet(parserDialectFacet)[0];
+  const engines = state.facet(enginesFacet)[0];
 
   return {
     builtins,
     variables,
     dialect,
-    parserDialect
+    parserDialect,
+    engines
   };
 }

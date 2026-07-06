@@ -25,13 +25,17 @@ describe('CodeEditor', function() {
 
     // when
     const initialValue = `for
-  fruit in [ "apple", "bananas" ], vegetable in vegetables
+  fruit in from json("[ \\"apple\\", \\"bananas\\" ]"), vegetable in vegetables
 return
   { ingredients: [ fruit, vegetable ] }`;
 
+    const editorContainer = domify('<div style="height: 200px; border: 1px solid #ccc;"></div>');
+    container.appendChild(editorContainer);
+
     const editor = new FeelEditor({
-      container,
+      container: editorContainer,
       value: initialValue,
+      engines: { camunda: '8.9' },
       variables: [
         {
           name: 'Variable1',
@@ -121,6 +125,30 @@ return
         }
       ]
     });
+
+    const versionControl = domify(`
+      <div style="margin: 10px 0; font-family: sans-serif; font-size: 13px;">
+        <label>Camunda version for linting:
+          <select class="engine-version">
+            <option>8.6</option>
+            <option>8.7</option>
+            <option>8.8</option>
+            <option selected>8.9</option>
+            <option>8.10</option>
+          </select>
+        </label>
+      </div>
+    `);
+
+    const versionSelect = /** @type {HTMLSelectElement} */ (
+      versionControl.querySelector('.engine-version')
+    );
+
+    versionSelect.addEventListener('change', () => {
+      editor.setEngines({ camunda: versionSelect.value });
+    });
+
+    container.appendChild(versionControl);
 
     // then
     expect(editor).to.exist;
