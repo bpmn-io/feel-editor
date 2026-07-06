@@ -7,7 +7,6 @@ import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@co
 
 import mitt from 'mitt';
 
-import linter from './lint/index.js';
 import theme from './theme/index.js';
 
 import * as Core from './core/index.js';
@@ -43,6 +42,7 @@ const placeholderConf = new Compartment();
  * @param {String} [config.value]
  * @param {Variable[]} [config.variables]
  * @param {Variable[]} [config.builtins]
+ * @param {Record<string, string>} [config.engines] target engine versions (e.g. `{ camunda: '8.6' }`); enables built-in compatibility linting
  * @param {Object} [config.contentAttributes]
  * @param {String} [config.placeholder]
  */
@@ -60,7 +60,8 @@ export default function FeelEditor({
   readOnly = false,
   value = '',
   builtins = domifiedBuiltins,
-  variables = []
+  variables = [],
+  engines
 }) {
 
   this._events = mitt();
@@ -107,7 +108,8 @@ export default function FeelEditor({
       dialect,
       builtins,
       variables,
-      parserDialect
+      parserDialect,
+      engines
     })),
     bracketMatching(),
     indentOnInput(),
@@ -118,7 +120,6 @@ export default function FeelEditor({
     keymap.of([
       ...defaultKeymap,
     ]),
-    linter,
     lintHandler,
     tooltipLayout,
     placeholderConf.of(placeholderExt(placeholder)),
@@ -215,6 +216,25 @@ FeelEditor.prototype.setVariables = function(variables) {
       coreConf.reconfigure(Core.configure({
         ...config,
         variables
+      }))
+    ]
+  });
+};
+
+/**
+ * Set the target engine versions used for built-in compatibility linting.
+ *
+ * @param {Record<string, string>} engines e.g. `{ camunda: '8.6' }`
+ */
+FeelEditor.prototype.setEngines = function(engines) {
+
+  const config = Core.get(this._cmEditor.state);
+
+  this._cmEditor.dispatch({
+    effects: [
+      coreConf.reconfigure(Core.configure({
+        ...config,
+        engines
       }))
     ]
   });

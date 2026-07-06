@@ -26,3 +26,8 @@ export const dialectFacet = Facet.define();
  */
 export const parserDialectFacet = Facet.define();
 
+/**
+ * @type {Facet<Record<string, string>>}
+ */
+export const enginesFacet = Facet.define();
+
