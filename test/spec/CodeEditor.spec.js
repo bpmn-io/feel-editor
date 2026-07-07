@@ -1,4 +1,5 @@
 import FeelEditor from '../../src/index.js';
+import { mountBenchmark, nastyExpression } from '../benchmark.js';
 import TestContainer from 'mocha-test-container-support';
 import { EditorSelection } from '@codemirror/state';
 import { lineNumbers } from '@codemirror/view';
@@ -24,10 +25,7 @@ describe('CodeEditor', function() {
   (singleStart && singleStart !== 'camunda' ? it.only : it)('should render', async function() {
 
     // when
-    const initialValue = `for
-  fruit in from json("[ \\"apple\\", \\"bananas\\" ]"), vegetable in vegetables
-return
-  { ingredients: [ fruit, vegetable ] }`;
+    const initialValue = nastyExpression(60);
 
     const editorContainer = domify('<div style="height: 200px; border: 1px solid #ccc;"></div>');
     container.appendChild(editorContainer);
@@ -35,7 +33,7 @@ return
     const editor = new FeelEditor({
       container: editorContainer,
       value: initialValue,
-      engines: { camunda: '8.9' },
+      engines: { camunda: '8.6' },
       variables: [
         {
           name: 'Variable1',
@@ -130,10 +128,10 @@ return
       <div style="margin: 10px 0; font-family: sans-serif; font-size: 13px;">
         <label>Camunda version for linting:
           <select class="engine-version">
-            <option>8.6</option>
+            <option selected>8.6</option>
             <option>8.7</option>
             <option>8.8</option>
-            <option selected>8.9</option>
+            <option>8.9</option>
             <option>8.10</option>
           </select>
         </label>
@@ -149,6 +147,8 @@ return
     });
 
     container.appendChild(versionControl);
+
+    mountBenchmark(container);
 
     // then
     expect(editor).to.exist;
