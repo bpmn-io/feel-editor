@@ -1,3 +1,5 @@
+import { isCompatible } from '@bpmn-io/semver-compat';
+
 import { completions as feelCompletions } from '../autocompletion/index.js';
 
 import { createContext, language } from '../language/index.js';
@@ -22,6 +24,7 @@ import {
  * @property {Array<Variable>} [entries] array of child variables if the variable is a context or list
  * @property {'function'|'variable'} [type] type of the variable
  * @property {Array<{name: string, type?: string}>} [params] function parameters
+ * @property {Record<string, string>} [engines] engine version requirements, e.g. `{ camunda: '>=8.9' }`
  */
 
 /**
@@ -48,10 +51,17 @@ export function configure({
   variables = [],
   builtins = [],
   engines,
-  completions = feelCompletions({ builtins, variables })
+  completions
 }) {
 
+  // parse + lint against ALL built-ins so incompatible calls still parse and
+  // get flagged; only suggest the ones available in the target engine(s)
   const context = createContext([ ...variables, ...builtins ]);
+
+  const completionSources = completions ?? feelCompletions({
+    builtins: availableBuiltins(builtins, engines),
+    variables
+  });
 
   return [
     dialectFacet.of(dialect),
@@ -63,13 +73,30 @@ export function configure({
       dialect,
       parserDialect,
       context,
-      completions
+      completions: completionSources
     }),
     lintExtension({
       builtins,
       engines
     })
   ];
+}
+
+/**
+ * Built-ins available in the target engine(s); when no engines are configured,
+ * all built-ins are available.
+ *
+ * @param {Variable[]} builtins
+ * @param {Record<string, string>} [engines]
+ *
+ * @return {Variable[]}
+ */
+function availableBuiltins(builtins, engines) {
+  if (!engines || !Object.keys(engines).length) {
+    return builtins;
+  }
+
+  return builtins.filter(builtin => !builtin.engines || isCompatible(builtin.engines, engines));
 }
 
 /**

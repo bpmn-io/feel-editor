@@ -36,6 +36,14 @@ return
       container: editorContainer,
       value: initialValue,
       engines: { camunda: '8.9' },
+      builtins: [
+        {
+          name: 'from json',
+          type: 'function',
+          params: [ { name: 'value' } ],
+          engines: { camunda: '>=8.9' }
+        }
+      ],
       variables: [
         {
           name: 'Variable1',
@@ -846,6 +854,42 @@ return
         expect(completions[1].label).to.eql('abs(n)');
       });
 
+    });
+
+
+    it('should not complete built-ins incompatible with the target engine', async function() {
+      const editor = new FeelEditor({
+        container,
+        value: '',
+        engines: { camunda: '8.6' },
+        builtins: [
+          {
+            name: 'now',
+            type: 'function',
+            params: []
+          },
+          {
+            name: 'from json',
+            type: 'function',
+            params: [ { name: 'value' } ],
+            engines: { camunda: '>=8.9' }
+          }
+        ]
+      });
+
+      const cm = getCm(editor);
+
+      // when
+      startCompletion(cm);
+
+      // then
+      // update done async
+      return expectEventually(() => {
+        const labels = currentCompletions(cm.state).map(completion => completion.label);
+
+        expect(labels).to.include('now()');
+        expect(labels.some(label => label.startsWith('from json'))).to.be.false;
+      });
     });
 
 
