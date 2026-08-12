@@ -6,7 +6,14 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.7.0
+
+* `FEAT`: filter compatible functions for autocompletion ([#110](https://github.com/bpmn-io/feel-editor/pull/110))
+* `FEAT`: support engine-version compatibility linting ([#110](https://github.com/bpmn-io/feel-editor/pull/110))
 * `DEPS`: add `@bpmn-io/cm-theme` as direct dependency ([#109](https://github.com/bpmn-io/feel-editor/pull/109))
+* `DEPS`: update to `@bpmn-io/feel-lint@3.2.0` ([#110](https://github.com/bpmn-io/feel-editor/pull/110))
+* `DEPS`: update to `camunda/feel-builtins@1.4.0` ([#110](https://github.com/bpmn-io/feel-editor/pull/110))
+* `DEPS`: add `@bpmn-io/semver-compat@0.1.0` ([#110](https://github.com/bpmn-io/feel-editor/pull/110))
 
 ## 2.6.0
 
