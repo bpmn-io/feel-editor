@@ -1,7 +1,7 @@
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
 import { defaultKeymap } from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
-import { setDiagnosticsEffect } from '@codemirror/lint';
+import { forceLinting, setDiagnosticsEffect } from '@codemirror/lint';
 import { Compartment, EditorState } from '@codemirror/state';
 import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
@@ -238,6 +238,8 @@ FeelEditor.prototype.setEngines = function(engines) {
       }))
     ]
   });
+
+  forceLinting(this._cmEditor);
 };
 
 /**

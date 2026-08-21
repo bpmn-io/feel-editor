@@ -443,6 +443,39 @@ return
   });
 
 
+  describe('#setEngines', function() {
+
+    it('should refresh linting', async function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        value: 'from json("{}")',
+        engines: { camunda: '8.7' },
+        builtins: [
+          {
+            name: 'from json',
+            type: 'function',
+            params: [ { name: 'value' } ],
+            engines: { camunda: '>=8.9' }
+          }
+        ]
+      });
+
+      expect(await forceLint(editor)).to.have.length(1);
+
+      const linted = lint(editor);
+
+      // when
+      editor.setEngines({ camunda: '8.9' });
+
+      // then
+      expect(await linted).to.be.empty;
+    });
+
+  });
+
+
   describe('placeholder', function() {
 
     it('should display placeholder', function() {
