@@ -6,6 +6,8 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+* `DEPS`: update to `@camunda/feel-builtins@1.4.1`
+
 ## 2.7.1
 
 * `FIX`: force linting after engines change ([#114](https://github.com/bpmn-io/feel-editor/pull/114))
