@@ -30,9 +30,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": ">= 20"
-  },
   "files": [
     "dist"
   ],
