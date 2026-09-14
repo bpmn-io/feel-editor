@@ -10,6 +10,7 @@ ___Note:__ Yet to be released changes appear here._
 * `DEPS`: update to `@codemirror/commands@6.11.0`
 * `DEPS`: update to `@codemirror/language@6.12.4`
 * `DEPS`: update to `@codemirror/state@6.7.4`
+* `DEPS`: update to `@codemirror/view@6.43.11`
 
 ## 2.7.1
 
