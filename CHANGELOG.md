@@ -8,6 +8,7 @@ ___Note:__ Yet to be released changes appear here._
 
 * `DEPS`: update to `@camunda/feel-builtins@1.4.1`
 * `DEPS`: update to `@codemirror/commands@6.11.0`
+* `DEPS`: update to `@codemirror/language@6.12.4`
 
 ## 2.7.1
 
