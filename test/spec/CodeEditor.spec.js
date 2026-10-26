@@ -1,5 +1,6 @@
 import FeelEditor from '../../src/index.js';
 import TestContainer from 'mocha-test-container-support';
+import { undo } from '@codemirror/commands';
 import { EditorSelection } from '@codemirror/state';
 import { lineNumbers } from '@codemirror/view';
 import { forceLinting, forEachDiagnostic } from '@codemirror/lint';
@@ -296,6 +297,81 @@ return
 
       // then
       expect(editor._cmEditor.state.doc.toString()).to.equal('Changed');
+    });
+
+
+    it('should not add external change to undo history', function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        value: 'old'
+      });
+
+      // when
+      editor.setValue('new');
+
+      const undone = undo(editor._cmEditor);
+
+      // then
+      expect(undone).to.be.false;
+      expect(editor._cmEditor.state.doc.toString()).to.equal('new');
+    });
+
+
+    it('should keep user edits undoable after external change', function() {
+
+      // given
+      const editor = new FeelEditor({
+        container,
+        value: 'old'
+      });
+
+      editor.setValue('new');
+
+      editor._cmEditor.dispatch({
+        changes: { from: 3, insert: '!' }
+      });
+
+      // when
+      undo(editor._cmEditor);
+
+      // then
+      expect(editor._cmEditor.state.doc.toString()).to.equal('new');
+    });
+  });
+
+
+  describe('history', function() {
+
+    it('should undo deleting the entire expression once', function() {
+
+      // given
+      const initialValue = 'Hello World!';
+      const editor = new FeelEditor({
+        container,
+        value: initialValue
+      });
+
+      editor._cmEditor.dispatch({
+        selection: EditorSelection.single(0, initialValue.length)
+      });
+      editor._cmEditor.dispatch({
+        changes: {
+          from: 0,
+          to: initialValue.length
+        }
+      });
+
+      // when
+      undo(editor._cmEditor);
+      const undoneAgain = undo(editor._cmEditor);
+
+      // then
+      expect(editor._cmEditor.state.doc.toString()).to.equal(initialValue);
+      expect(editor.getSelection().main.from).to.equal(0);
+      expect(editor.getSelection().main.to).to.equal(initialValue.length);
+      expect(undoneAgain).to.be.false;
     });
   });
 
