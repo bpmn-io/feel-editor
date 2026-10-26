@@ -1,8 +1,12 @@
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
-import { defaultKeymap } from '@codemirror/commands';
+import {
+  defaultKeymap,
+  history,
+  historyKeymap
+} from '@codemirror/commands';
 import { bracketMatching, indentOnInput } from '@codemirror/language';
 import { forceLinting, setDiagnosticsEffect } from '@codemirror/lint';
-import { Compartment, EditorState } from '@codemirror/state';
+import { Compartment, EditorState, Transaction } from '@codemirror/state';
 import { EditorView, keymap, placeholder as placeholderExt, tooltips } from '@codemirror/view';
 
 import mitt from 'mitt';
@@ -114,11 +118,13 @@ export default function FeelEditor({
     bracketMatching(),
     indentOnInput(),
     closeBrackets(),
+    history(),
     EditorView.contentAttributes.of(contentAttributes),
     changeHandler,
     keyHandler,
     keymap.of([
       ...defaultKeymap,
+      ...historyKeymap
     ]),
     lintHandler,
     tooltipLayout,
@@ -155,7 +161,8 @@ FeelEditor.prototype.setValue = function(value) {
       from: 0,
       to: this._cmEditor.state.doc.length,
       insert: value,
-    }
+    },
+    annotations: Transaction.addToHistory.of(false)
   });
 };
 
