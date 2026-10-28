@@ -6,6 +6,10 @@ All notable changes to [@bpmn-io/feel-editor](https://github.com/bpmn-io/feel-ed
 
 ___Note:__ Yet to be released changes appear here._
 
+## 2.8.1
+
+* `FIX`: handle undo/redo with CodeMirror history extension ([#117](https://github.com/bpmn-io/feel-editor/pull/117))
+
 ## 2.8.0
 
 * `DEPS`: update to `@camunda/feel-builtins@1.4.1`
